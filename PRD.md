@@ -12,7 +12,7 @@ The Agentic WordPress Management Platform
 | **Date** | August 13, 2026 |
 | **Author** | Patrick (Product Lead) |
 | **Status** | Draft — Internal (non-technical-first pivot; Phase 0) |
-| **Repo** | SinachPat/wursor |
+| **Repo** | Wursor/wursor |
 | **Classification** | Confidential |
 | **Supersedes** | v1.3 (engineer-first; desktop shell; Tauri + Monaco) |
 

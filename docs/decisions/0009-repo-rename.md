@@ -24,3 +24,5 @@ Rename the repository to `wursor`, set the description to the product tagline, c
 
 - Remote is `https://github.com/SinachPat/wursor`; identity matches the product.
 - Redirects from the old name are handled by GitHub automatically.
+
+> **Follow-up (2026-08-15):** the repo was later transferred to the `Wursor` GitHub organization — canonical path is now `https://github.com/Wursor/wursor`.
