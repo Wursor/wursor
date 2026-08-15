@@ -24,6 +24,9 @@ Each ADR is a single file following the [Nygard format](https://cognitect.com/bl
 | [0008](0008-empty-packages-not-stubs.md) | Workspace ships empty packages, not placeholder source | Accepted |
 | [0009](0009-repo-rename.md) | Repository renamed originmain → wursor | Accepted |
 | [0010](0010-openrouter-live-golden.md) | Golden harness scores live runs through a provider-agnostic LLM client (OpenRouter first) | Accepted |
+| [0011](0011-fastify-react-stack.md) | Fastify is the API server; React + Vite is the web shell | Accepted |
+| [0012](0012-in-memory-user-store.md) | In-memory user store behind a UserStore interface; Postgres deferred | Accepted |
+| [0013](0013-docker-boundary-mock.md) | Sandbox orchestration mocks the Docker boundary; real daemon client deferred | Accepted |
 
 ## How to add one
 
