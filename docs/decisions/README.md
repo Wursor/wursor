@@ -27,6 +27,8 @@ Each ADR is a single file following the [Nygard format](https://cognitect.com/bl
 | [0011](0011-fastify-react-stack.md) | Fastify is the API server; React + Vite is the web shell | Accepted |
 | [0012](0012-in-memory-user-store.md) | In-memory user store behind a UserStore interface; Postgres deferred | Accepted |
 | [0013](0013-docker-boundary-mock.md) | Sandbox orchestration mocks the Docker boundary; real daemon client deferred | Accepted |
+| [0014](0014-postgres-queryable.md) | Postgres user store via a Queryable boundary; schema in SQL migrations | Accepted |
+| [0015](0015-dockerode-engine-gating.md) | Docker daemon client via dockerode behind an injected engine; sandbox gated by env | Accepted |
 
 ## How to add one
 

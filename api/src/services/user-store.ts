@@ -5,18 +5,18 @@ export type User = {
 };
 
 export interface UserStore {
-  findByEmail(email: string): User | undefined;
-  create(user: User): User;
+  findByEmail(email: string): Promise<User | undefined>;
+  create(user: User): Promise<User>;
 }
 
 export class InMemoryUserStore implements UserStore {
   private byEmail = new Map<string, User>();
 
-  findByEmail(email: string): User | undefined {
+  async findByEmail(email: string): Promise<User | undefined> {
     return this.byEmail.get(email);
   }
 
-  create(user: User): User {
+  async create(user: User): Promise<User> {
     this.byEmail.set(user.email, user);
     return user;
   }
