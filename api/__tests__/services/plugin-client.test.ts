@@ -43,7 +43,7 @@ describe('PluginClient', () => {
 
     const [, init] = fetchMock.mock.calls[0] as [string, { headers: Record<string, string> }];
     const ts = init.headers['X-Wursor-Timestamp'];
-    expect(init.headers['X-Wursor-Signature']).toBe(expectedSignature('h-secret', ts, 'POST', '/files', '{"a":1}'));
+    expect(init.headers['X-Wursor-Signature']).toBe(expectedSignature('h-secret', ts, 'POST', '/wursor/v1/files', '{"a":1}'));
   });
 
   it('maps a 401 to Authentication failed', async () => {

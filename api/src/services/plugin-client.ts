@@ -14,12 +14,17 @@ function sha256hex(value: string): string {
 
 export class PluginClient {
   private readonly baseUrl: string;
+  private readonly namespace: string;
 
-  constructor(private readonly creds: PluginCredentials) {
+  constructor(
+    private readonly creds: PluginCredentials,
+    namespace = 'wursor/v1',
+  ) {
     if (!isHttpsUrl(creds.siteUrl)) {
       throw new Error('Site URL must be https');
     }
-    this.baseUrl = `${creds.siteUrl.replace(/\/$/, '')}/wp-json/wursor/v1`;
+    this.namespace = namespace;
+    this.baseUrl = `${creds.siteUrl.replace(/\/$/, '')}/wp-json/${namespace}`;
   }
 
   async get(path: string): Promise<unknown> {
@@ -32,8 +37,9 @@ export class PluginClient {
 
   private async request(method: string, path: string, body?: unknown): Promise<unknown> {
     const bodyText = body === undefined ? '' : JSON.stringify(body);
+    const route = `/${this.namespace}${path}`;
     const timestamp = String(Math.floor(Date.now() / 1000));
-    const canonical = `${timestamp}\n${method}\n${path}\n${sha256hex(bodyText)}`;
+    const canonical = `${timestamp}\n${method}\n${route}\n${sha256hex(bodyText)}`;
     const signature = createHmac('sha256', this.creds.hmacSecret).update(canonical).digest('hex');
 
     const token = method === 'GET' ? this.creds.readToken : (this.creds.deployToken ?? this.creds.readToken);
