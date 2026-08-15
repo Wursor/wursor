@@ -8,6 +8,7 @@
     "mirror:time": "tsx golden/src/run-mirror-timing.ts"
   },
   "devDependencies": {
+    "@playwright/test": "^1.62.1",
     "tsx": "^4.20.3",
     "typescript": "^5.9.2",
     "vitest": "^3.2.4"
