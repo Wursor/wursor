@@ -22,4 +22,4 @@ jobs:
       - name: Reconcile with GitHub
         run: bash scripts/mirror.sh
         env:
-          MIRROR_URL: https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/SinachPat/wursor.git
+          MIRROR_URL: https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/Wursor/wursor.git
