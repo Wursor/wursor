@@ -2,5 +2,18 @@
   "name": "@wursor/api",
   "private": true,
   "type": "module",
-  "scripts": {}
+  "scripts": {
+    "test": "vitest run",
+    "dev": "tsx watch src/index.ts",
+    "start": "tsx src/index.ts"
+  },
+  "dependencies": {
+    "fastify": "^5.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "tsx": "^4.20.3",
+    "typescript": "^5.9.2",
+    "vitest": "^3.2.4"
+  }
 }
