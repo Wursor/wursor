@@ -30,6 +30,7 @@ Each ADR is a single file following the [Nygard format](https://cognitect.com/bl
 | [0014](0014-postgres-queryable.md) | Postgres user store via a Queryable boundary; schema in SQL migrations | Accepted |
 | [0015](0015-dockerode-engine-gating.md) | Docker daemon client via dockerode behind an injected engine; sandbox gated by env | Accepted |
 | [0016](0016-pairing-code-ownership.md) | Pairing-code TTL/lockout lives on the Wursor API; the plugin enforces token/HMAC/scope | Accepted |
+| [0017](0017-semantic-tool-schema.md) | The agent is given a semantic, allowlisted tool schema — not a raw wp_cli surface | Accepted |
 
 ## How to add one
 

@@ -1,0 +1,24 @@
+[
+  {
+    "id": "spike-01",
+    "prompt": "Rebrand this site: set the site title to 'Acme Dental', set the tagline to 'Gentle care for every smile', and create a new page titled 'Services' with a paragraph about teeth whitening.",
+    "asserts": [
+      { "type": "option", "key": "blogname", "value": "Acme Dental" },
+      { "type": "option", "key": "blogdescription", "value": "Gentle care for every smile" },
+      { "type": "page_title_exists", "title": "Services" }
+    ]
+  },
+  {
+    "id": "spike-02",
+    "prompt": "Create an 'About' page that introduces the practice in one paragraph and a 'Contact' page that lists the phone number (555-0123).",
+    "asserts": [
+      { "type": "page_title_exists", "title": "About" },
+      { "type": "page_title_exists", "title": "Contact" }
+    ]
+  },
+  {
+    "id": "spike-03",
+    "prompt": "Find the existing 'Sample Page' and rewrite its content to start with 'Welcome to our practice.'.",
+    "asserts": [{ "type": "page_content_contains", "slug": "sample-page", "text": "Welcome to our practice." }]
+  }
+]

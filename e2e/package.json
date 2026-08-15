@@ -5,7 +5,8 @@
   "scripts": {
     "test": "vitest run",
     "golden": "tsx golden/src/run-golden.ts",
-    "mirror:time": "tsx golden/src/run-mirror-timing.ts"
+    "mirror:time": "tsx golden/src/run-mirror-timing.ts",
+    "agent:spike": "tsx agent/run-agent-spike.ts"
   },
   "devDependencies": {
     "@playwright/test": "^1.62.1",
