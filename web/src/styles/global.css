@@ -1,8 +1,495 @@
+:root {
+  --bg-app: #0c0c10;
+  --bg-panel: #111115;
+  --bg-toolbar: #141418;
+  --bg-surface: #1c1c22;
+  --bg-input: rgba(255, 255, 255, 0.04);
+
+  --fg: rgba(255, 255, 255, 0.88);
+  --fg-2: rgba(255, 255, 255, 0.45);
+  --fg-3: rgba(255, 255, 255, 0.22);
+
+  --border: rgba(255, 255, 255, 0.055);
+  --border-2: rgba(255, 255, 255, 0.1);
+
+  --accent: #3385ff;
+  --accent-bg: rgba(51, 133, 255, 0.14);
+  --accent-strong: #0066ff;
+  --success: #10b981;
+
+  --sh-sm: 0 1px 3px rgba(0, 0, 0, 0.4), 0 1px 2px rgba(0, 0, 0, 0.3);
+  --sh-lg: 0 10px 24px rgba(0, 0, 0, 0.35), 0 4px 8px rgba(0, 0, 0, 0.25);
+  --sh-product: 0 48px 96px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(255, 255, 255, 0.06);
+
+  --r-2: 8px;
+  --r-3: 12px;
+  --r-4: 16px;
+  --r-5: 20px;
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
 * {
   box-sizing: border-box;
 }
 
 body {
   margin: 0;
-  font-family: system-ui, -apple-system, sans-serif;
+  background: var(--bg-app);
+  color: var(--fg);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ---------- Auth screen ---------- */
+.auth-screen {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(51, 133, 255, 0.08), transparent 60%), var(--bg-app);
+  padding: 40px;
+}
+
+.wursor-signup {
+  width: 360px;
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-radius: var(--r-5);
+  padding: 40px 32px;
+  box-shadow: var(--sh-lg);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.wursor-signup input {
+  background: var(--bg-input);
+  border: 1px solid var(--border-2);
+  border-radius: var(--r-2);
+  color: var(--fg);
+  padding: 12px 14px;
+  font-size: 0.9375rem;
+  outline: none;
+  transition: border-color 0.15s var(--ease), box-shadow 0.15s var(--ease);
+}
+
+.wursor-signup input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-bg);
+}
+
+.wursor-signup button {
+  margin-top: 4px;
+  background: var(--accent-strong);
+  color: #fff;
+  border: none;
+  border-radius: var(--r-2);
+  padding: 12px;
+  font-weight: 600;
+  font-size: 0.9375rem;
+  cursor: pointer;
+  transition: transform 0.12s var(--ease), box-shadow 0.12s var(--ease);
+}
+
+.wursor-signup button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(0, 102, 255, 0.35);
+}
+
+.wursor-signup button:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.wursor-signup [role='alert'] {
+  color: #ef4444;
+  font-size: 0.8125rem;
+  margin: 0;
+}
+
+/* ---------- App chrome ---------- */
+.app {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.app-topbar {
+  height: 60px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 24px;
+  background: var(--bg-toolbar);
+  border-bottom: 1px solid var(--border);
+}
+
+.app-logo {
+  font-weight: 800;
+  font-size: 1rem;
+  letter-spacing: -0.02em;
+}
+
+.app-badge {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.625rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--fg-3);
+  padding: 4px 8px;
+  border: 1px solid var(--border);
+  border-radius: 9999px;
+}
+
+.app-body {
+  flex: 1;
+  display: flex;
+  min-height: 0;
+}
+
+/* ---------- Chat panel ---------- */
+.chat {
+  width: 380px;
+  flex-shrink: 0;
+  background: var(--bg-panel);
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-scroll {
+  flex: 1;
+  overflow-y: auto;
+  padding: 24px 20px;
+}
+
+.wursor-welcome h2 {
+  font-size: 1.625rem;
+  font-weight: 800;
+  letter-spacing: -0.028em;
+  margin: 8px 0;
+  line-height: 1.25;
+}
+
+.welcome-kicker {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.625rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin: 0;
+}
+
+.welcome-sub {
+  color: var(--fg-2);
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.chat-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.message {
+  max-width: 85%;
+  padding: 12px 14px;
+  border-radius: var(--r-3);
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  animation: pop 0.2s var(--ease);
+}
+
+.message-user {
+  align-self: flex-end;
+  background: var(--accent-strong);
+  color: #fff;
+  border-bottom-right-radius: 4px;
+}
+
+.message-agent {
+  align-self: flex-start;
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-bottom-left-radius: 4px;
+}
+
+.wursor-working {
+  color: var(--fg-2);
+  font-size: 0.8125rem;
+  padding: 12px 2px;
+  animation: pulse 1.2s ease-in-out infinite;
+}
+
+.chat-composer {
+  display: flex;
+  gap: 8px;
+  padding: 16px;
+  border-top: 1px solid var(--border);
+}
+
+.wursor-chat-input {
+  flex: 1;
+  background: var(--bg-input);
+  border: 1px solid var(--border-2);
+  border-radius: var(--r-2);
+  color: var(--fg);
+  padding: 12px 14px;
+  font-size: 0.9375rem;
+  outline: none;
+}
+
+.wursor-chat-input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-bg);
+}
+
+.wursor-chat-send {
+  width: 44px;
+  background: var(--accent-strong);
+  color: #fff;
+  border: none;
+  border-radius: var(--r-2);
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: transform 0.12s var(--ease);
+}
+
+.wursor-chat-send:hover {
+  transform: translateY(-1px);
+}
+
+/* ---------- Preview ---------- */
+.preview {
+  flex: 1;
+  display: grid;
+  place-items: center;
+  padding: 32px;
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 24px 24px;
+  overflow: hidden;
+}
+
+.browser {
+  width: min(1000px, 100%);
+  height: min(640px, 100%);
+  background: #ffffff;
+  border-radius: var(--r-5);
+  box-shadow: var(--sh-product);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.browser-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  background: #f4f4f5;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.07);
+}
+
+.dot {
+  width: 11px;
+  height: 11px;
+  border-radius: 9999px;
+}
+
+.dot-red {
+  background: #ff5f57;
+}
+
+.dot-yellow {
+  background: #febc2e;
+}
+
+.dot-green {
+  background: #28c840;
+}
+
+.browser-url {
+  flex: 1;
+  text-align: center;
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.07);
+  border-radius: 6px;
+  padding: 5px 12px;
+  font-size: 0.8125rem;
+  color: #71717a;
+}
+
+.preview-badge {
+  color: #047857;
+  font-size: 0.8125rem;
+  font-weight: 600;
+}
+
+.browser-body {
+  flex: 1;
+  overflow: auto;
+  background: #ffffff;
+  color: #0a0a0a;
+}
+
+.preview-working {
+  height: 100%;
+  display: grid;
+  place-items: center;
+  color: #71717a;
+  font-size: 0.9375rem;
+  animation: pulse 1.2s ease-in-out infinite;
+}
+
+.mock-site {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.mock-nav {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 20px 40px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  font-size: 0.875rem;
+  color: #52525b;
+}
+
+.mock-brand {
+  font-weight: 700;
+  color: #0a0a0a;
+}
+
+.mock-hero {
+  padding: 80px 40px;
+  text-align: center;
+}
+
+.mock-hero h1 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: #0a0a0a;
+  margin: 0 0 16px;
+  transition: opacity 0.3s var(--ease);
+}
+
+.mock-hero p {
+  color: #52525b;
+  max-width: 480px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+
+/* ---------- Approve bar ---------- */
+.approve-bar {
+  position: absolute;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(28, 28, 34, 0.92);
+  backdrop-filter: blur(20px) saturate(1.6);
+  border: 1px solid var(--border-2);
+  border-radius: 9999px;
+  padding: 8px 10px 8px 20px;
+  box-shadow: var(--sh-lg);
+  animation: rise 0.25s var(--ease);
+}
+
+.approve-copy {
+  color: var(--fg-2);
+  font-size: 0.875rem;
+}
+
+.wursor-approve-button {
+  background: var(--accent-strong);
+  color: #fff;
+  border: none;
+  border-radius: 9999px;
+  padding: 10px 18px;
+  font-weight: 600;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: transform 0.12s var(--ease), box-shadow 0.12s var(--ease);
+}
+
+.wursor-approve-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(0, 102, 255, 0.4);
+}
+
+.wursor-reject-button {
+  background: transparent;
+  color: var(--fg-2);
+  border: 1px solid var(--border-2);
+  border-radius: 9999px;
+  padding: 10px 18px;
+  font-weight: 600;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: background 0.12s var(--ease);
+}
+
+.wursor-reject-button:hover {
+  background: var(--bg-surface);
+}
+
+/* ---------- Motion ---------- */
+@keyframes pop {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 12px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@media (max-width: 800px) {
+  .app-body {
+    flex-direction: column;
+  }
+  .chat {
+    width: 100%;
+    height: 50%;
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+  }
+  .preview {
+    height: 50%;
+    padding: 16px;
+  }
 }
