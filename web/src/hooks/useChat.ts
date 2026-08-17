@@ -8,6 +8,12 @@ function extractHeading(text: string): string | undefined {
   return match?.[1];
 }
 
+function mockReply(text: string, heading: string | undefined): string {
+  return heading !== undefined
+    ? `Done — I updated the homepage heading to “${heading}”. Preview it below.`
+    : 'Done — your change is ready to preview.';
+}
+
 export function useChat() {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [status, setStatus] = useState<ChatStatus>('idle');
@@ -17,18 +23,21 @@ export function useChat() {
     const nextHeading = extractHeading(text);
     setMessages((prev) => [...prev, { id: crypto.randomUUID(), role: 'user', text }]);
     setStatus('working');
-    await new Promise((resolve) => setTimeout(resolve, 1200));
-    setMessages((prev) => [
-      ...prev,
-      {
-        id: crypto.randomUUID(),
-        role: 'agent',
-        text:
-          nextHeading !== undefined
-            ? `Done — I updated the homepage heading to “${nextHeading}”. Preview it below.`
-            : 'Done — your change is ready to preview.',
-      },
-    ]);
+
+    try {
+      const res = await fetch('/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: text }),
+      });
+      if (!res.ok) throw new Error('chat unavailable');
+      const body = (await res.json()) as { reply?: string };
+      setMessages((prev) => [...prev, { id: crypto.randomUUID(), role: 'agent', text: body.reply ?? 'Done' }]);
+    } catch {
+      await new Promise((resolve) => setTimeout(resolve, 1200));
+      setMessages((prev) => [...prev, { id: crypto.randomUUID(), role: 'agent', text: mockReply(text, nextHeading) }]);
+    }
+
     if (nextHeading !== undefined) {
       setHeading(nextHeading);
     }

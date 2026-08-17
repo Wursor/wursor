@@ -1,7 +1,10 @@
 import Fastify from 'fastify';
 import { authRoutes } from './routes/auth.ts';
+import { chatRoutes } from './routes/chat.ts';
 import { sessionRoutes } from './routes/sessions.ts';
 import { siteRoutes } from './routes/sites.ts';
+import type { LlmClient } from './agents/llm-client.ts';
+import type { ToolExecutor } from './agents/tool-executor.ts';
 import { PairingService } from './services/pairing-service.ts';
 import { InMemorySessionStore, type SessionStore } from './services/session-store.ts';
 import { InMemorySiteStore, type SiteStore } from './services/site-store.ts';
@@ -14,6 +17,8 @@ export type BuildAppOptions = {
   siteStore?: SiteStore;
   pairingService?: PairingService;
   sandboxManager?: SandboxManager;
+  llmClient?: LlmClient;
+  toolExecutor?: ToolExecutor;
 };
 
 export async function buildApp(opts: BuildAppOptions = {}) {
@@ -27,5 +32,6 @@ export async function buildApp(opts: BuildAppOptions = {}) {
   await authRoutes(app, userStore, sessionStore);
   await sessionRoutes(app, opts.sandboxManager);
   await siteRoutes(app, { sessionStore, siteStore, pairingService });
+  await chatRoutes(app, { sessionStore, llmClient: opts.llmClient, toolExecutor: opts.toolExecutor });
   return app;
 }
