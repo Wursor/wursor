@@ -30,7 +30,7 @@ export function ChatPanel({ messages, status, onSend }: ChatPanelProps) {
         ) : (
           <ul className="chat-list">
             {messages.map((message) => (
-              <li key={message.id} className={`message message-${message.role}`}>
+              <li key={message.id} className={`message message-${message.role} wursor-message-${message.role}`}>
                 {message.text}
               </li>
             ))}

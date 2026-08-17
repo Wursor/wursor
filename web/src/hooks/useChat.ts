@@ -14,35 +14,41 @@ function mockReply(text: string, heading: string | undefined): string {
     : 'Done — your change is ready to preview.';
 }
 
-export function useChat() {
+export function useChat(sessionToken: string | null) {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [status, setStatus] = useState<ChatStatus>('idle');
   const [heading, setHeading] = useState('Welcome to our site');
 
-  const send = useCallback(async (text: string) => {
-    const nextHeading = extractHeading(text);
-    setMessages((prev) => [...prev, { id: crypto.randomUUID(), role: 'user', text }]);
-    setStatus('working');
+  const send = useCallback(
+    async (text: string) => {
+      const nextHeading = extractHeading(text);
+      setMessages((prev) => [...prev, { id: crypto.randomUUID(), role: 'user', text }]);
+      setStatus('working');
 
-    try {
-      const res = await fetch('/chat', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: text }),
-      });
-      if (!res.ok) throw new Error('chat unavailable');
-      const body = (await res.json()) as { reply?: string };
-      setMessages((prev) => [...prev, { id: crypto.randomUUID(), role: 'agent', text: body.reply ?? 'Done' }]);
-    } catch {
-      await new Promise((resolve) => setTimeout(resolve, 1200));
-      setMessages((prev) => [...prev, { id: crypto.randomUUID(), role: 'agent', text: mockReply(text, nextHeading) }]);
-    }
+      try {
+        const res = await fetch('/chat', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            ...(sessionToken !== null ? { Authorization: `Bearer ${sessionToken}` } : {}),
+          },
+          body: JSON.stringify({ message: text }),
+        });
+        if (!res.ok) throw new Error('chat unavailable');
+        const body = (await res.json()) as { reply?: string };
+        setMessages((prev) => [...prev, { id: crypto.randomUUID(), role: 'agent', text: body.reply ?? 'Done' }]);
+      } catch {
+        await new Promise((resolve) => setTimeout(resolve, 1200));
+        setMessages((prev) => [...prev, { id: crypto.randomUUID(), role: 'agent', text: mockReply(text, nextHeading) }]);
+      }
 
-    if (nextHeading !== undefined) {
-      setHeading(nextHeading);
-    }
-    setStatus('done');
-  }, []);
+      if (nextHeading !== undefined) {
+        setHeading(nextHeading);
+      }
+      setStatus('done');
+    },
+    [sessionToken],
+  );
 
   return { messages, status, heading, send };
 }
