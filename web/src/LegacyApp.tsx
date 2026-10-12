@@ -1,3 +1,5 @@
+'use client';
+
 import { useState } from 'react';
 import { ApproveBar } from './components/ApproveBar.tsx';
 import { ChatPanel } from './components/ChatPanel.tsx';
@@ -19,7 +21,7 @@ async function signUp(email: string, password: string): Promise<string> {
   return body.sessionToken;
 }
 
-export function App() {
+export function LegacyApp() {
   const [sessionToken, setSessionToken] = useState<string | null>(null);
   const [applied, setApplied] = useState(false);
   const chat = useChat(sessionToken);
