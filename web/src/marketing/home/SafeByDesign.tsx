@@ -24,6 +24,23 @@ const RULES: ReadonlyArray<{ icon: IconName; title: string; body: string }> = [
   },
 ];
 
+/** The four rules as cards. Used on the home page and on the Trust page. */
+export function SafetyRules() {
+  return (
+    <div className="m-rules">
+      {RULES.map((r) => (
+        <div key={r.title} className="m-rule">
+          <span className="m-rule-icon">
+            <Icon name={r.icon} size={20} />
+          </span>
+          <h3 className="t-title-s">{r.title}</h3>
+          <p className="t-body-m m-section-sub">{r.body}</p>
+        </div>
+      ))}
+    </div>
+  );
+}
+
 export function SafeByDesign() {
   return (
     <section className="m-section">
@@ -33,17 +50,7 @@ export function SafeByDesign() {
         subtitle="Four rules Wursor can’t break, however you set it up."
         mobileSubtitle="Four rules Wursor can’t break."
       />
-      <div className="m-rules">
-        {RULES.map((r) => (
-          <div key={r.title} className="m-rule">
-            <span className="m-rule-icon">
-              <Icon name={r.icon} size={20} />
-            </span>
-            <h3 className="t-title-s">{r.title}</h3>
-            <p className="t-body-m m-section-sub">{r.body}</p>
-          </div>
-        ))}
-      </div>
+      <SafetyRules />
     </section>
   );
 }

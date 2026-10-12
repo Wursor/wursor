@@ -298,3 +298,56 @@ main { display: block; }
   .m-cta-sub { display: none; }
   .footer { margin-top: 72px; }
 }
+
+/* ---------- Inner pages ---------- */
+.m-pagehero { display: flex; flex-direction: column; align-items: center; gap: 28px; max-width: 1200px; margin: 0 auto; padding: 72px var(--space-6) 0; text-align: center; }
+.m-pagehero .m-hero-actions { align-items: center; }
+.m-page .m-section, .m-page .m-cta, .m-page .m-row, .m-page .m-grid-section { margin-top: 140px; }
+.m-page .m-grid-first { margin-top: 64px; }
+.m-page .m-grid-tight { margin-top: 72px; }
+.m-page .footer { margin-top: 140px; }
+.m-grid-section { display: flex; flex-direction: column; align-items: center; gap: 48px; width: 100%; max-width: 1248px; margin: 0 auto; padding: 0 var(--space-6); }
+.m-featuregrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-6); width: 100%; }
+.m-featuregrid .m-rule h3 { color: var(--color-text-primary); }
+.m-docs-search { width: 560px; max-width: 100%; }
+
+.m-row { display: flex; align-items: center; gap: 96px; max-width: 1248px; margin: 0 auto; padding: 0 var(--space-6); }
+.m-row-reverse { flex-direction: row-reverse; }
+.m-row-text { display: flex; flex: 1 0 0; min-width: 0; flex-direction: column; align-items: flex-start; gap: 20px; }
+.m-rowvisual { position: relative; flex: none; width: 600px; max-width: 100%; overflow: hidden; border-radius: var(--radius-xl); text-align: left; }
+.m-rowscene { position: relative; width: 600px; height: 480px; overflow: hidden; }
+.m-rowbackdrop { position: absolute; top: -120px; left: -372px; display: block; width: 1344px; height: 720px; max-width: none; }
+.m-rowcard { position: absolute; }
+.m-convowindow { width: 448px; height: 424px; overflow: hidden; border-radius: 12.8px; background: var(--color-bg-surface); border: 1px solid var(--color-border-subtle); box-shadow: var(--shadow-modal); }
+
+.m-boundaries { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-6); width: 100%; }
+.m-boundary { display: flex; flex-direction: column; gap: 20px; padding: var(--space-8); border-radius: 20px; background: var(--color-bg-surface); border: 1px solid var(--color-border-subtle); }
+.m-boundary h3 { margin: 0; color: var(--color-text-primary); }
+.m-points li[data-kind="never"] .icon { color: var(--color-diff-remove-fg); }
+
+.m-compare { width: 100%; overflow-x: auto; border-radius: 20px; background: var(--color-bg-surface); border: 1px solid var(--color-border-subtle); }
+.m-compare table { width: 100%; min-width: 720px; border-collapse: collapse; }
+.m-compare th, .m-compare td { padding: var(--space-4) var(--space-6); text-align: center; border-top: 1px solid var(--color-border-subtle); }
+.m-compare thead th { border-top: 0; color: var(--color-text-primary); }
+.m-compare tbody th { text-align: left; font-weight: 400; color: var(--color-text-primary); }
+.m-compare td { width: 190px; color: var(--color-text-secondary); }
+.m-draft-note { margin: 0; color: var(--color-text-tertiary); }
+
+.m-articles { width: 760px; max-width: 100%; margin: 0; padding: 0; overflow: hidden; list-style: none; border-radius: 20px; background: var(--color-bg-surface); border: 1px solid var(--color-border-subtle); }
+.m-articles li { display: flex; align-items: center; gap: var(--space-4); padding: 18px var(--space-6); color: var(--color-text-primary); }
+.m-articles li + li { border-top: 1px solid var(--color-border-subtle); }
+.m-articles li > :first-child { flex: 1 0 0; }
+.m-articles .icon { color: var(--color-text-tertiary); }
+
+@media (max-width: 900px) {
+  .m-pagehero { padding-top: var(--space-8); gap: var(--space-5); }
+  .m-page .m-section, .m-page .m-cta, .m-page .m-row, .m-page .m-grid-section { margin-top: 72px; }
+  .m-page .m-grid-first, .m-page .m-grid-tight { margin-top: 48px; }
+  .m-page .footer { margin-top: 72px; }
+  .m-grid-section { gap: var(--space-8); padding: 0 var(--space-4); }
+  .m-featuregrid { grid-template-columns: 1fr; }
+  .m-row, .m-row-reverse { flex-direction: column; align-items: stretch; gap: var(--space-8); padding: 0 var(--space-4); }
+  .m-rowvisual { width: 100%; border-radius: 28px; }
+  .m-boundaries { grid-template-columns: 1fr; }
+  .m-boundary { padding: var(--space-6); }
+}

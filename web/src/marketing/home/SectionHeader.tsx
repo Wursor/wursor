@@ -12,22 +12,24 @@ export function Responsive({ desktop, mobile }: { desktop: ReactNode; mobile?: R
 }
 
 type Props = {
-  eyebrow: string;
+  eyebrow?: string;
   title: string;
   subtitle?: string;
   mobileTitle?: string;
   mobileSubtitle?: string;
   align?: 'center' | 'left';
+  /** Use h1 for the page's first heading only. */
+  as?: 'h1' | 'h2';
 };
 
 /** Eyebrow, headline and one supporting sentence. Centred by default. */
-export function SectionHeader({ eyebrow, title, subtitle, mobileTitle, mobileSubtitle, align = 'center' }: Props) {
+export function SectionHeader({ eyebrow, title, subtitle, mobileTitle, mobileSubtitle, align = 'center', as: Heading = 'h2' }: Props) {
   return (
     <div className={`m-section-header m-align-${align}`}>
-      <p className="t-overline m-eyebrow">{eyebrow}</p>
-      <h2 className="t-display-l m-section-title">
+      {eyebrow && <p className="t-overline m-eyebrow">{eyebrow}</p>}
+      <Heading className="t-display-l m-section-title">
         <Responsive desktop={title} mobile={mobileTitle} />
-      </h2>
+      </Heading>
       {subtitle && (
         <p className="t-body-l m-section-sub">
           <Responsive desktop={subtitle} mobile={mobileSubtitle} />

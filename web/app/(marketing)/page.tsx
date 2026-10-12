@@ -1,4 +1,4 @@
-import { Footer } from '../../src/marketing/Footer.tsx';
+import { Shell } from '../../src/marketing/Shell.tsx';
 import { ApproveWithProof } from '../../src/marketing/home/ApproveWithProof.tsx';
 import { ClosingCta } from '../../src/marketing/home/ClosingCta.tsx';
 import { Examples } from '../../src/marketing/home/Examples.tsx';
@@ -10,33 +10,28 @@ import { SafeByDesign } from '../../src/marketing/home/SafeByDesign.tsx';
 import { SectionHeader } from '../../src/marketing/home/SectionHeader.tsx';
 import { SurfacesShowcase } from '../../src/marketing/home/SurfacesShowcase.tsx';
 import { WatchTheWork } from '../../src/marketing/home/WatchTheWork.tsx';
-import { Nav } from '../../src/marketing/Nav.tsx';
 
 export default function HomePage() {
   return (
-    <>
-      <Nav />
-      <main>
-        <Hero />
-        <ProofStrip />
-        <section className="m-section m-section-first">
-          <SectionHeader
-            eyebrow="One screen"
-            title="Talk. Watch. Decide."
-            subtitle="The workspace puts the conversation, your live site and the to-do board side by side, so you always know what Wursor is doing."
-            mobileSubtitle="The workspace puts the conversation, your live site and the board side by side."
-          />
-          <SurfacesShowcase />
-        </section>
-        <WatchTheWork />
-        <ApproveWithProof />
-        <SafeByDesign />
-        <Examples />
-        <PricingTeaser />
-        <Faq />
-        <ClosingCta />
-      </main>
-      <Footer />
-    </>
+    <Shell>
+      <Hero />
+      <ProofStrip />
+      <section className="m-section m-section-first">
+        <SectionHeader
+          eyebrow="One screen"
+          title="Talk. Watch. Decide."
+          subtitle="The workspace puts the conversation, your live site and the to-do board side by side, so you always know what Wursor is doing."
+          mobileSubtitle="The workspace puts the conversation, your live site and the board side by side."
+        />
+        <SurfacesShowcase />
+      </section>
+      <WatchTheWork />
+      <ApproveWithProof />
+      <SafeByDesign />
+      <Examples />
+      <PricingTeaser />
+      <Faq />
+      <ClosingCta />
+    </Shell>
   );
 }
