@@ -8,6 +8,7 @@ The project is pre-1.0. Versions below `1.0.0` are internal milestones, not publ
 
 ### Added
 
+- ADRs 0018 to 0021: Next.js web app (partly supersedes ADR 0011), sign-in by code, link and passkeys, Cloud provisioning on WeOwn Cloud, and keeping the "never sees a diff" rule wording. PRD, IMPLEMENTATION and AGENTS.md updated to match.
 - `docs/prd-assets/headless-architecture.png`, the architecture diagram used in the PRD.
 - Design reference: Figma file "Wursor - Experiment" (Design system, Product Design, Marketing site and Brand Guideline pages).
 - **Monorepo workspace** — `pnpm` workspace (`api`, `web`, `e2e`), root `package.json` / `pnpm-workspace.yaml` / `tsconfig.base.json`, and a PHP `plugin` package (`composer.json`). Empty packages by design (see [ADR 8](docs/decisions/0008-empty-packages-not-stubs.md)).

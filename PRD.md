@@ -653,7 +653,7 @@ PKCE is a standard, secure sign-in method for browser apps. It protects the code
 
 1.  The person selects Sign in. The Next.js server generates a code verifier and challenge, a state value and a nonce, stores them in a short-lived encrypted cookie and redirects the browser to the Wursor identity service.
 
-2.  The identity service authenticates the person with a passkey or an emailed link. In V1 it also accepts single sign-on from a company identity provider.
+2.  The identity service authenticates the person with an emailed 8-character code, an emailed link or a passkey (ADR 0019). In V1 it also accepts single sign-on from a company identity provider.
 
 3.  The identity service redirects back with a code. The Next.js server validates the state, exchanges the code and verifier for tokens, validates the identity token and creates a session record on the server.
 
@@ -1062,7 +1062,7 @@ These requirements apply only to the Headless pattern in this revision. They rep
 |---|---|---|---|
 | HL-01 | The frontend is a Next.js application (App Router, TypeScript) deployed on its own domain, separate from every target platform. | MVP | The full core journey (create task, watch run, preview, review, approve) works in an environment where no WordPress site is part of the application stack. |
 | HL-02 | Wursor owns its control plane. Users, organizations, projects, tasks, approvals, policies and the audit log are stored in Wursor's own database (PostgreSQL) and served by the Wursor API. No product data is stored inside a customer's site. | MVP | Removing the connector plugin from a customer site deletes no Wursor records. A database restore drill recovers the control plane with no access to any customer site. |
-| HL-03 | Identity is Wursor-owned. People sign in with passkeys or an emailed link. The Next.js server and the identity service use the authorization code flow with PKCE. Single sign-on (OIDC or SAML) is added in V1. | MVP | Sign-in works with no WordPress account. A test that submits a wrong code verifier is rejected, and a replayed authorization code is rejected. |
+| HL-03 | Identity is Wursor-owned. People sign in with an emailed 8-character code, an emailed link or a passkey (ADR 0019). The Next.js server and the identity service use the authorization code flow with PKCE. Single sign-on (OIDC or SAML) is added in V1. | MVP | Sign-in works with no WordPress account. A test that submits a wrong code verifier is rejected, and a replayed authorization code is rejected. |
 | HL-04 | A backend for frontend holds all access and refresh tokens on the server. The browser receives only an HttpOnly session cookie and, while watching a run, a stream token. | MVP | Scans of browser storage, page source and responses during an end-to-end run find no access or refresh token. |
 | HL-05 | The API is contract-first. An OpenAPI description in the repository is the source of truth, and the typed client, request validators and mock server are generated from it. | MVP | Contract tests call the real Wursor API and Conductor with generated requests and validate responses. A breaking change without a version bump fails CI. |
 | HL-06 | The browser opens event streams directly to the Conductor with a two-minute, run-scoped stream token sent in an Authorization header, and resumes after a drop from the last event number. | MVP | Across 50 forced disconnects, no event is lost or duplicated, and tokens never appear in access logs. |
@@ -1130,13 +1130,13 @@ These requirements apply only to the Headless pattern in this revision. They rep
 | D-HL-4 | How the connector plugin is distributed: WordPress.org directory, direct download, or both. | M1 | Product |
 | D-HL-5 | Which backup method the WordPress target relies on first, and whether a fleet connector supplies it. | Phase 0 | Product |
 | D-HL-6 | Whether single sign-on arrives at V1 or earlier for design-partner customers. | M2 | Product |
-| D-HL-7 | How Cloud sites are provisioned for the first release: on WeOwn Cloud infrastructure, or through a partner (WordPress.com, InstaWP, a managed host API) behind the same interface. Recommended: WeOwn Cloud only if on-call, patching and abuse handling are staffed from the first customer; otherwise a partner first. | Phase 0 | CTO |
+| D-HL-7 | **Decided (ADR 0020, October 12, 2026): WeOwn Cloud.** Cloud sites are provisioned on WeOwn Cloud infrastructure behind the same interface. The condition in section 5.3 still applies: on-call, patching and abuse handling staffed from the first customer. | Phase 0 | CTO |
 | D-HL-8 | Plans and prices: hosted and connect-only plans, work allowances, backup retention beyond 30 days, and what a free trial includes. Draft numbers in the design are placeholders. | M2 | Product and finance |
 | D-HL-9 | Whether WordPress.com sign-in is in the MVP or the connector plugin only. Recommended: both, because WordPress.com is the shortest path for non-technical owners; verify capabilities in Phase 0. | Phase 0 | Product |
 | D-HL-10 | Retention after a move out: 30 days live and read-only, then 30 days archived (proposed). | M2 | Product and legal |
 | D-HL-11 | Temporary address scheme and search-engine policy for Cloud sites before a domain is connected. | M2 | Engineering lead |
 | D-HL-12 | Acceptable-use policy, abuse handling and availability target for Cloud sites. | M2 | Operations and legal |
-| D-HL-13 | Whether sign-in uses an emailed 8-character code (as designed), an emailed link (as HL-03 says), or both. Recommended: the code, with the link as a fallback on mobile, and update HL-03. | M0 | Product and engineering |
+| D-HL-13 | **Decided (ADR 0019, October 12, 2026):** support the emailed 8-character code, the emailed link and passkeys. Build order: code, link, passkeys. HL-03 updated. | M0 | Product and engineering |
 | D-HL-14 | Cloud storage allowance per plan, and whether hosting is included in every plan. The billing screens show sample numbers only. | M2 | Product and finance |
 | D-HL-15 | Whether the theme follows the device only, or also offers a manual light and dark switch in Settings. | M1 | Design |
 | D-HL-16 | Whether the marketing pages move onto the product prototype so that landing page to onboarding can be walked as one flow, or stay separate and link by address. | Now | Design |
@@ -1191,7 +1191,7 @@ This section records what the screen-level design contains, so that engineering,
 
 | **Gap** | **What is missing or different** | **Where decided** |
 |---|---|---|
-| Sign-in method | The design uses an emailed 8-character code. HL-03 says passkey or emailed link. | D-HL-13 |
+| Sign-in method | Resolved by ADR 0019: code, link and passkeys are all supported. The designed screens cover the code; link and passkey screens still need design. | D-HL-13 |
 | Calendar extras | Not yet designed: drag to reschedule, an empty month, and a day with more than three changes. | PX-05 |
 | Mobile preview toolbar | Tag and device toggles are hidden on mobile to make room for Publish. | PX-09 |
 | Touch size | Icon buttons are 36 px, below the 44 px target. | PX-09 |

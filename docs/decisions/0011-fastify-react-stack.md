@@ -1,6 +1,6 @@
 # 11. Fastify is the API server; React + Vite is the web shell
 
-- **Status:** Accepted
+- **Status:** Partially superseded by [ADR 0018](0018-nextjs-web-app.md) (the React + Vite web shell). Fastify for `api/` stands.
 - **Date:** 2026-08-15
 
 ## Context
