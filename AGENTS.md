@@ -50,6 +50,7 @@ The `.agents/skills/` directory is a family of rigor skills modeled on Cursor's 
 - Frontend: Next.js (App Router) + React + TypeScript. Server layer holds tokens; browser gets a session cookie only (ADR 0018). Existing Vite shell is being migrated.
 - Sign-in: emailed 8-character code, emailed link and passkeys (ADR 0019)
 - Cloud sites: provisioned on WeOwn Cloud behind the platform interface (ADR 0020)
+- Hosting: DigitalOcean for Wursor and WeOwn Cloud, one VPC per plane, Terraform (ADR 0022)
 - Direction: see PRD.md (Headless, revision 4) and IMPLEMENTATION.md section 0
 - Sandboxes: Docker on VPS, pre-baked WordPress image, overlayfs layers, media proxied (not copied)
 - Plugin: standard WordPress PHP plugin, REST API + token auth
