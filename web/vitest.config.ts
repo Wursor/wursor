@@ -3,16 +3,10 @@ import { defineConfig } from 'vitest/config';
 
 export default defineConfig({
   plugins: [react()],
-  server: {
-    proxy: {
-      '/auth': 'http://localhost:3000',
-      '/chat': 'http://localhost:3000',
-      '/sites': 'http://localhost:3000',
-      '/health': 'http://localhost:3000',
-    },
-  },
+  esbuild: { jsx: 'automatic' },
   test: {
     environment: 'jsdom',
     setupFiles: ['./src/test-setup.ts'],
+    include: ['__tests__/**/*.test.{ts,tsx}'],
   },
 });

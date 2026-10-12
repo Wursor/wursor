@@ -1,12 +1,17 @@
 {
   "extends": "../tsconfig.base.json",
   "compilerOptions": {
-    "jsx": "react-jsx",
-    "outDir": "dist",
-    "rootDir": "src",
+    "jsx": "preserve",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
     "lib": ["ES2022", "DOM", "DOM.Iterable"],
     "noEmit": true,
-    "allowImportingTsExtensions": true
+    "incremental": true,
+    "declaration": false,
+    "sourceMap": false,
+    "allowImportingTsExtensions": true,
+    "plugins": [{ "name": "next" }]
   },
-  "include": ["src"]
+  "include": ["next-env.d.ts", "app", "src", "__tests__", "next.config.ts", ".next/types/**/*.ts"],
+  "exclude": ["node_modules"]
 }
