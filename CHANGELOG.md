@@ -8,6 +8,8 @@ The project is pre-1.0. Versions below `1.0.0` are internal milestones, not publ
 
 ### Added
 
+- `docs/prd-assets/headless-architecture.png`, the architecture diagram used in the PRD.
+- Design reference: Figma file "Wursor - Experiment" (Design system, Product Design, Marketing site and Brand Guideline pages).
 - **Monorepo workspace** — `pnpm` workspace (`api`, `web`, `e2e`), root `package.json` / `pnpm-workspace.yaml` / `tsconfig.base.json`, and a PHP `plugin` package (`composer.json`). Empty packages by design (see [ADR 8](docs/decisions/0008-empty-packages-not-stubs.md)).
 - **Phase 0 spike records** under `spikes/`:
   - `pairing-threat-model.md` — pairing protocol: 8+ char code, 5-min TTL, 5-attempt lockout, HMAC, scoped `read`/`deploy` tokens, threat table T1–T10.
@@ -24,6 +26,8 @@ The project is pre-1.0. Versions below `1.0.0` are internal milestones, not publ
 
 ### Changed
 
+- **PRD.md replaced with Wursor PRD: Headless, revision 4** (October 10, 2026). Wursor owns its control plane (Next.js app, Wursor API, Conductor), WordPress is the first target platform behind a platform interface, and a site can live on Wursor Cloud, on a connected WordPress, or be built here and published, with moves in both directions. Adds access levels (Full access, Content only), evidence-bound approval, and the PX requirement family for the designed surfaces. The v2.0 text (August 13, 2026) remains in git history at `e9de6ba`.
+- **IMPLEMENTATION.md** gains section 0, "Direction update (October 2026)": what changed, four decisions to ratify (Next.js versus Vite, sign-in method, Cloud provisioning, wording of the "no diff" rule), how existing sprints map, new work steps A to I, and updated Phase 1 exit criteria. Sprints 1 to 8 are unchanged and marked as superseded where they conflict.
 - **Repository identity** — renamed from `originmain` to `wursor`; description set to the product tagline; stale homepage cleared; topics `wordpress`, `ai`, `agent` added (see [ADR 9](docs/decisions/0009-repo-rename.md)).
 - **PRD / IMPLEMENTATION** — expanded risk register (R1–R14 with mitigations and sprint ownership), media-proxy and capability-tier decisions locked, pairing and warm-pool details corrected.
 - **README / AGENTS.md** — repo layout and Phase 0 gate documented; status updated to reflect the workspace existing while product code remains gated.
