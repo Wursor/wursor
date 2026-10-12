@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import { BrandMark } from './BrandMark.tsx';
 import { Button } from './Button.tsx';
 import { NAV_LINKS, ROUTES } from './content.ts';
-import { Icon } from './Icon.tsx';
+import { Icon } from '../ui/Icon.tsx';
 
 export function Nav() {
   const [open, setOpen] = useState(false);

@@ -13,8 +13,9 @@
   --color-bg-inverse: #14120b;
 
   --color-text-primary: #14120b;
-  --color-text-secondary: #6b675e;
-  --color-text-tertiary: #8f8b80;
+  /* AA: Figma's #6b675e / #8f8b80 secondary and tertiary text are 4.9:1 and 3.0:1 on sunken. Darkened to 6.0:1 and 4.6:1. */
+  --color-text-secondary: #5e5a52;
+  --color-text-tertiary: #706c64;
   --color-text-inverse: #f2f1ec;
   --color-text-on-accent: #ffffff;
   --color-text-link: #2a52b0;
@@ -24,6 +25,8 @@
   --color-border-strong: #c4c2b8;
 
   --color-accent-default: #e8590c;
+  /* Fill for chips and counters that carry text. White on #e8590c is 3.6:1; on this it is 4.9:1. */
+  --color-accent-fill: #c24a08;
   --color-accent-text: #b8420a;
   --color-accent-subtle: #fdede3;
 
@@ -80,8 +83,8 @@
     --color-bg-inverse: #f2f1ec;
 
     --color-text-primary: #f2f1ec;
-    --color-text-secondary: #8f8b80;
-    --color-text-tertiary: #6b675e;
+    --color-text-secondary: #aaa59a;
+    --color-text-tertiary: #918d83;
     --color-text-inverse: #14120b;
     --color-text-on-accent: #14120b;
     /* Figma keeps the light value (#2a52b0) in dark, which fails AA on #0e0e0c. Lightened to the dark "working" blue. */
@@ -92,6 +95,7 @@
     --color-border-strong: #4a473f;
 
     --color-accent-default: #ff7a33;
+    --color-accent-fill: #ff7a33;
     --color-accent-text: #ff9a5e;
     --color-accent-subtle: #3a1a08;
 
@@ -121,8 +125,8 @@
   --color-bg-inverse: #f2f1ec;
 
   --color-text-primary: #f2f1ec;
-  --color-text-secondary: #8f8b80;
-  --color-text-tertiary: #6b675e;
+  --color-text-secondary: #aaa59a;
+  --color-text-tertiary: #918d83;
   --color-text-inverse: #14120b;
   --color-text-on-accent: #14120b;
   --color-text-link: #7c9cf0;
@@ -132,6 +136,7 @@
   --color-border-strong: #4a473f;
 
   --color-accent-default: #ff7a33;
+  --color-accent-fill: #ff7a33;
   --color-accent-text: #ff9a5e;
   --color-accent-subtle: #3a1a08;
 
