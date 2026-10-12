@@ -36,6 +36,7 @@ Each ADR is a single file following the [Nygard format](https://cognitect.com/bl
 | [0020](0020-weown-cloud-provisioning.md) | Cloud sites are provisioned on WeOwn Cloud | Accepted |
 | [0021](0021-keep-no-diff-rule-wording.md) | Keep the "never sees a diff" rule in AGENTS.md as written | Accepted |
 | [0022](0022-digitalocean-hosting.md) | Wursor and WeOwn Cloud run on DigitalOcean | Accepted (service picks to confirm) |
+| [0023](0023-product-components-and-contrast.md) | Product UI is built once at design size and reused; text contrast tokens meet AA | Accepted |
 
 ## How to add one
 

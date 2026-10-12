@@ -10,7 +10,7 @@ Non-technical WordPress site owners describe what they want; Wursor makes it hap
 
 ```
 api/               Node.js + TypeScript API server (empty until Phase 0 gate)
-web/               Next.js (App Router) + TypeScript frontend (ADR 0018)
+web/               Next.js (App Router) + TypeScript frontend (ADR 0018): app/ routes, src/product (app UI components), src/marketing, src/ui, src/styles (tokens)
 plugin/            WordPress plugin (PHP) — empty until Phase 0 gate
 infrastructure/    Docker images, warm pool, GC, deploy scripts
 e2e/               Playwright + e2e/golden/ harness

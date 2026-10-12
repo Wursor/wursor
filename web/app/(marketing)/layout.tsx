@@ -4,6 +4,7 @@ import type { Metadata } from 'next';
 import type { ReactNode } from 'react';
 import '../../src/styles/tokens.css';
 import '../../src/styles/marketing.css';
+import '../../src/styles/product.css';
 
 export const metadata: Metadata = {
   title: { default: 'Wursor', template: '%s · Wursor' },
