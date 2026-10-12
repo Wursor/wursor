@@ -48,19 +48,19 @@
 
 ### 0.2 Decisions to ratify before building on them
 
-These conflict with existing ADRs or code and need a written decision (add ADRs 0018 onward) before work starts.
+These conflicted with existing ADRs or code. All four were decided on October 12, 2026 and recorded as ADRs 0018 to 0021.
 
-1. **Next.js versus React + Vite.** [ADR 0011](docs/decisions/0011-fastify-react-stack.md) chose Fastify and React. Headless rev 4 needs a server layer for token handling. Options: adopt Next.js, or keep Vite and add a small backend-for-frontend inside the API. Decide before more of `web/` is built.
-2. **Sign-in method.** The design uses an emailed 8-character code. HL-03 still says passkey or emailed link (PRD D-HL-13).
-3. **Who provisions Cloud sites.** WeOwn Cloud infrastructure or a partner behind the same interface (PRD D-HL-7). Do not build the hosting plane until this is decided.
-4. **"The user never sees a diff" (AGENTS.md rule 3).** The PRD keeps technical detail one tap away in an expandable section for owners who want it. Confirm the wording of the rule.
+1. **Decided: Next.js ([ADR 0018](docs/decisions/0018-nextjs-web-app.md)).** Was: Next.js versus React + Vite. [ADR 0011](docs/decisions/0011-fastify-react-stack.md) chose Fastify and React. Headless rev 4 needs a server layer for token handling. Options: adopt Next.js, or keep Vite and add a small backend-for-frontend inside the API. Decide before more of `web/` is built.
+2. **Decided: code, link and passkeys ([ADR 0019](docs/decisions/0019-sign-in-methods.md)).** Was: sign-in method. The design uses an emailed 8-character code. HL-03 still says passkey or emailed link (PRD D-HL-13).
+3. **Decided: WeOwn Cloud ([ADR 0020](docs/decisions/0020-weown-cloud-provisioning.md)).** Was: who provisions Cloud sites. WeOwn Cloud infrastructure or a partner behind the same interface (PRD D-HL-7). Do not build the hosting plane until this is decided.
+4. **Decided: leave the wording ([ADR 0021](docs/decisions/0021-keep-no-diff-rule-wording.md)).** Was: "The user never sees a diff" (AGENTS.md rule 3). The PRD keeps technical detail one tap away in an expandable section for owners who want it. Confirm the wording of the rule.
 
 ### 0.3 How the existing sprints map
 
 | Existing work | Status under the new direction |
 | :--- | :--- |
 | Phase 0 spikes and golden harness | Keep as they are. |
-| Sprint 1, web app scaffold and sandbox orchestration | Keep the sandbox work. Revisit the scaffold after decision 0.2.1. |
+| Sprint 1, web app scaffold and sandbox orchestration | Keep the sandbox work. Move the web scaffold to Next.js (ADR 0018). |
 | Sprint 2, WordPress plugin connector | Keep. Extend `site-info` to report the access level (Full access or Content only) and the operations the site supports. Wrap it behind the platform interface. |
 | Sprint 3, agent orchestrator and playbooks | Keep. Add the pre-run access check so a task that needs more access stops in the composer before any run starts. |
 | Sprints 4 and 5, content and design playbooks | Keep. Design playbooks gain the new-site path: a five-question brief and three design directions. |
@@ -76,7 +76,7 @@ These conflict with existing ADRs or code and need a written decision (add ADRs 
 | C | Identity: sign-up, sign-in, verify states, workspace naming, then Home. | PX-01, PX-02 |
 | D | Evidence-bound approval and the Publish entry point on desktop and mobile. | PX-03, SH-10 |
 | E | New-site path on Cloud: brief, three design directions, build on a safe copy, preview, approval. | SH-03 |
-| F | Hosting plane: provisioning, temporary address, backups, domain connection. Blocked on 0.2.3. | SH-04, SH-12, SH-14 |
+| F | Hosting plane: provisioning, temporary address, backups, domain connection. Unblocked by ADR 0020; staffing readiness still applies. | SH-04, SH-12, SH-14 |
 | G | Moves in both directions as releases, with dry run, page-by-page comparison and rollback. | SH-08 to SH-11 |
 | H | Surfaces: Home, Sites, Activity, Board with calendar, Settings, command palette, system states. | PX-04 to PX-08 |
 | I | Mobile and dark parity audits, accessibility scan, touch-target and contrast checks. | PX-09 to PX-12 |
