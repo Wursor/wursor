@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { BrandMark } from './BrandMark.tsx';
 import { Button } from './Button.tsx';
@@ -9,6 +10,7 @@ import { Icon } from '../ui/Icon.tsx';
 
 export function Nav() {
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
     if (!open) return;
@@ -29,7 +31,7 @@ export function Nav() {
 
         <nav aria-label="Primary" className="nav-links t-body-m">
           {NAV_LINKS.map((l) => (
-            <Link key={l.href} href={l.href}>
+            <Link key={l.href} href={l.href} aria-current={pathname === l.href ? 'page' : undefined}>
               {l.label}
             </Link>
           ))}
@@ -58,7 +60,7 @@ export function Nav() {
       {open && (
         <nav id="mobile-menu" aria-label="Mobile" className="nav-menu">
           {NAV_LINKS.map((l) => (
-            <Link key={l.href} href={l.href} className="t-title-m" onClick={() => setOpen(false)}>
+            <Link key={l.href} href={l.href} className="t-title-m" aria-current={pathname === l.href ? 'page' : undefined} onClick={() => setOpen(false)}>
               {l.mobileLabel ?? l.label}
             </Link>
           ))}

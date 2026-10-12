@@ -110,3 +110,25 @@ export const FAQ: ReadonlyArray<{ question: string; answer: string; open?: boole
       'Changes are made on a copy, a backup is taken before anything is applied, and each approval is tied to the exact checks you saw. You can disconnect Wursor from your site at any time.',
   },
 ];
+
+/** Rows of the plan comparison (draft numbers from the design; shown only when PRICING_CONFIRMED). */
+export const COMPARE_ROWS: ReadonlyArray<{ label: string; values: readonly [string, string, string] }> = [
+  { label: 'Sites', values: ['1', '5', '25'] },
+  { label: 'Changes per month', values: ['50', 'Unlimited', 'Unlimited'] },
+  { label: 'Safe copy before every publish', values: ['Included', 'Included', 'Included'] },
+  { label: 'Proof and nine checks', values: ['Included', 'Included', 'Included'] },
+  { label: 'Undo history', values: ['30 days', '90 days', '1 year'] },
+  { label: 'Team members', values: ['1', '5', 'Unlimited'] },
+  { label: 'Client sharing', values: ['—', '—', 'Included'] },
+  { label: 'Support', values: ['Email', 'Priority email', 'Priority and onboarding'] },
+];
+
+/** Docs articles. An article without an href has no page yet. */
+export const ARTICLES: ReadonlyArray<{ title: string; href?: string }> = [
+  { title: 'Start or connect a site' },
+  { title: 'What happens when I ask for a change' },
+  { title: 'How approval works', href: '/trust' },
+  { title: 'Undo a published change' },
+  { title: 'Invite your team' },
+  { title: 'Change or cancel your plan' },
+];
