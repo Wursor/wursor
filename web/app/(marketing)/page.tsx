@@ -1,3 +1,12 @@
+import { Footer } from '../../src/marketing/Footer.tsx';
+import { Nav } from '../../src/marketing/Nav.tsx';
+
 export default function HomePage() {
-  return <main>Wursor</main>;
+  return (
+    <>
+      <Nav />
+      <main />
+      <Footer />
+    </>
+  );
 }
