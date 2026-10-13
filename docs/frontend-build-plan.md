@@ -6,7 +6,7 @@ Each screen exists in up to four versions: desktop light (1440 wide), mobile lig
 
 Status key: `todo` · `built` (code written, tests pass) · `verified` (compared to all four frames).
 
-**Progress:** sections 1, 2, 3, 4, A, B0, B and D built. Section 1 and 2: 18 screens. Measured against Figma so far: 1a, 1b, 1c and 2a on desktop light, 1c on desktop dark, and 1a, 1b and 2a on mobile (dark for 2a). D2 checked against Figma geometry on desktop light, and on mobile dark by eye. Everything else shares the same components and is covered by unit tests but has not been compared frame by frame. See `design-discrepancies.md` for places the design and an existing decision disagree.
+**Progress:** sections 1, 2, 3, 4, A, B0, B, D and 5 built. Section 1 and 2: 18 screens. Measured against Figma so far: 1a, 1b, 1c and 2a on desktop light, 1c on desktop dark, and 1a, 1b and 2a on mobile (dark for 2a). D2 checked against Figma geometry on desktop light, and on mobile dark by eye. Everything else shares the same components and is covered by unit tests but has not been compared frame by frame. See `design-discrepancies.md` for places the design and an existing decision disagree.
 
 **Totals:** 163 distinct screens · 647 frames to match (desktop light 154, mobile light 170, desktop dark 153, mobile dark 170).
 
@@ -126,9 +126,9 @@ Status key: `todo` · `built` (code written, tests pass) · `verified` (compared
 
 | Screen | Desktop light | Mobile light | Desktop dark | Mobile dark | Status |
 |---|---|---|---|---|---|
-| 5a · Scanning (live) | `46:1393` | `134:31273` | `136:36725` | `136:56823` | todo |
-| 5b · Here is what I know | `46:1497` | `134:31372` | `136:36755` | `136:56853` | todo |
-| 5c · Partly blocked | `46:1636` | `134:31520` | `136:36790` | `136:56888` | todo |
+| 5a · Scanning (live) | `46:1393` | `134:31273` | `136:36725` | `136:56823` | built |
+| 5b · Here is what I know | `46:1497` | `134:31372` | `136:36755` | `136:56853` | built |
+| 5c · Partly blocked | `46:1636` | `134:31520` | `136:36790` | `136:56888` | built |
 
 ## 6 · Pick a first change
 

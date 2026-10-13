@@ -100,7 +100,7 @@ button:where([class^="p-"]):focus-visible { outline: 2px solid var(--color-accen
 .p-stream[data-density="everything"] { justify-content: flex-end; }
 .p-composer-area { padding: var(--space-2) var(--space-4) var(--space-4); }
 .p-message-user { padding: var(--space-3) var(--space-4); border-radius: var(--radius-lg); background: var(--color-bg-sunken); }
-.p-message p { font: 400 14px/20px var(--font-sans); color: var(--color-text-primary); }
+.p-message p { margin: 0; font: 400 14px/20px var(--font-sans); color: var(--color-text-primary); }
 .p-message-wursor { display: flex; align-items: flex-start; gap: var(--space-3); }
 .p-message-wursor p { flex: 1 0 0; min-width: 0; }
 .p-stepgroup-header, .p-thought-header { display: flex; align-items: center; gap: var(--space-1); width: 100%; text-align: left; }
