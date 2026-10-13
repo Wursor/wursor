@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { Banner } from '../ui/Banner.tsx';
 import { Icon } from '../ui/Icon.tsx';
+import { Checklist } from './Checklist.tsx';
 import { WizardShell } from './WizardShell.tsx';
 
 type Props = {
@@ -17,7 +18,6 @@ type Props = {
 
 const TASKS = ['Creating your site', 'Installing your look', 'Securing the connection', 'Taking the first backup'] as const;
 
-type State = 'done' | 'running' | 'pending';
 
 /** Step 8, Cloud path: the site is set up task by task, then it is live on a temporary address. */
 export function SetupStep({ siteName, address, stepMs = 2500, onConnectDomain, onLater, onSaveAndExit }: Props) {
@@ -76,24 +76,10 @@ export function SetupStep({ siteName, address, stepMs = 2500, onConnectDomain, o
             <p className="t-body-l">Your site is approved. We are getting its home ready.</p>
           </div>
           <div className="ob-fork-content ob-setup">
-            <ol aria-label="Setup progress" className="ob-checklist">
-              {TASKS.map((label, i) => {
-                const state: State = i < done ? 'done' : i === done ? 'running' : 'pending';
-                return (
-                  <li key={label} className="ob-checkitem" data-state={state}>
-                    <span className="ob-checkitem-mark" aria-hidden="true">
-                      {state === 'done' && <Icon name="check-circle" size={20} />}
-                      {state === 'running' && <Icon name="loader" size={20} className="ob-spin" />}
-                      {state === 'pending' && <span className="ob-pending-dot" />}
-                    </span>
-                    <span className="ob-checkitem-text">
-                      <span className="t-body-m">{label}</span>
-                      <span className="t-caption">{state === 'done' ? 'Done' : state === 'running' ? 'Working…' : 'Waiting'}</span>
-                    </span>
-                  </li>
-                );
-              })}
-            </ol>
+            <Checklist
+              label="Setup progress"
+              items={TASKS.map((label, i) => ({ label, state: i < done ? 'done' : i === done ? 'running' : 'pending' }))}
+            />
             <p className="ob-note t-body-m">
               <Icon name="info" size={20} />
               <span>This usually takes a few minutes. You can close this page; we will email you when it is ready.</span>
