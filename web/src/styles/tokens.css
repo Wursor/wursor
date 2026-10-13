@@ -40,6 +40,10 @@
   --color-status-success-fg: #1f6b42;
   --color-status-success-bg: #e4f2e8;
 
+  --color-status-danger-dot: #c93a3a;
+  --color-status-danger-fg: #a12a2a;
+  --color-border-focus: #e8590c;
+
   --color-diff-add-fg: #1f6b42;
   --color-diff-remove-fg: #a12a2a;
 
@@ -109,6 +113,10 @@
     --color-status-success-fg: #5cc48a;
     --color-status-success-bg: #17301f;
 
+    --color-status-danger-dot: #e86a6a;
+    --color-status-danger-fg: #e86a6a;
+    --color-border-focus: #ff7a33;
+
     --color-diff-add-fg: #5cc48a;
     --color-diff-remove-fg: #e86a6a;
 
@@ -149,6 +157,10 @@
   --color-status-success-dot: #5cc48a;
   --color-status-success-fg: #5cc48a;
   --color-status-success-bg: #17301f;
+
+  --color-status-danger-dot: #e86a6a;
+  --color-status-danger-fg: #e86a6a;
+  --color-border-focus: #ff7a33;
 
   --color-diff-add-fg: #5cc48a;
   --color-diff-remove-fg: #e86a6a;

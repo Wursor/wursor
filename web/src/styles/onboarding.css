@@ -1,0 +1,156 @@
+/*
+ * Pre-workspace screens: sign up, sign in, verify, name the workspace, and the starting-path flows.
+ * Measurements come from the Figma frames (desktop 1440 wide, mobile 390). Colours, spacing and radii are tokens.
+ * Below 601px the mobile frames apply: 16px page margins, a 56px header, a full-width card.
+ */
+.ob-page {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  min-height: 100dvh;
+  background: var(--color-bg-canvas);
+  color: var(--color-text-primary);
+}
+.ob-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 72px;
+  padding: 0 var(--space-10);
+}
+.ob-brand { display: flex; align-items: center; gap: var(--space-2); }
+.ob-header-right { display: flex; align-items: center; gap: var(--space-5); }
+.ob-help { color: var(--color-text-secondary); }
+
+.ob-column { display: flex; flex-direction: column; align-items: center; gap: var(--space-5); }
+.ob-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-5);
+  width: 480px;
+  max-width: 100%;
+  /* Figma draws the 1px border inside the 40px padding; in CSS it sits outside it, so take it off. */
+  padding: calc(var(--space-10) - 1px);
+  border-radius: var(--radius-xl);
+  background: var(--color-bg-surface);
+  border: 1px solid var(--color-border-subtle);
+}
+.ob-heading { display: flex; flex-direction: column; gap: var(--space-2); width: 100%; }
+.ob-heading h1, .ob-heading p { margin: 0; }
+.ob-heading p { color: var(--color-text-secondary); }
+
+/* Provider buttons: the dark pill is Google, the outlined one is email. */
+.ob-options { display: flex; flex-direction: column; gap: var(--space-3); width: 100%; }
+.ob-provider, .ob-continue {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  width: 100%;
+  height: var(--size-control-lg);
+  border: 0;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+}
+.ob-provider-primary { background: var(--color-bg-inverse); color: var(--color-text-inverse); }
+.ob-provider-secondary { background: var(--color-bg-surface); border: 1px solid var(--color-border-strong); color: var(--color-text-primary); }
+.ob-glyph { display: flex; align-items: center; justify-content: center; height: 20px; }
+.ob-terms { margin: 0; width: 100%; text-align: center; color: var(--color-text-tertiary); }
+.ob-account-row { display: flex; gap: var(--space-1); margin: 0; white-space: nowrap; color: var(--color-text-secondary); }
+.ob-account-row a { color: var(--color-text-link); }
+
+/* Back: ghost button, 28px on desktop and 36px on mobile. */
+.ob-back {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  height: var(--size-control-sm);
+  padding: 0 var(--space-3);
+  border: 0;
+  border-radius: var(--radius-full);
+  background: transparent;
+  cursor: pointer;
+}
+.ob-back:hover { background: var(--color-bg-sunken); }
+
+/* Text field: 44px, 8px radius. Focus is the accent border plus a 2px ring; an error turns the border red. */
+.ob-textfield { display: flex; flex-direction: column; gap: var(--space-1); width: 100%; }
+.ob-field {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  height: var(--size-control-lg);
+  padding: 0 var(--space-3);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-surface);
+  border: 1px solid var(--color-border-default);
+}
+.ob-field:focus-within { border-color: var(--color-border-focus); box-shadow: 0 0 0 2px var(--color-border-focus); }
+.ob-field[data-invalid="true"], .ob-field[data-invalid="true"]:focus-within { border-color: var(--color-status-danger-dot); }
+.ob-field[data-invalid="true"]:focus-within { box-shadow: 0 0 0 2px var(--color-status-danger-dot); }
+.ob-input { flex: 1 0 0; min-width: 0; padding: 0; border: 0; outline: 0; background: transparent; color: var(--color-text-primary); }
+.ob-input::placeholder { color: var(--color-text-secondary); opacity: 1; }
+.ob-error { margin: 0; color: var(--color-status-danger-fg); }
+.ob-error a { color: inherit; }
+
+/* Continue: black pill when it can be pressed, sunken and quiet when it cannot. */
+.ob-continue { padding: 0 var(--space-5); background: var(--color-bg-inverse); color: var(--color-text-inverse); }
+.ob-continue[aria-disabled="true"] { background: var(--color-bg-sunken); color: var(--color-text-tertiary); cursor: default; }
+.ob-link { width: 100%; padding: 0; border: 0; background: transparent; color: var(--color-text-link); text-align: center; cursor: pointer; }
+
+.ob-provider:focus-visible, .ob-continue:focus-visible, .ob-back:focus-visible, .ob-link:focus-visible { outline: 2px solid var(--color-accent-default); outline-offset: 2px; }
+
+/* ---------- Verify: eight code boxes, status line, resend row ---------- */
+.ob-card-verify { width: 520px; }
+.ob-code-wrap { max-width: 100%; }
+.ob-code { display: flex; gap: var(--space-2); }
+.ob-code-box {
+  box-sizing: border-box;
+  width: 44px;
+  height: 52px;
+  padding: 0;
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-sm);
+  outline: 0;
+  background: var(--color-bg-surface);
+  color: var(--color-text-primary);
+  font: 500 20px/28px var(--font-sans);
+  letter-spacing: -0.01em;
+  text-align: center;
+}
+.ob-code-box:focus { border-color: var(--color-border-focus); box-shadow: 0 0 0 2px var(--color-border-focus); }
+.ob-code-box[aria-invalid="true"], .ob-code-box[aria-invalid="true"]:focus { border-color: var(--color-status-danger-dot); color: var(--color-status-danger-fg); }
+.ob-code-box[aria-invalid="true"]:focus { box-shadow: 0 0 0 2px var(--color-status-danger-dot); }
+.ob-status { margin: 0; width: 100%; color: var(--color-text-secondary); }
+.ob-status-error { color: var(--color-status-danger-fg); }
+.ob-resend-row { display: flex; align-items: center; justify-content: space-between; width: 100%; white-space: nowrap; }
+.ob-resend-row p { margin: 0; color: var(--color-text-secondary); }
+.ob-resend, .ob-link-inline { padding: 0; border: 0; background: transparent; cursor: pointer; }
+.ob-resend { color: var(--color-text-secondary); }
+.ob-resend:hover { text-decoration: underline; }
+.ob-link-inline { color: var(--color-text-link); }
+.ob-resend:focus-visible, .ob-link-inline:focus-visible { outline: 2px solid var(--color-accent-default); outline-offset: 2px; }
+.ob-toast-region { position: fixed; left: 0; right: 0; bottom: 56px; display: flex; justify-content: center; padding: 0 var(--space-4); pointer-events: none; }
+
+@media (max-width: 600px) {
+  .ob-card-verify { width: 100%; }
+  .ob-code-wrap { width: 100%; }
+  .ob-code { gap: 6px; width: 100%; }
+  .ob-code-box { flex: 1 0 0; width: auto; min-width: 1px; }
+  .ob-resend-row { flex-direction: column; align-items: flex-start; }
+  .ob-resend-row > :first-child { height: 20px; }
+  .ob-header { top: env(safe-area-inset-top, 0px); height: 56px; padding: 0 var(--space-4); }
+  .ob-column { width: 100%; padding: 0 var(--space-4); }
+  .ob-card { width: 100%; }
+  .ob-back { height: var(--size-control-md); padding: 0 var(--space-4); }
+  /* In the mobile frames the label fills the button and sits left of centre. */
+  .ob-btn-label { flex: 1 0 0; min-width: 0; text-align: left; }
+}
