@@ -9,8 +9,8 @@ type Props = {
   onSaveAndExit?: (() => void) | undefined;
   /** Tighter spacing, used when an extra banner would otherwise push the actions off a 900px screen. */
   compact?: boolean;
-  /** Body width: 560 (default), 600 for the longer forms, or 1040 with the step indicator and actions held to 600 for three cards side by side. */
-  size?: 'narrow' | 'medium' | 'wide';
+  /** Body width: 560 (default), 600 for the longer forms, 1040 with the step indicator and actions held to 600 for three cards side by side, or 960 for the scan's two columns. */
+  size?: 'narrow' | 'medium' | 'wide' | 'scan';
   children: ReactNode;
 };
 

@@ -425,3 +425,23 @@
 .ob-provider-seg { width: 100%; }
 .ob-provider-seg .p-segment { cursor: pointer; }
 .ob-provider-seg .p-segment:focus-visible { outline: 2px solid var(--color-accent-default); outline-offset: 2px; }
+
+/* ---------- Section 5: Wursor takes a look ---------- */
+.ob-wizard-body[data-size="scan"] { width: 960px; }
+.ob-scan { display: flex; align-items: flex-start; gap: var(--space-6); width: 100%; }
+.ob-scan-findings { display: flex; flex: 1 0 0; flex-direction: column; gap: var(--space-2); min-width: 0; }
+.ob-finding { display: flex; align-items: center; gap: var(--space-3); width: 100%; padding: var(--space-3) var(--space-4); border-radius: var(--radius-md); background: var(--color-bg-surface); border: 1px solid var(--color-border-subtle); }
+.ob-finding-tile { display: flex; align-items: center; justify-content: center; flex: none; width: 32px; height: 32px; overflow: hidden; border-radius: var(--radius-sm); background: var(--color-bg-sunken); color: var(--color-text-secondary); }
+.ob-finding-text { display: flex; flex: 1 0 0; flex-direction: column; min-width: 0; white-space: nowrap; }
+.ob-finding-text .t-caption { color: var(--color-text-tertiary); }
+.ob-finding-result { display: flex; align-items: center; gap: var(--space-2); flex: none; color: var(--color-text-primary); white-space: nowrap; }
+.ob-finding-dot { width: 8px; height: 8px; border-radius: var(--radius-full); background: var(--color-status-needs-you-dot); }
+.ob-finding-looking { color: var(--color-text-tertiary); font-weight: 500; }
+.ob-finding[data-state="running"] .ob-finding-result > .icon { color: var(--color-status-working-dot); }
+.ob-scan-panel { display: flex; flex: 1 0 0; flex-direction: column; gap: var(--space-4); min-width: 0; padding: var(--space-5); border-radius: var(--radius-lg); background: var(--color-bg-surface); border: 1px solid var(--color-border-subtle); }
+.ob-scan-panel-head { display: flex; align-items: center; gap: var(--space-2); margin: 0; color: var(--color-text-primary); }
+.ob-scan-dot { width: 8px; height: 8px; border-radius: var(--radius-full); background: var(--color-status-working-dot); }
+.ob-scan-panel .p-stepline-running .icon { animation: ob-spin 1s linear infinite; }
+@media (prefers-reduced-motion: reduce) { .ob-scan-panel .p-stepline-running .icon { animation: none; } }
+@media (max-width: 600px) { .ob-wizard-body[data-size="scan"] { width: 100%; } .ob-scan { flex-direction: column; align-items: stretch; } }
+.ob-wizard-body[data-size="scan"] .ob-access { align-self: flex-start; }

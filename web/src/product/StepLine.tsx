@@ -1,8 +1,8 @@
 import type { ReactNode } from 'react';
 import { Icon, type IconName } from '../ui/Icon.tsx';
 
-type Kind = 'look' | 'search' | 'edit' | 'running';
-const ICON: Record<Kind, IconName> = { look: 'eye', search: 'search', edit: 'pencil', running: 'loader' };
+type Kind = 'look' | 'search' | 'edit' | 'check' | 'capture' | 'running';
+const ICON: Record<Kind, IconName> = { look: 'eye', search: 'search', edit: 'pencil', check: 'shield-check', capture: 'camera', running: 'loader' };
 
 /** One thing Wursor did. A running step swaps in a spinner and a stronger label. */
 export function StepLine({ kind, time, children }: { kind: Kind; time: string; children: ReactNode }) {
