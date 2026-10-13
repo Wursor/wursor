@@ -6,6 +6,8 @@ Each screen exists in up to four versions: desktop light (1440 wide), mobile lig
 
 Status key: `todo` · `built` (code written, tests pass) · `verified` (compared to all four frames).
 
+**Progress:** sections 1 and 2 built (18 screens). Measured against Figma so far: 1a, 1b, 1c and 2a on desktop light, 1c on desktop dark, and 1a, 1b and 2a on mobile (dark for 2a). Everything else in those sections shares the same components and is covered by unit tests but has not been compared frame by frame. See `design-discrepancies.md` for places the design and an existing decision disagree.
+
 **Totals:** 163 distinct screens · 647 frames to match (desktop light 154, mobile light 170, desktop dark 153, mobile dark 170).
 
 
@@ -13,29 +15,29 @@ Status key: `todo` · `built` (code written, tests pass) · `verified` (compared
 
 | Screen | Desktop light | Mobile light | Desktop dark | Mobile dark | Status |
 |---|---|---|---|---|---|
-| 1a · Welcome | `41:508` | `134:53060` | `141:56156` | `136:56007` | todo |
-| 1b · Email entry | `41:539` | `134:29204` | `136:36086` | `136:56027` | todo |
-| 1c · Email not valid | `41:579` | `134:29236` | `136:36104` | `136:56043` | todo |
-| 1d · Sending code | `41:619` | `134:29268` | `136:36122` | `136:56059` | todo |
-| 1e · Sign in | `41:659` | `134:29300` | `136:36140` | `136:56075` | todo |
-| 1f · Sign in, email entry | `166:60281` | `167:131` | `167:22` | `167:264` | todo |
-| 1g · No account with that email | `166:60297` | `167:149` | `167:38` | `167:282` | todo |
-| 1h · Sign in, sending code | `176:2` | `176:494` | `176:263` | `176:791` | todo |
+| 1a · Welcome | `41:508` | `134:53060` | `141:56156` | `136:56007` | built |
+| 1b · Email entry | `41:539` | `134:29204` | `136:36086` | `136:56027` | built |
+| 1c · Email not valid | `41:579` | `134:29236` | `136:36104` | `136:56043` | built |
+| 1d · Sending code | `41:619` | `134:29268` | `136:36122` | `136:56059` | built |
+| 1e · Sign in | `41:659` | `134:29300` | `136:36140` | `136:56075` | built |
+| 1f · Sign in, email entry | `166:60281` | `167:131` | `167:22` | `167:264` | built |
+| 1g · No account with that email | `166:60297` | `167:149` | `167:38` | `167:282` | built |
+| 1h · Sign in, sending code | `176:2` | `176:494` | `176:263` | `176:791` | built |
 
 ## 2 · Verify email
 
 | Screen | Desktop light | Mobile light | Desktop dark | Mobile dark | Status |
 |---|---|---|---|---|---|
-| 2a · Enter code | `41:689` | `134:29330` | `136:36161` | `136:56096` | todo |
-| 2b · Checking code | `41:732` | `134:29371` | `136:36180` | `136:56113` | todo |
-| 2c · Wrong code | `41:776` | `134:29413` | `136:36200` | `136:56131` | todo |
-| 2d · New code sent | `41:820` | `134:29455` | `136:36220` | `136:56149` | todo |
-| 2e · Code expired | `41:867` | `134:29500` | `136:36240` | `136:56167` | todo |
-| 2f · Too many tries | `41:918` | `134:29545` | `136:36260` | `136:56185` | todo |
-| 2g · Sign in, enter code | `176:18` | `176:512` | `176:279` | `176:809` | todo |
-| 2h · Sign in, checking code | `176:35` | `176:531` | `176:296` | `176:828` | todo |
-| 2i · Sign in, wrong code | `176:53` | `176:551` | `176:314` | `176:848` | todo |
-| 2j · Sign in, new code sent | `176:71` | `176:571` | `176:332` | `176:868` | todo |
+| 2a · Enter code | `41:689` | `134:29330` | `136:36161` | `136:56096` | built |
+| 2b · Checking code | `41:732` | `134:29371` | `136:36180` | `136:56113` | built |
+| 2c · Wrong code | `41:776` | `134:29413` | `136:36200` | `136:56131` | built |
+| 2d · New code sent | `41:820` | `134:29455` | `136:36220` | `136:56149` | built |
+| 2e · Code expired | `41:867` | `134:29500` | `136:36240` | `136:56167` | built |
+| 2f · Too many tries | `41:918` | `134:29545` | `136:36260` | `136:56185` | built |
+| 2g · Sign in, enter code | `176:18` | `176:512` | `176:279` | `176:809` | built |
+| 2h · Sign in, checking code | `176:35` | `176:531` | `176:296` | `176:828` | built |
+| 2i · Sign in, wrong code | `176:53` | `176:551` | `176:314` | `176:848` | built |
+| 2j · Sign in, new code sent | `176:71` | `176:571` | `176:332` | `176:868` | built |
 
 ## 3 · Name your workspace
 
