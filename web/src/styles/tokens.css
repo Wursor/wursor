@@ -182,4 +182,5 @@
 .t-label-s { font: 500 12px/16px var(--font-sans); }
 .t-caption { font: 400 12px/16px var(--font-sans); }
 .t-overline { font: 600 11px/16px var(--font-sans); letter-spacing: 0.06em; text-transform: uppercase; }
+.t-body-l-strong { font: 500 16px/24px var(--font-sans); }
 .t-mono-s { font: 400 12px/16px var(--font-mono); }

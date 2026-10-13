@@ -9,6 +9,7 @@ import { ChooseWpSiteStep } from './ChooseWpSiteStep.tsx';
 import { ConnectProblemStep } from './ConnectProblemStep.tsx';
 import { ConnectSiteFlow, type ConnectDone, type Scenario } from './ConnectSiteFlow.tsx';
 import { ConnectedStep } from './ConnectSteps.tsx';
+import { FirstChangeStep } from './FirstChangeStep.tsx';
 import { ScanStep } from './ScanStep.tsx';
 import { DomainFlow, type DomainScenario } from './DomainFlow.tsx';
 import { WpPermissionsStep } from './WpPermissionsStep.tsx';
@@ -172,4 +173,9 @@ export function DomainScreen({ scenario }: { scenario?: DomainScenario | undefin
 export function ScanScreen({ access }: { access: 'full' | 'content' }) {
   const router = useRouter();
   return <ScanStep access={access} onContinue={() => router.push('/start/first-change')} onBack={() => router.back()} onSaveAndExit={() => router.push('/')} />;
+}
+
+export function FirstChangeScreen({ access }: { access: 'full' | 'content' }) {
+  const router = useRouter();
+  return <FirstChangeStep access={access} onStart={() => router.push('/workspace')} onBack={() => router.back()} onSaveAndExit={() => router.push('/')} />;
 }
