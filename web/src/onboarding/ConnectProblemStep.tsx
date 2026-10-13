@@ -12,7 +12,7 @@ type Props = {
   onPrimary: () => void;
   secondary?: string;
   onSecondary?: () => void;
-  onSaveAndExit?: () => void;
+  onSaveAndExit?: (() => void) | undefined;
 };
 
 /** A step-6 screen that stopped on a problem: the heading says what happened to the site, the card says why and what to do. */

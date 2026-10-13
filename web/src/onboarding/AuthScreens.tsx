@@ -7,6 +7,8 @@ import { AboutSiteStep } from './AboutSiteStep.tsx';
 import { ChoosePlatformStep } from './ChoosePlatformStep.tsx';
 import { ChooseWpSiteStep } from './ChooseWpSiteStep.tsx';
 import { ConnectProblemStep } from './ConnectProblemStep.tsx';
+import { ConnectSiteFlow, type ConnectDone, type Scenario } from './ConnectSiteFlow.tsx';
+import { ConnectedStep } from './ConnectSteps.tsx';
 import { WpPermissionsStep } from './WpPermissionsStep.tsx';
 import { WpWaitingStep } from './WpWaitingStep.tsx';
 import { ForkStep, type Path } from './ForkStep.tsx';
@@ -124,4 +126,38 @@ export function WordPressComScreen({ outcome = 'approved' }: { outcome?: 'approv
       />
     );
   return <ChooseWpSiteStep sites={DEMO_WP_SITES} onContinue={() => router.push('/start/connect/done')} onBack={() => setPhase('waiting')} onSaveAndExit={exit} />;
+}
+
+const SCENARIOS: readonly Scenario[] = ['ok', 'unreachable', 'not-wordpress', 'admin', 'blocked', 'expired', 'noplugins', 'content', 'empty', 'pages'];
+
+/** Connect a site that is somewhere other than WordPress.com, or (purpose build) build here and publish to a WordPress. */
+export function ConnectSiteScreen({ scenario, purpose = 'connect' }: { scenario?: string | undefined; purpose?: 'connect' | 'build' }) {
+  const router = useRouter();
+  const safe = SCENARIOS.find((s) => s === scenario) ?? 'ok';
+  const done = (how: ConnectDone) => router.push(how === 'empty' ? '/start/cloud' : '/start/look');
+  return (
+    <ConnectSiteFlow
+      scenario={safe}
+      purpose={purpose}
+      onDone={done}
+      onChooseCloud={() => router.push('/start/cloud')}
+      onBackOut={() => router.back()}
+      onSaveAndExit={() => router.push('/')}
+    />
+  );
+}
+
+/** The end of the WordPress.com path: connected, ready for a first look. */
+export function ConnectedScreen() {
+  const router = useRouter();
+  return (
+    <ConnectedStep
+      variant="first-look"
+      siteName="Harbor Bakery"
+      url="harborbakery.com"
+      onContinue={() => router.push('/start/look')}
+      onBack={() => router.back()}
+      onSaveAndExit={() => router.push('/')}
+    />
+  );
 }

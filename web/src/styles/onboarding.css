@@ -364,3 +364,38 @@
 .ob-problem-text p { margin: 0; }
 .ob-problem-text .t-body-m { color: var(--color-text-secondary); }
 .ob-problem-actions { display: flex; align-items: flex-start; gap: var(--space-2); }
+
+/* ---------- Connect screens ---------- */
+.ob-addressform { width: 100%; }
+.ob-helper { margin: 0; color: var(--color-text-secondary); }
+.ob-statusline > .icon { color: var(--color-status-working-dot); }
+.ob-field > .icon { color: var(--icon-color); }
+.ob-siteconfirm { width: 100%; overflow: hidden; border-radius: var(--radius-lg); background: var(--color-bg-surface); border: 1px solid var(--color-border-default); }
+.ob-siteconfirm-top { display: flex; align-items: center; gap: var(--space-3); padding: var(--space-4); }
+.ob-siteconfirm-favicon { display: flex; align-items: center; justify-content: center; flex: none; width: 40px; height: 40px; overflow: hidden; border-radius: var(--radius-md); background: var(--color-accent-subtle); color: var(--color-accent-text); }
+.ob-siteconfirm-text { display: flex; flex: 1 0 0; flex-direction: column; min-width: 0; white-space: nowrap; }
+.ob-siteconfirm-text .t-caption { color: var(--color-text-tertiary); }
+.ob-siteconfirm-status { display: flex; align-items: center; gap: var(--space-1); color: var(--color-text-secondary); white-space: nowrap; }
+.ob-siteconfirm[data-state="connected"] .ob-siteconfirm-status { color: var(--color-status-success-fg); }
+.ob-siteconfirm-note { display: flex; align-items: flex-start; gap: var(--space-2); padding: var(--space-3) var(--space-4); background: var(--color-bg-sunken); color: var(--color-text-secondary); }
+.ob-siteconfirm-note > span:not(.icon) { flex: 1 0 0; min-width: 0; }
+.ob-access { display: flex; align-items: center; gap: var(--space-2); }
+.ob-access > .icon { color: var(--color-text-secondary); }
+.ob-access .t-caption { color: var(--color-text-secondary); white-space: nowrap; }
+.ob-access-badge { display: inline-flex; align-items: center; gap: var(--space-1); padding: 3px 10px 3px 8px; border-radius: var(--radius-full); white-space: nowrap; }
+.ob-access-badge[data-access="full"] { background: var(--color-status-success-bg); color: var(--color-status-success-fg); }
+.ob-access-badge[data-access="content"] { background: var(--color-bg-sunken); color: var(--color-text-secondary); }
+.ob-pairstep { display: flex; align-items: flex-start; gap: var(--space-3); width: 100%; }
+.ob-pairstep-n { display: flex; align-items: center; justify-content: center; flex: none; width: 24px; height: 24px; overflow: hidden; border-radius: var(--radius-full); background: var(--color-bg-sunken); color: var(--color-text-primary); }
+.ob-pairstep-text { display: flex; flex: 1 0 0; flex-direction: column; align-items: flex-start; gap: var(--space-1); min-width: 0; }
+.ob-pairstep-text p { margin: 0; }
+.ob-pairstep-text .t-body-m { color: var(--color-text-secondary); }
+.ob-dl-icon { position: relative; display: block; flex: none; width: 16px; height: 16px; }
+.ob-dl-icon > .icon { position: absolute; left: 0; top: 0; }
+.ob-paircode { display: flex; align-items: center; gap: var(--space-4); width: 100%; padding: var(--space-4) var(--space-5); border-radius: var(--radius-lg); background: var(--color-bg-sunken); border: 1px solid var(--color-border-subtle); }
+.ob-paircode-text { display: flex; flex: 1 0 0; flex-direction: column; gap: var(--space-1); min-width: 0; white-space: nowrap; }
+.ob-paircode-label { margin: 0; font: 600 11px/16px var(--font-sans); letter-spacing: 0.06em; text-transform: uppercase; color: var(--color-text-tertiary); }
+.ob-paircode-value { margin: 0; font: 300 36px/40px var(--font-sans); letter-spacing: -0.02em; color: var(--color-text-primary); }
+.ob-checkitem[data-state="failed"] .ob-checkitem-mark { color: var(--color-status-danger-fg); }
+.ob-checkitem[data-state="failed"] .t-body-m { font-weight: 500; }
+.ob-checkitem[data-state="failed"] .t-caption { color: var(--color-status-danger-fg); }
