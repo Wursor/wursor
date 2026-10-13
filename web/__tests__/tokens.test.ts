@@ -30,6 +30,7 @@ const COLOR_TOKENS = [
   '--color-status-working-dot', '--color-status-working-fg', '--color-status-working-bg',
   '--color-status-needs-you-dot', '--color-status-needs-you-fg', '--color-status-needs-you-bg',
   '--color-status-success-dot', '--color-status-success-fg', '--color-status-success-bg',
+  '--color-status-danger-dot', '--color-status-danger-fg', '--color-border-focus',
   '--color-diff-add-fg', '--color-diff-remove-fg', '--icon-color',
 ];
 
@@ -56,6 +57,15 @@ describe('design tokens', () => {
   it('uses the Figma dark values', () => {
     expect(dark['--color-bg-canvas']).toBe('#0e0e0c');
     expect(dark['--color-accent-default']).toBe('#ff7a33');
+  });
+
+  it('uses the Figma values for the error and focus colours (light and dark)', () => {
+    expect(light['--color-status-danger-dot']).toBe('#c93a3a');
+    expect(light['--color-status-danger-fg']).toBe('#a12a2a');
+    expect(light['--color-border-focus']).toBe('#e8590c');
+    expect(dark['--color-status-danger-dot']).toBe('#e86a6a');
+    expect(dark['--color-status-danger-fg']).toBe('#e86a6a');
+    expect(dark['--color-border-focus']).toBe('#ff7a33');
   });
 
   it('keeps dark and automatic dark in agreement', () => {
@@ -109,6 +119,7 @@ const PAIRS: ReadonlyArray<[string, string]> = [
   ['--color-status-needs-you-fg', '--color-status-needs-you-bg'],
   ['--color-status-success-fg', '--color-status-success-bg'],
   ['--color-diff-add-fg', '--color-bg-surface'], ['--color-diff-remove-fg', '--color-bg-surface'],
+  ['--color-status-danger-fg', '--color-bg-surface'], ['--color-status-danger-fg', '--color-bg-canvas'],
 ];
 
 describe('contrast (WCAG 2.2 AA, PX-10)', () => {
