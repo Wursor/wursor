@@ -12,3 +12,6 @@ Places where the Figma file ("Wursor - weown.net", page Product Design) and an e
 | 6 | Mobile buttons | Labels fill the button and sit left of centre | Same | Matches the frames; flagged because desktop centres them. |
 | 7 | Settings T2 | A dark T2 frame (`62:8721`) sits inside the light Settings section | Counted as the dark version of T2 | Dark T2 also exists in the dark section. |
 | 8 | Design-to-code export | Focus ring is a 2px spread in the Figma style "Focus/Ring"; the exported code drops the spread | 1px accent border plus a 2px ring | Matches the style, not the export. |
+| D1 | Section D, Connect your web address | Provider control "How to do this at" has GoDaddy, Namecheap and Cloudflare, with no instructions shown under it | Same: the control only changes the selected provider; no per-provider steps are invented | Awaiting designed copy for each provider |
+| D2 | Section D, copy button | Icon only, no copied state | The icon swaps to a tick and the label reads "Copied" for two seconds | Confirms the copy worked, matching the pairing code Copy button |
+| D3 | Section D, stand-in behaviour | DNS check, securing and the switch are all real in the product | Timed stand-ins (`?scenario=wrong-record` shows the wrong-record state) | Backend is out of scope for this pass |

@@ -6,7 +6,7 @@ Each screen exists in up to four versions: desktop light (1440 wide), mobile lig
 
 Status key: `todo` · `built` (code written, tests pass) · `verified` (compared to all four frames).
 
-**Progress:** sections 1 and 2 built (18 screens). Measured against Figma so far: 1a, 1b, 1c and 2a on desktop light, 1c on desktop dark, and 1a, 1b and 2a on mobile (dark for 2a). Everything else in those sections shares the same components and is covered by unit tests but has not been compared frame by frame. See `design-discrepancies.md` for places the design and an existing decision disagree.
+**Progress:** sections 1, 2, 3, 4, A, B0, B and D built. Section 1 and 2: 18 screens. Measured against Figma so far: 1a, 1b, 1c and 2a on desktop light, 1c on desktop dark, and 1a, 1b and 2a on mobile (dark for 2a). D2 checked against Figma geometry on desktop light, and on mobile dark by eye. Everything else shares the same components and is covered by unit tests but has not been compared frame by frame. See `design-discrepancies.md` for places the design and an existing decision disagree.
 
 **Totals:** 163 distinct screens · 647 frames to match (desktop light 154, mobile light 170, desktop dark 153, mobile dark 170).
 
@@ -107,12 +107,12 @@ Status key: `todo` · `built` (code written, tests pass) · `verified` (compared
 
 | Screen | Desktop light | Mobile light | Desktop dark | Mobile dark | Status |
 |---|---|---|---|---|---|
-| D1 · Enter your web address | `92:20295` | `134:33965` | `136:46294` | `136:57390` | todo |
-| D2 · Add this record, waiting | `92:20383` | `134:34015` | `136:46316` | `136:57412` | todo |
-| D3 · The record is wrong | `92:20482` | `134:34085` | `136:46341` | `136:57437` | todo |
-| D4 · Securing the connection | `92:20571` | `134:34145` | `136:46363` | `136:57459` | todo |
-| D5 · Ready to switch | `92:20656` | `134:34196` | `136:46385` | `136:57481` | todo |
-| D6 · Live on your web address | `92:20745` | `134:34250` | `136:46405` | `136:57501` | todo |
+| D1 · Enter your web address | `92:20295` | `134:33965` | `136:46294` | `136:57390` | built |
+| D2 · Add this record, waiting | `92:20383` | `134:34015` | `136:46316` | `136:57412` | built |
+| D3 · The record is wrong | `92:20482` | `134:34085` | `136:46341` | `136:57437` | built |
+| D4 · Securing the connection | `92:20571` | `134:34145` | `136:46363` | `136:57459` | built |
+| D5 · Ready to switch | `92:20656` | `134:34196` | `136:46385` | `136:57481` | built |
+| D6 · Live on your web address | `92:20745` | `134:34250` | `136:46405` | `136:57501` | built |
 
 ## C · Build here, publish to my WordPress
 
