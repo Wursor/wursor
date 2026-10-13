@@ -399,3 +399,29 @@
 .ob-checkitem[data-state="failed"] .ob-checkitem-mark { color: var(--color-status-danger-fg); }
 .ob-checkitem[data-state="failed"] .t-body-m { font-weight: 500; }
 .ob-checkitem[data-state="failed"] .t-caption { color: var(--color-status-danger-fg); }
+
+/* ---------- Section D: connect a web address ---------- */
+.ob-domainstatus { display: flex; align-items: flex-start; gap: var(--space-3); width: 100%; padding: var(--space-4); border-radius: var(--radius-lg); background: var(--color-bg-surface); border: 1px solid var(--color-border-subtle); }
+.ob-domainstatus-mark { display: flex; align-items: center; justify-content: center; flex: none; width: 32px; height: 32px; border-radius: var(--radius-full); background: var(--color-status-needs-you-bg); color: var(--color-status-needs-you-fg); }
+.ob-domainstatus[data-state="wrong"] .ob-domainstatus-mark { background: var(--color-status-danger-bg); color: var(--color-status-danger-fg); }
+.ob-domainstatus[data-state="securing"] .ob-domainstatus-mark { background: var(--color-status-working-bg); color: var(--color-status-working-fg); }
+.ob-domainstatus[data-state="secure"] .ob-domainstatus-mark { background: var(--color-status-success-bg); color: var(--color-status-success-fg); }
+.ob-domainstatus-text { display: flex; flex: 1 0 0; flex-direction: column; gap: var(--space-1); min-width: 0; }
+.ob-domainstatus-text .t-body-m { color: var(--color-text-secondary); }
+.ob-domainstatus-note { flex: none; color: var(--color-text-tertiary); white-space: nowrap; }
+.ob-dns { display: flex; flex-direction: column; gap: var(--space-2); width: 100%; }
+.ob-dns-row { display: flex; align-items: center; gap: var(--space-3); height: 52px; padding: var(--space-3) var(--space-4); border-radius: var(--radius-md); }
+.ob-dns-head { font: 600 11px/16px var(--font-sans); letter-spacing: 0.06em; text-transform: uppercase; color: var(--color-text-tertiary); }
+.ob-dns-head > span:nth-child(1), .ob-dns-type { flex: none; width: 70px; }
+.ob-dns-head > span:nth-child(2), .ob-dns-name { flex: none; width: 90px; }
+.ob-dns-head > span:nth-child(3), .ob-dns-points { flex: 1 0 0; min-width: 0; }
+.ob-dns-value { background: var(--color-bg-sunken); font: 400 12px/16px var(--font-mono); color: var(--color-text-primary); }
+.ob-dns-points { overflow-wrap: anywhere; }
+.ob-dns-copy { display: flex; align-items: center; justify-content: center; flex: none; width: var(--size-control-sm); height: var(--size-control-sm); padding: 0; border: 0; border-radius: var(--radius-full); background: transparent; color: var(--color-text-primary); cursor: pointer; }
+.ob-dns-copy:hover { background: var(--color-bg-surface); }
+.ob-dns-copy:focus-visible { outline: 2px solid var(--color-accent-default); outline-offset: 2px; }
+.ob-provider-pick { display: flex; flex-direction: column; gap: var(--space-2); width: 100%; }
+.ob-provider-pick > p { margin: 0; }
+.ob-provider-seg { width: 100%; }
+.ob-provider-seg .p-segment { cursor: pointer; }
+.ob-provider-seg .p-segment:focus-visible { outline: 2px solid var(--color-accent-default); outline-offset: 2px; }
