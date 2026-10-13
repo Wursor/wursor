@@ -39,3 +39,18 @@ export function WizardActions({ onBack, onSkip, canSkip = true, onContinue, read
     </div>
   );
 }
+
+/** Back on the left and anything on the right: for screens whose main action is not a plain Continue. */
+export function WizardFooter({ onBack, backLabel = 'Back', children }: { onBack?: (() => void) | undefined; backLabel?: string; children?: React.ReactNode }) {
+  return (
+    <div className="ob-wizard-actions">
+      <div className="ob-wizard-left">
+        <button type="button" className="ob-wizard-back t-body-m-strong" onClick={onBack}>
+          <Icon name="arrow-left-20" size={20} />
+          {backLabel}
+        </button>
+      </div>
+      {children}
+    </div>
+  );
+}
