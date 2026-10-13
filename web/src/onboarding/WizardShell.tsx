@@ -9,13 +9,13 @@ type Props = {
   onSaveAndExit?: (() => void) | undefined;
   /** Tighter spacing, used when an extra banner would otherwise push the actions off a 900px screen. */
   compact?: boolean;
-  /** A 1040px body with the step indicator and actions held to 600px, for screens with three cards side by side. */
-  wide?: boolean;
+  /** Body width: 560 (default), 600 for the longer forms, or 1040 with the step indicator and actions held to 600 for three cards side by side. */
+  size?: 'narrow' | 'medium' | 'wide';
   children: ReactNode;
 };
 
 /** The frame for the numbered setup steps: header with Help and Save and exit, a 560px column, and the step indicator on top. */
-export function WizardShell({ step, label, onSaveAndExit, compact, wide, children }: Props) {
+export function WizardShell({ step, label, onSaveAndExit, compact, size = 'narrow', children }: Props) {
   return (
     <div className="ob-wizard">
       <header className="ob-wizard-header">
@@ -32,7 +32,7 @@ export function WizardShell({ step, label, onSaveAndExit, compact, wide, childre
           </button>
         </nav>
       </header>
-      <main className="ob-wizard-body" data-compact={compact ? 'true' : undefined} data-wide={wide ? 'true' : undefined}>
+      <main className="ob-wizard-body" data-compact={compact ? 'true' : undefined} data-size={size}>
         <StepIndicator step={step} label={label} />
         {children}
       </main>
