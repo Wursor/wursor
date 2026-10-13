@@ -2,7 +2,10 @@
 
 import { useRouter } from 'next/navigation';
 import { AuthFlow } from './AuthFlow.tsx';
+import { AboutSiteStep } from './AboutSiteStep.tsx';
 import { ForkStep, type Path } from './ForkStep.tsx';
+import { PickLookStep } from './PickLookStep.tsx';
+import { SetupStep } from './SetupStep.tsx';
 import { WorkspaceStep } from './WorkspaceStep.tsx';
 
 /** Where each flow goes once the visitor is in. New accounts name their workspace; returning users go straight to Home. */
@@ -36,4 +39,28 @@ const PATH_ROUTE: Record<Path, string> = { cloud: '/start/cloud', connect: '/sta
 export function ForkScreen() {
   const router = useRouter();
   return <ForkStep onContinue={(p) => router.push(PATH_ROUTE[p])} onBack={() => router.back()} onSaveAndExit={() => router.push('/')} />;
+}
+
+/** The Cloud path: brief, pick a look, the first build (the workspace), then go live. */
+export function AboutSiteScreen() {
+  const router = useRouter();
+  return <AboutSiteStep onContinue={() => router.push('/start/cloud/look')} onBack={() => router.back()} onSaveAndExit={() => router.push('/')} />;
+}
+
+export function PickLookScreen() {
+  const router = useRouter();
+  return <PickLookStep onContinue={() => router.push('/start/cloud/build')} onBack={() => router.back()} onSaveAndExit={() => router.push('/')} />;
+}
+
+export function SetupScreen() {
+  const router = useRouter();
+  return (
+    <SetupStep
+      siteName="Harbor Bakery"
+      address="harborbakery.wursor.site"
+      onConnectDomain={() => router.push('/start/domain')}
+      onLater={() => router.push('/home')}
+      onSaveAndExit={() => router.push('/')}
+    />
+  );
 }

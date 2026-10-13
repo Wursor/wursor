@@ -36,7 +36,7 @@ const PATHS: ReadonlyArray<{ value: Path; icon: IconName; iconSize: number; tag:
 export function ForkStep({ onContinue, onBack, onSaveAndExit }: Props) {
   const [path, setPath] = useState<Path | null>(null);
   return (
-    <WizardShell step={4} label="Where should your site live?" onSaveAndExit={onSaveAndExit} wide>
+    <WizardShell step={4} label="Where should your site live?" onSaveAndExit={onSaveAndExit} size="wide">
       <div className="ob-wizard-heading ob-wizard-heading-center">
         <h1 className="t-display-m">Where should your site live?</h1>
         <p className="t-body-l">You can change your mind later. Moving out is free.</p>

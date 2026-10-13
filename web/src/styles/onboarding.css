@@ -217,8 +217,9 @@
 }
 
 /* ---------- The fork: three path cards in a 1040px body ---------- */
-.ob-wizard-body[data-wide="true"] { width: 1040px; align-items: center; }
-.ob-wizard-body[data-wide="true"] .ob-steps, .ob-wizard-body[data-wide="true"] .ob-wizard-actions { width: 600px; max-width: 100%; }
+.ob-wizard-body[data-size="medium"] { width: 600px; }
+.ob-wizard-body[data-size="wide"] { width: 1040px; align-items: center; }
+.ob-wizard-body[data-size="wide"] .ob-steps, .ob-wizard-body[data-size="wide"] .ob-wizard-actions { width: 600px; max-width: 100%; }
 .ob-wizard-heading-center { width: 760px; max-width: 100%; align-items: center; text-align: center; }
 .ob-fork-content { display: flex; flex-direction: column; align-items: center; gap: var(--space-5); width: 100%; }
 .ob-paths { display: flex; align-items: stretch; gap: var(--space-6); width: 100%; }
@@ -249,7 +250,94 @@
 .ob-path-foot .t-caption { flex: 1 0 0; min-width: 0; }
 
 @media (max-width: 600px) {
-  .ob-wizard-body[data-wide="true"] { width: 100%; align-items: stretch; }
-  .ob-wizard-body[data-wide="true"] .ob-steps, .ob-wizard-body[data-wide="true"] .ob-wizard-actions { width: 100%; }
+  .ob-wizard-body[data-size="wide"] { align-items: stretch; }
+  .ob-wizard-body[data-size="wide"] .ob-steps, .ob-wizard-body[data-size="wide"] .ob-wizard-actions { width: 100%; }
   .ob-paths { flex-direction: column; }
+}
+
+/* ---------- Cloud path: brief, looks, setup ---------- */
+.ob-field-md { height: var(--size-control-md); }
+.ob-form-tight { gap: var(--space-4); }
+.ob-group-tight { gap: var(--space-2); }
+.ob-group-tight > p { line-height: 16px; }
+.ob-chips { display: flex; flex-wrap: wrap; gap: var(--space-2); }
+.ob-chip { display: flex; align-items: center; gap: var(--space-1); height: 28px; padding: 0 var(--space-3); border-radius: var(--radius-full); border: 1px solid var(--color-border-default); background: var(--color-bg-surface); color: var(--color-text-primary); cursor: pointer; }
+/* Figma's selected chip is a plain dark fill with no border, so it is 2px narrower than an unselected one. */
+.ob-chip[aria-pressed="true"] { background: var(--color-bg-inverse); border-width: 0; color: var(--color-text-inverse); }
+.ob-chip:focus-visible { outline: 2px solid var(--color-accent-default); outline-offset: 2px; }
+.ob-tone .p-segmented { display: flex; width: 100%; }
+.ob-looks { align-items: flex-start; }
+.ob-lookcard {
+  display: flex;
+  flex: 1 0 0;
+  flex-direction: column;
+  gap: var(--space-3);
+  min-width: 0;
+  padding: var(--space-3);
+  border-radius: var(--radius-xl);
+  background: var(--color-bg-surface);
+  border: 1px solid var(--color-border-default);
+  text-align: left;
+  cursor: pointer;
+  align-self: stretch;
+}
+.ob-lookcard[aria-busy="true"] { cursor: default; }
+.ob-lookcard[data-checked="true"] { border: 1.5px solid var(--color-text-primary); }
+.ob-lookcard:has(input:focus-visible) { outline: 2px solid var(--color-accent-default); outline-offset: 2px; }
+.ob-look-wrap { position: relative; display: block; flex: none; box-sizing: border-box; width: 288px; max-width: 100%; height: 180px; overflow: hidden; border-radius: var(--radius-lg); border: 1px solid var(--color-border-subtle); }
+.ob-look-wrap-loading { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: var(--space-2); background: var(--color-bg-sunken); }
+.ob-look-wrap-loading .t-caption { color: var(--color-text-tertiary); }
+.ob-lookcard-text { display: flex; align-items: flex-start; gap: var(--space-2); }
+.ob-lookcard-copy { display: flex; flex: 1 0 0; flex-direction: column; gap: var(--space-1); min-width: 0; }
+.ob-lookcard-copy .t-caption { color: var(--color-text-secondary); }
+.ob-lookcard-text > .icon { color: var(--color-text-primary); }
+.ob-spin { animation: ob-spin 1s linear infinite; }
+@keyframes ob-spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .ob-spin { animation: none; } }
+
+/* The look previews keep their own colours in both themes. */
+.ob-look { position: absolute; left: -1px; top: -1px; width: 288px; height: 180px; overflow: hidden; font-family: var(--font-sans); background: #fdede3; color: #14120b; }
+.ob-look[data-look="clean"] { background: #ffffff; }
+.ob-look[data-look="bold"] { background: #14120b; color: #f2f1ec; }
+.ob-look-nav { position: absolute; top: 0; left: 0; display: flex; align-items: center; gap: 10px; width: 288px; height: 28px; padding: 0 16px; font-size: 6px; line-height: 8px; color: #6b675e; }
+.ob-look[data-look="bold"] .ob-look-nav { color: #aaa59a; }
+.ob-look-brand { font-size: 7px; line-height: 10px; font-weight: 500; color: #14120b; white-space: nowrap; }
+.ob-look[data-look="bold"] .ob-look-brand { color: #f2f1ec; }
+.ob-look-spacer { flex: 1 0 0; }
+.ob-look-headline { position: absolute; left: 16px; top: 48px; width: 150px; margin: 0; font-size: 18px; line-height: 20px; font-weight: 300; letter-spacing: -0.02em; }
+.ob-look-address { position: absolute; left: 16px; top: 125px; margin: 0; font-size: 7px; line-height: 10px; color: #6b675e; white-space: nowrap; }
+.ob-look[data-look="bold"] .ob-look-address { color: #f2f1ec; }
+.ob-look-button { position: absolute; left: 16px; top: 146px; padding: 5px 10px; border-radius: 999px; background: #14120b; color: #f2f1ec; font-size: 6.5px; line-height: 8px; font-weight: 500; white-space: nowrap; }
+.ob-look[data-look="bold"] .ob-look-button { background: #e8590c; color: #14120b; }
+.ob-look-image { position: absolute; left: 172px; top: 40px; width: 100px; height: 120px; border-radius: 8px; background: #ffffff; }
+.ob-look[data-look="clean"] .ob-look-image { background: #f1f0eb; }
+.ob-look[data-look="bold"] .ob-look-image { background: #e8590c; }
+
+/* Setting up, and live */
+.ob-setup, .ob-live { align-items: stretch; }
+.ob-checklist { display: flex; flex-direction: column; width: 100%; margin: 0; padding: 0; list-style: none; }
+.ob-checkitem { display: flex; align-items: center; gap: var(--space-3); padding: var(--space-2) 0; }
+.ob-checkitem-mark { display: flex; align-items: center; justify-content: center; flex: none; width: 20px; height: 20px; }
+.ob-checkitem[data-state="done"] .ob-checkitem-mark { color: var(--color-status-success-fg); }
+.ob-checkitem[data-state="running"] .ob-checkitem-mark { color: var(--color-accent-default); }
+.ob-pending-dot { display: block; width: 18px; height: 18px; border-radius: var(--radius-full); border: 1.5px solid var(--color-border-strong); box-sizing: border-box; }
+.ob-checkitem-text { display: flex; flex: 1 0 0; flex-direction: column; min-width: 0; }
+.ob-checkitem-text .t-caption { color: var(--color-text-tertiary); }
+.ob-checkitem[data-state="pending"] .t-body-m { color: var(--color-text-tertiary); }
+.ob-checkitem[data-state="running"] .t-body-m { font-weight: 500; }
+.ob-note { display: flex; align-items: center; gap: var(--space-2); margin: 0; color: var(--color-text-secondary); }
+.ob-note > span { flex: 1 0 0; min-width: 0; }
+.ob-sitecard { width: 100%; overflow: hidden; border-radius: var(--radius-lg); background: var(--color-bg-surface); border: 1px solid var(--color-border-default); }
+.ob-sitecard-top { display: flex; align-items: center; gap: var(--space-3); padding: var(--space-4); }
+.ob-sitecard-avatar { display: flex; align-items: center; justify-content: center; flex: none; width: 40px; height: 40px; border-radius: var(--radius-md); background: var(--color-accent-subtle); color: var(--color-accent-text); }
+.ob-sitecard-text { display: flex; flex: 1 0 0; flex-direction: column; min-width: 0; }
+.ob-sitecard-text .t-caption { color: var(--color-text-secondary); }
+.ob-sitecard-status { display: flex; align-items: center; gap: var(--space-1); color: var(--color-status-success-fg); }
+.ob-sitecard-foot { display: flex; align-items: center; gap: var(--space-2); padding: var(--space-3) var(--space-4); background: var(--color-bg-sunken); color: var(--color-text-secondary); }
+.ob-later { height: var(--size-control-lg); padding: 0 var(--space-5) 0 0; border: 0; background: transparent; cursor: pointer; color: var(--color-text-primary); }
+.ob-later:focus-visible { outline: 2px solid var(--color-accent-default); outline-offset: 2px; }
+
+@media (max-width: 600px) {
+  .ob-looks { align-items: stretch; }
+  .ob-lookcard { flex: none; }
 }
