@@ -2,6 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 import { AuthFlow } from './AuthFlow.tsx';
+import { ForkStep, type Path } from './ForkStep.tsx';
 import { WorkspaceStep } from './WorkspaceStep.tsx';
 
 /** Where each flow goes once the visitor is in. New accounts name their workspace; returning users go straight to Home. */
@@ -27,4 +28,12 @@ export function WorkspaceScreen() {
   const router = useRouter();
   const next = () => router.push(NEXT_AFTER_WORKSPACE);
   return <WorkspaceStep onContinue={next} onSkip={next} onBack={() => router.back()} onSaveAndExit={() => router.push('/')} />;
+}
+
+/** Each starting path has its own run of steps (sections A, B0 and C of the design). */
+const PATH_ROUTE: Record<Path, string> = { cloud: '/start/cloud', connect: '/start/connect', build: '/start/build' };
+
+export function ForkScreen() {
+  const router = useRouter();
+  return <ForkStep onContinue={(p) => router.push(PATH_ROUTE[p])} onBack={() => router.back()} onSaveAndExit={() => router.push('/')} />;
 }
