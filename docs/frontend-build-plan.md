@@ -6,7 +6,7 @@ Each screen exists in up to four versions: desktop light (1440 wide), mobile lig
 
 Status key: `todo` · `built` (code written, tests pass) · `verified` (compared to all four frames).
 
-**Progress:** sections 1, 2, 3, 4, A, B0, B, D and 5 built. Section 1 and 2: 18 screens. Measured against Figma so far: 1a, 1b, 1c and 2a on desktop light, 1c on desktop dark, and 1a, 1b and 2a on mobile (dark for 2a). D2 checked against Figma geometry on desktop light, and on mobile dark by eye. Everything else shares the same components and is covered by unit tests but has not been compared frame by frame. See `design-discrepancies.md` for places the design and an existing decision disagree.
+**Progress:** sections 1, 2, 3, 4, A, B0, B, D, 5 and 6 built. Section 1 and 2: 18 screens. Measured against Figma so far: 1a, 1b, 1c and 2a on desktop light, 1c on desktop dark, and 1a, 1b and 2a on mobile (dark for 2a). D2 checked against Figma geometry on desktop light, and on mobile dark by eye. Everything else shares the same components and is covered by unit tests but has not been compared frame by frame. See `design-discrepancies.md` for places the design and an existing decision disagree.
 
 **Totals:** 163 distinct screens · 647 frames to match (desktop light 154, mobile light 170, desktop dark 153, mobile dark 170).
 
@@ -134,10 +134,10 @@ Status key: `todo` · `built` (code written, tests pass) · `verified` (compared
 
 | Screen | Desktop light | Mobile light | Desktop dark | Mobile dark | Status |
 |---|---|---|---|---|---|
-| 6a · Nothing chosen | `46:1767` | `134:31646` | `136:36824` | `136:56922` | todo |
-| 6b · Suggestion chosen | `46:1862` | `134:31734` | `136:36847` | `136:56945` | todo |
-| 6c · Own change typed | `46:1955` | `134:31822` | `136:36870` | `136:56968` | todo |
-| 6d · Content only, suggestions | `92:20201` | `134:31910` | `136:36893` | `136:56991` | todo |
+| 6a · Nothing chosen | `46:1767` | `134:31646` | `136:36824` | `136:56922` | built |
+| 6b · Suggestion chosen | `46:1862` | `134:31734` | `136:36847` | `136:56945` | built |
+| 6c · Own change typed | `46:1955` | `134:31822` | `136:36870` | `136:56968` | built |
+| 6d · Content only, suggestions | `92:20201` | `134:31910` | `136:36893` | `136:56991` | built |
 
 ## W1 · Workspace, the life of a change
 
