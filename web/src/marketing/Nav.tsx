@@ -7,10 +7,13 @@ import { BrandMark } from './BrandMark.tsx';
 import { Button } from './Button.tsx';
 import { NAV_LINKS, ROUTES } from './content.ts';
 import { Icon } from '../ui/Icon.tsx';
+import { useCommandPalette } from './CommandPalette.tsx';
+import { ThemeToggle } from './ThemeToggle.tsx';
 
 export function Nav() {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
+  const palette = useCommandPalette();
 
   useEffect(() => {
     if (!open) return;
@@ -38,6 +41,10 @@ export function Nav() {
         </nav>
 
         <div className="nav-actions">
+          <button type="button" className="nav-icon-button" aria-label="Search" aria-haspopup="dialog" aria-keyshortcuts="Control+K Meta+K" onClick={palette.open}>
+            <Icon name="search" />
+          </button>
+          <ThemeToggle />
           <Link href={ROUTES.signIn} className="nav-signin t-label-m">
             Sign in
           </Link>

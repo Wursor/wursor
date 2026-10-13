@@ -1,3 +1,5 @@
+import type { IconName } from '../ui/Icon.tsx';
+
 export type NavLink = { label: string; mobileLabel?: string; href: string };
 
 export const NAV_LINKS: readonly NavLink[] = [
@@ -131,4 +133,14 @@ export const ARTICLES: ReadonlyArray<{ title: string; href?: string }> = [
   { title: 'Undo a published change' },
   { title: 'Invite your team' },
   { title: 'Change or cancel your plan' },
+];
+
+/** Docs topic cards. Shared by the Docs page and the site search. */
+export const DOCS_TOPICS: ReadonlyArray<{ icon: IconName; title: string; body: string }> = [
+  { icon: 'rocket', title: 'Getting started', body: 'Start or connect your site and make your first change.' },
+  { icon: 'plug', title: 'Start or connect a site', body: 'Start on Wursor Cloud, link WordPress, move between hosts and manage access.' },
+  { icon: 'sparkles', title: 'Asking for changes', body: 'Write a request, point at the page and follow the work.' },
+  { icon: 'shield-check', title: 'Review and approve', body: 'Compare before and after, read the checks and publish.' },
+  { icon: 'credit-card', title: 'Team and billing', body: 'Invite people, set roles and manage your plan.' },
+  { icon: 'help', title: 'Troubleshooting', body: 'Fixes for the most common connection and preview problems.' },
 ];

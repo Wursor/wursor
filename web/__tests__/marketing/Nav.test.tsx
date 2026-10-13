@@ -1,9 +1,24 @@
 import { render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { describe, expect, it } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { Nav } from '../../src/marketing/Nav.tsx';
 
+function deviceTheme(dark: boolean) {
+  window.matchMedia = vi.fn().mockImplementation((query: string) => ({
+    matches: dark && query === '(prefers-color-scheme: dark)',
+    media: query,
+    addEventListener: vi.fn(),
+    removeEventListener: vi.fn(),
+  })) as unknown as typeof window.matchMedia;
+}
+
 describe('Nav', () => {
+  beforeEach(() => {
+    localStorage.clear();
+    document.documentElement.removeAttribute('data-theme');
+    deviceTheme(false);
+  });
+
   it('links the brand to the home page', () => {
     render(<Nav />);
     expect(screen.getByRole('link', { name: 'Wursor' })).toHaveAttribute('href', '/');
@@ -56,5 +71,40 @@ describe('Nav', () => {
     const menu = screen.getByRole('navigation', { name: 'Mobile' });
     await userEvent.click(within(menu).getByRole('link', { name: 'Pricing' }));
     expect(screen.queryByRole('navigation', { name: 'Mobile' })).not.toBeInTheDocument();
+  });
+
+  describe('theme toggle', () => {
+    it('is off on a light device', () => {
+      render(<Nav />);
+      expect(screen.getByRole('button', { name: 'Dark theme' })).toHaveAttribute('aria-pressed', 'false');
+    });
+
+    it('is on when the device is dark and nothing is saved', () => {
+      deviceTheme(true);
+      render(<Nav />);
+      expect(screen.getByRole('button', { name: 'Dark theme' })).toHaveAttribute('aria-pressed', 'true');
+    });
+
+    it('is on when dark was chosen earlier, even on a light device', () => {
+      localStorage.setItem('wursor-theme', 'dark');
+      render(<Nav />);
+      expect(screen.getByRole('button', { name: 'Dark theme' })).toHaveAttribute('aria-pressed', 'true');
+    });
+
+    it('switches the page to dark and remembers it', async () => {
+      render(<Nav />);
+      await userEvent.click(screen.getByRole('button', { name: 'Dark theme' }));
+      expect(document.documentElement).toHaveAttribute('data-theme', 'dark');
+      expect(localStorage.getItem('wursor-theme')).toBe('dark');
+      expect(screen.getByRole('button', { name: 'Dark theme' })).toHaveAttribute('aria-pressed', 'true');
+    });
+
+    it('switches a dark device to light', async () => {
+      deviceTheme(true);
+      render(<Nav />);
+      await userEvent.click(screen.getByRole('button', { name: 'Dark theme' }));
+      expect(document.documentElement).toHaveAttribute('data-theme', 'light');
+      expect(screen.getByRole('button', { name: 'Dark theme' })).toHaveAttribute('aria-pressed', 'false');
+    });
   });
 });
