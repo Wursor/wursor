@@ -40,3 +40,9 @@ button { font: inherit; color: inherit; }
   color: var(--color-text-inverse);
   box-shadow: 0 8px 20px #14120b1f;
 }
+
+/* ---------- Banner ---------- */
+/* Figma's banner is 48px tall even when its text wraps to two lines, so the vertical padding is small and the text centres in the box. */
+.ui-banner { display: flex; align-items: center; gap: var(--space-3); width: 100%; min-height: 48px; padding: var(--space-1) var(--space-4); border-radius: var(--radius-md); }
+.ui-banner p { flex: 1 0 0; min-width: 0; margin: 0; }
+.ui-banner[data-tone="info"] { background: var(--color-status-working-bg); color: var(--color-status-working-fg); }
