@@ -1,10 +1,11 @@
 import type { Metadata } from 'next';
-import { SearchField } from '../../../src/product/SearchField.tsx';
 import { ClosingCta } from '../../../src/marketing/home/ClosingCta.tsx';
 import { FeatureGrid } from '../../../src/marketing/pages/FeatureGrid.tsx';
 import { PageHero } from '../../../src/marketing/pages/PageHero.tsx';
 import { PopularArticles } from '../../../src/marketing/pages/PopularArticles.tsx';
+import { DocsSearch } from '../../../src/marketing/pages/DocsSearch.tsx';
 import { Shell } from '../../../src/marketing/Shell.tsx';
+import { DOCS_TOPICS } from '../../../src/marketing/content.ts';
 
 export const metadata: Metadata = { title: 'Docs' };
 
@@ -17,20 +18,13 @@ export default function DocsPage() {
         subtitle="Guides for starting or connecting a site, moving between hosts, asking for changes and staying in control."
       >
         <div className="m-docs-search">
-          {/* Search is shown as in the design but not usable until the docs exist. */}
-          <SearchField label="Search the docs" shortcut="⌘K" disabled />
+          {/* Opens the site search; it covers pages and topics until the articles are written. */}
+          <DocsSearch />
         </div>
       </PageHero>
       <FeatureGrid
         title="Browse by topic"
-        cards={[
-          { icon: 'rocket', title: 'Getting started', body: 'Start or connect your site and make your first change.' },
-          { icon: 'plug', title: 'Start or connect a site', body: 'Start on Wursor Cloud, link WordPress, move between hosts and manage access.' },
-          { icon: 'sparkles', title: 'Asking for changes', body: 'Write a request, point at the page and follow the work.' },
-          { icon: 'shield-check', title: 'Review and approve', body: 'Compare before and after, read the checks and publish.' },
-          { icon: 'credit-card', title: 'Team and billing', body: 'Invite people, set roles and manage your plan.' },
-          { icon: 'help', title: 'Troubleshooting', body: 'Fixes for the most common connection and preview problems.' },
-        ]}
+        cards={DOCS_TOPICS}
       />
       <PopularArticles />
       <ClosingCta />

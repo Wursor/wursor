@@ -4,7 +4,7 @@ export type IconName =
   | 'activity' | 'arrow-right' | 'bell' | 'board' | 'check' | 'camera' | 'check-circle' | 'chevron-down' | 'chevron-right' | 'chevron-up' | 'clock' | 'close' | 'credit-card' | 'dots'
   | 'eye' | 'globe' | 'help' | 'home' | 'key' | 'list' | 'loader' | 'lock' | 'menu' | 'mic' | 'monitor' | 'paperclip'
   | 'pencil' | 'plug' | 'plus' | 'pointer' | 'refresh' | 'rocket' | 'search' | 'shield-check' | 'sidebar' | 'sliders'
-  | 'shield' | 'smartphone' | 'sparkles' | 'split' | 'stop' | 'undo' | 'user' | 'x';
+  | 'shield' | 'smartphone' | 'sparkles' | 'split' | 'stop' | 'sun' | 'moon' | 'undo' | 'user' | 'x';
 
 type Props = { name: IconName; size?: number; className?: string };
 

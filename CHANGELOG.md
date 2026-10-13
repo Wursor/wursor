@@ -8,6 +8,8 @@ The project is pre-1.0. Versions below `1.0.0` are internal milestones, not publ
 
 ### Added
 
+- Web: working site search on the marketing site. Cmd+K (Ctrl+K on Windows and Linux), a Search button in the navigation and the Docs search field open a command palette over every page. It searches the pages, docs topics and any docs article that has a page, with arrow keys and Enter to choose and Escape to close. Docs topics now live in `content.ts` so the page and the search share one source.
+- Web: light/dark theme toggle in the marketing navigation. It follows the device until the visitor chooses, remembers the choice in `localStorage`, and sets the theme before first paint so there is no flash. Sun and moon icons added to `public/icons` (hand-drawn, not Figma exports).
 - Web: the five other marketing pages (Product, How it works, Trust, Pricing, Docs), a marketing e2e check (`pnpm --filter @wursor/e2e test:marketing`), and product components for setup, activity and search. Web: Next.js app with design tokens (light and dark, AA contrast), the marketing Home page (desktop and phone), and a product component library built at design size (conversation, workspace, board, compare and approval) that the marketing mockups use and the app will reuse (ADR 0023). ADRs 0018 to 0022 (0022: hosting on DigitalOcean): Next.js web app (partly supersedes ADR 0011), sign-in by code, link and passkeys, Cloud provisioning on WeOwn Cloud, and keeping the "never sees a diff" rule wording. PRD, IMPLEMENTATION and AGENTS.md updated to match.
 - `docs/prd-assets/headless-architecture.png`, the architecture diagram used in the PRD.
 - Design reference: Figma file "Wursor - Experiment" (Design system, Product Design, Marketing site and Brand Guideline pages).
