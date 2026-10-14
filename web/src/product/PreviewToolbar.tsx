@@ -1,3 +1,4 @@
+import type { ReactNode } from 'react';
 import { IconButton } from './IconButton.tsx';
 import { Tab } from './Tab.tsx';
 import { Tag } from './Tag.tsx';
@@ -9,9 +10,9 @@ const TABS: ReadonlyArray<{ value: PreviewView; label: string }> = [
   { value: 'proof', label: 'Proof' },
 ];
 
-type Props = { selected: PreviewView; tag?: string; onSelect?: (view: PreviewView) => void };
+type Props = { selected: PreviewView; tag?: string; onSelect?: (view: PreviewView) => void; trailing?: ReactNode };
 
-export function PreviewToolbar({ selected, tag, onSelect }: Props) {
+export function PreviewToolbar({ selected, tag, onSelect, trailing }: Props) {
   return (
     <div className="p-previewbar">
       <div role="tablist" aria-label="View" className="p-tabs">
@@ -23,6 +24,7 @@ export function PreviewToolbar({ selected, tag, onSelect }: Props) {
       {tag && <Tag label={tag} />}
       <IconButton icon="monitor" label="Desktop" />
       <IconButton icon="smartphone" label="Phone" />
+      {trailing}
     </div>
   );
 }

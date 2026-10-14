@@ -1,0 +1,30 @@
+/*
+ * The workspace app shell: top bar, sidebar or rail, conversation, preview, board, drawer.
+ * The pieces themselves live in product.css; this file only lays them out and makes them fit the window.
+ */
+:where(.ws) :where(p, h2, h3) { margin: 0; font: inherit; }
+.ws { display: flex; flex-direction: column; height: 100vh; height: 100dvh; min-height: 0; overflow: hidden; background: var(--color-bg-canvas); color: var(--color-text-primary); font-family: var(--font-sans); text-align: left; }
+.ws-tabs { display: none; }
+.ws-body { display: flex; flex: 1 0 0; min-height: 0; }
+.ws-convo { display: flex; flex: none; width: 440px; min-height: 0; }
+.ws-convo > .p-convo { height: 100%; }
+.ws-preview { display: flex; flex: 1 0 0; min-width: 0; min-height: 0; flex-direction: column; }
+.ws-stage { position: relative; display: flex; flex: 1 0 0; min-height: 0; flex-direction: column; align-items: center; padding: var(--space-6); overflow: hidden; background: var(--color-bg-sunken); }
+.ws-fit { width: 100%; }
+.ws-fit-box { position: relative; margin: 0 auto; }
+.ws-fit-clip { overflow: hidden; border-radius: var(--radius-lg); background: var(--color-bg-surface); }
+.ws-fit-page { text-align: left; }
+.ws-overlay { position: absolute; inset: 0; pointer-events: none; }
+.ws-browser { width: 760px; }
+.ws-compare { width: 760px; height: 379px; }
+.ws-approval { position: absolute; left: var(--space-6); right: var(--space-6); bottom: var(--space-6); }
+.ws-board { flex: none; }
+.ws-proof { display: flex; flex-direction: column; gap: var(--space-4); width: 100%; max-width: 896px; align-self: flex-start; }
+.ws-proof-title { font: 500 16px/24px var(--font-sans); color: var(--color-text-primary); }
+.ws-proof-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4); }
+.ws-proof-grid > * { min-width: 0; }
+.ws-publish-mobile { display: none; }
+.ws-convo .p-sidebar, .ws-body > .p-sidebar { height: 100%; }
+.ws-dots { display: flex; flex: none; gap: var(--space-2); width: 40px; height: 8px; }
+.ws-dots i { width: 8px; height: 8px; border-radius: var(--radius-full); background: var(--color-border-strong); }
+.ws-browser .p-device-bar { padding: var(--space-2) var(--space-4); }

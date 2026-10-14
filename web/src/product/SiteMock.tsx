@@ -34,18 +34,18 @@ export function SiteMock({ state }: { state: 'before' | 'after' }) {
           <p className="p-site-label">Call or visit</p>
           <p className="p-site-line">12 Quay Street</p>
           {state === 'after' ? (
-            <a href={phone.href} className="p-site-phone">
+            <a href={phone.href} className="p-site-phone" data-point="phone">
               <Icon name="smartphone" size={20} />
               <span>{phone.callLabel}</span>
             </a>
           ) : (
-            <p className="p-site-phone-plain">{phone.display}</p>
+            <p className="p-site-phone-plain" data-point="phone">{phone.display}</p>
           )}
         </div>
       </div>
       <div className="p-site-footer">
         <span>12 Quay Street</span>
-        <span className={state === 'after' ? 'p-site-footer-link' : undefined}>{phone.display}</span>
+        <span className={state === 'after' ? 'p-site-footer-link' : undefined} data-point="footer">{phone.display}</span>
       </div>
     </div>
   );
