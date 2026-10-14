@@ -6,7 +6,7 @@
 .sy-dialog h2 { font: 500 20px/28px var(--font-sans); letter-spacing: -0.01em; color: var(--color-text-primary); }
 .sy-dialog p { font: 400 14px/20px var(--font-sans); color: var(--color-text-secondary); }
 .sy-dialog-actions { display: flex; align-items: center; justify-content: flex-end; gap: var(--space-2); }
-.sy-scrim { position: fixed; inset: 0; z-index: 60; display: flex; align-items: flex-start; padding-top: min(300px, 40vh); box-sizing: border-box; justify-content: center; background: color-mix(in srgb, var(--color-bg-inverse) 40%, transparent); }
+.sy-scrim { position: fixed; inset: 0; z-index: 60; display: flex; align-items: flex-start; padding-top: min(300px, 40vh); box-sizing: border-box; justify-content: center; background: var(--color-scrim); }
 .sy-dim { pointer-events: none; }
 
 /* Empty state */
@@ -40,7 +40,7 @@
 .sy-code { font: 400 13px/20px var(--font-mono); color: var(--color-text-tertiary); }
 
 /* Spec sheets */
-.sy-spec { display: flex; flex-direction: column; gap: 60px; box-sizing: border-box; min-height: 100vh; padding: 40px; background: var(--color-bg-canvas); }
+.sy-spec { display: flex; flex-direction: column; gap: 20px; box-sizing: border-box; min-height: 100vh; padding: 40px; background: var(--color-bg-canvas); }
 .sy-spec-group > h2 { margin: 0; font: 600 11px/16px var(--font-sans); letter-spacing: 0.06em; text-transform: uppercase; color: var(--color-text-tertiary); }
 .sy-spec-group { display: flex; flex-direction: column; gap: 12px; }
 .sy-spec-row { display: flex; flex-wrap: wrap; align-items: flex-start; gap: var(--space-4); }
@@ -61,7 +61,7 @@
 .mb-list a[data-tone="danger"] { color: var(--color-status-danger-fg); }
 .mb-list a:focus-visible { outline: 2px solid var(--color-accent-default); outline-offset: -2px; }
 
-.mb-scrim { position: fixed; inset: 0; z-index: 60; display: flex; align-items: flex-end; background: color-mix(in srgb, var(--color-bg-inverse) 40%, transparent); }
+.mb-scrim { position: fixed; inset: 0; z-index: 60; display: flex; align-items: flex-end; background: var(--color-scrim); }
 .mb-sheet { display: flex; flex-direction: column; gap: var(--space-3); box-sizing: border-box; width: 100%; max-height: 90vh; padding: var(--space-3) var(--space-4); overflow: hidden; border-radius: 20px 20px 0 0; background: var(--color-bg-surface); box-shadow: 0 -8px 24px #0000002e; font-family: var(--font-sans); }
 .mb-sheet h2 { margin: 0; font: 500 16px/24px var(--font-sans); letter-spacing: -0.005em; color: var(--color-text-primary); }
 .mb-grab { display: block; flex: none; width: 36px; height: 4px; border-radius: 2px; background: #ccc9bf; }
@@ -95,3 +95,6 @@
   .sy-standalone { padding: var(--space-4); }
   .sy-facts .app-settingrow { gap: var(--space-6); }
 }
+
+.sy-stack .app-meter-track span { background: var(--color-status-needs-you-dot); }
+.sy-spec .sy-dialog { box-shadow: none; }

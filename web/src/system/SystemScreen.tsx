@@ -7,10 +7,15 @@ import { BrandMark } from '../marketing/BrandMark.tsx';
 import { PageHeader } from '../home/parts.tsx';
 import { SettingRow } from '../settings/controls.tsx';
 import { UsageMeter } from '../sites/UsageMeter.tsx';
+import { sidebarChanges } from '../workspace/scenario.ts';
 import { ConfirmDialog } from './ConfirmDialog.tsx';
 import { EmptyState } from './EmptyState.tsx';
 
 export type SystemKind = 'content-only' | 'error' | 'limit' | 'session' | 'maintenance' | 'not-found' | 'unreachable' | 'loading';
+
+/** The frame keeps the header's second line empty; this holds its height. */
+const NO_SUB = '\u00A0';
+const CHANGES = sidebarChanges('working');
 
 const FACTS = [
   { title: 'Connection', detail: 'Lost 14:02 · retrying every minute', state: 'Reconnecting' },
@@ -23,7 +28,7 @@ export function SystemScreen({ kind, onAction }: { kind: SystemKind; onAction: (
   switch (kind) {
     case 'content-only':
       return (
-        <AppShell active="home">
+        <AppShell active="home" changes={CHANGES}>
           <div className="sy-stack">
             <PageHeader title="Harbor Bakery" sub="This site is set to Content only." />
             <EmptyState title="This change needs Full access" action={{ label: 'Change access', onClick: onAction }}>
@@ -34,7 +39,7 @@ export function SystemScreen({ kind, onAction }: { kind: SystemKind; onAction: (
       );
     case 'error':
       return (
-        <AppShell active="home">
+        <AppShell active="home" changes={CHANGES}>
           <div className="sy-stack">
             <EmptyState title="Something went wrong on our side" action={{ label: 'Try again', onClick: onAction }}>
               Nothing on your site was changed. Try again, and if it keeps happening, send us the reference below.
@@ -45,9 +50,9 @@ export function SystemScreen({ kind, onAction }: { kind: SystemKind; onAction: (
       );
     case 'limit':
       return (
-        <AppShell active="home">
+        <AppShell active="home" changes={CHANGES}>
           <div className="sy-stack">
-            <PageHeader title="Home" sub="Harbor Bakery is live." />
+            <PageHeader title="Home" sub={NO_SUB} />
             <Banner tone="warning" action={{ label: 'Upgrade plan', onClick: onAction }}>
               You’ve used all 40 changes in your plan this month. Running changes will finish; new ones start on 1 November, or sooner if you upgrade.
             </Banner>
@@ -59,8 +64,8 @@ export function SystemScreen({ kind, onAction }: { kind: SystemKind; onAction: (
       return (
         <>
           <div aria-hidden="true" className="sy-dim">
-            <AppShell active="home">
-              <PageHeader title="Home" sub="Harbor Bakery is live." />
+            <AppShell active="home" changes={CHANGES}>
+              <PageHeader title="Home" sub="Everything on Harbor Bakery, in one place." />
             </AppShell>
           </div>
           <div className="sy-scrim">
@@ -84,7 +89,7 @@ export function SystemScreen({ kind, onAction }: { kind: SystemKind; onAction: (
       );
     case 'unreachable':
       return (
-        <AppShell active="sites">
+        <AppShell active="sites" changes={CHANGES}>
           <div className="sy-stack">
             <PageHeader title="Harbor Bakery" sub="harborbakery.com" />
             <Banner tone="danger" action={{ label: 'Try again', onClick: onAction }}>
@@ -100,7 +105,7 @@ export function SystemScreen({ kind, onAction }: { kind: SystemKind; onAction: (
       );
     case 'loading':
       return (
-        <AppShell active="home">
+        <AppShell active="home" changes={CHANGES}>
           <div role="status" aria-label="Loading" aria-busy="true" className="sy-stack">
             <div className="sy-heading-skeleton">
               <i className="sy-bar sy-bar-title" />

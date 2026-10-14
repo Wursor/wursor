@@ -11,6 +11,7 @@
   --color-bg-surface: #ffffff;
   --color-bg-sunken: #f1f0eb;
   --color-bg-inverse: #14120b;
+  --color-scrim: #14120b66;
 
   --color-text-primary: #14120b;
   /* AA: Figma's #6b675e / #8f8b80 secondary and tertiary text are 4.9:1 and 3.0:1 on sunken. Darkened to 6.0:1 and 4.6:1. */
@@ -89,6 +90,7 @@
     --color-bg-surface: #171714;
     --color-bg-sunken: #1e1e1a;
     --color-bg-inverse: #f2f1ec;
+    --color-scrim: #00000066;
 
     --color-text-primary: #f2f1ec;
     --color-text-secondary: #aaa59a;
@@ -139,6 +141,7 @@
   --color-bg-surface: #171714;
   --color-bg-sunken: #1e1e1a;
   --color-bg-inverse: #f2f1ec;
+  --color-scrim: #00000066;
 
   --color-text-primary: #f2f1ec;
   --color-text-secondary: #aaa59a;
