@@ -6,7 +6,7 @@ Each screen exists in up to four versions: desktop light (1440 wide), mobile lig
 
 Status key: `todo` · `built` (code written, tests pass) · `verified` (compared to all four frames).
 
-**Progress:** sections 1, 2, 3, 4, A, B0, B, D, 5, 6, C, W1, W2, 7, H and S built. Section 1 and 2: 18 screens. Measured against Figma so far: 1a, 1b, 1c and 2a on desktop light, 1c on desktop dark, and 1a, 1b and 2a on mobile (dark for 2a). D2 checked against Figma geometry on desktop light, and on mobile dark by eye. Everything else shares the same components and is covered by unit tests but has not been compared frame by frame. See `design-discrepancies.md` for places the design and an existing decision disagree.
+**Progress:** sections 1, 2, 3, 4, A, B0, B, D, 5, 6, C, W1, W2, 7, H, S and T built. Section 1 and 2: 18 screens. Measured against Figma so far: 1a, 1b, 1c and 2a on desktop light, 1c on desktop dark, and 1a, 1b and 2a on mobile (dark for 2a). D2 checked against Figma geometry on desktop light, and on mobile dark by eye. Everything else shares the same components and is covered by unit tests but has not been compared frame by frame. See `design-discrepancies.md` for places the design and an existing decision disagree.
 
 **Totals:** 163 distinct screens · 647 frames to match (desktop light 154, mobile light 170, desktop dark 153, mobile dark 170).
 
@@ -195,12 +195,12 @@ Status key: `todo` · `built` (code written, tests pass) · `verified` (compared
 
 | Screen | Desktop light | Mobile light | Desktop dark | Mobile dark | Status |
 |---|---|---|---|---|---|
-| T1 · Settings, workspace | `62:6754` | `134:38817` | `136:45013` | `136:61945` | todo |
-| T2 · Settings, safety and approvals | `62:6974`, `62:8721` | `134:39059` | `136:45041` | `136:61972` | todo |
-| T3 · Settings, team | `62:7243` | `134:39323` | `136:45094` | `136:62024` | todo |
-| T4 · Settings, billing | `62:7478` | `134:39555` | `136:45137` | `136:62066` | todo |
-| T5 · Settings, notifications | `62:7781` | `134:39858` | `136:45169` | `136:62097` | todo |
-| T6 · Settings, account | `62:8003` | `134:40094` | `136:45202` | `136:62129` | todo |
+| T1 · Settings, workspace | `62:6754` | `134:38817` | `136:45013` | `136:61945` | built |
+| T2 · Settings, safety and approvals | `62:6974`, `62:8721` | `134:39059` | `136:45041` | `136:61972` | built |
+| T3 · Settings, team | `62:7243` | `134:39323` | `136:45094` | `136:62024` | built |
+| T4 · Settings, billing | `62:7478` | `134:39555` | `136:45137` | `136:62066` | built |
+| T5 · Settings, notifications | `62:7781` | `134:39858` | `136:45169` | `136:62097` | built |
+| T6 · Settings, account | `62:8003` | `134:40094` | `136:45202` | `136:62129` | built |
 
 ## K · Keyboard and command palette
 
