@@ -77,13 +77,14 @@ describe('what is around the conversation', () => {
     render(<WorkspaceApp />);
     expect(screen.getByRole('list', { name: 'Changes' })).toBeInTheDocument();
     expect(screen.getByRole('region', { name: 'Board' })).toBeInTheDocument();
+    expect(document.querySelector('.ws')).toHaveAttribute('data-board', 'true');
   });
 
   it('keeps only the icon rail once there is something to review, and drops the board', () => {
     render(<WorkspaceApp initialPhase="ready" />);
     expect(screen.queryByRole('list', { name: 'Changes' })).not.toBeInTheDocument();
     expect(screen.getByRole('button', { name: 'New change' })).toBeInTheDocument();
-    expect(screen.queryByRole('region', { name: 'Board' })).not.toBeInTheDocument();
+    expect(document.querySelector('.ws')).toHaveAttribute('data-board', 'false');
   });
 
   it('moves the change itself to Needs you on the board while a question is open', () => {

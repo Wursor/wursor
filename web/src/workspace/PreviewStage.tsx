@@ -7,11 +7,21 @@ import { PointOverlay } from './PointOverlay.tsx';
 import { ProofView } from './ProofView.tsx';
 import { PAGE_URL, type Phase } from './scenario.ts';
 
-/** What the stage shows: the page as it is now (with a marker where Wursor is working), the comparison, or the proof. */
-export function PreviewStage({ phase, view }: { phase: Phase; view: PreviewView }) {
+/**
+ * What the stage shows: the page as it is now (with a marker where Wursor is working), the comparison, or the proof.
+ * On a phone the page is drawn in its phone layout at its real size instead of being scaled down.
+ */
+export function PreviewStage({ phase, view, compact = false }: { phase: Phase; view: PreviewView; compact?: boolean }) {
   if (view === 'proof') return <ProofView />;
 
   if (view === 'compare') {
+    if (compact) {
+      return (
+        <div className="ws-compare-phone">
+          <CompareSlider before={<SiteMock state="before" layout="phone" />} after={<SiteMock state="after" layout="phone" />} />
+        </div>
+      );
+    }
     return (
       <FitFrame>
         <div className="ws-compare">
@@ -30,6 +40,16 @@ export function PreviewStage({ phase, view }: { phase: Phase; view: PreviewView 
         : phase === 'needs-you'
           ? { target: 'footer', label: 'Footer', pad: { x: 4, y: 2 }, cursor: false }
           : null;
+
+  if (compact) {
+    return (
+      <div className="ws-phone-frame">
+        <BrowserFrame url={PAGE_URL}>
+          <SiteMock state={after ? 'after' : 'before'} layout="phone" />
+        </BrowserFrame>
+      </div>
+    );
+  }
 
   return (
     <FitFrame overlay={(zoom) => (marker ? <PointOverlay {...marker} zoom={zoom} /> : null)}>

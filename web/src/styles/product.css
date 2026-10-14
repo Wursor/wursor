@@ -335,3 +335,15 @@ button:where([class^="p-"]):focus-visible { outline: 2px solid var(--color-accen
 .p-changerow-diff { display: flex; flex: none; flex-direction: column; align-items: flex-end; font: 400 12px/16px var(--font-mono); }
 .p-drawer .p-changerow p { margin: 0; }
 .p-stream[data-anchor="bottom"] { justify-content: flex-end; }
+
+/* ---------- Site mock, phone layout: one column, a menu button instead of links ---------- */
+.p-site-menu { display: none; color: var(--color-text-secondary); }
+.p-site[data-layout="phone"] { width: 100%; }
+.p-site[data-layout="phone"] .p-site-nav { padding: var(--space-4); }
+.p-site[data-layout="phone"] .p-site-links { display: none; }
+.p-site[data-layout="phone"] .p-site-menu { display: inline-flex; }
+.p-site[data-layout="phone"] .p-site-hero { padding: var(--space-6) var(--space-4); }
+.p-site[data-layout="phone"] .p-site-body { flex-direction: column; align-items: stretch; gap: var(--space-5); padding: var(--space-5) var(--space-4); }
+.p-site[data-layout="phone"] .p-site-col { flex: none; align-items: stretch; }
+.p-site[data-layout="phone"] .p-site-phone { width: 100%; justify-content: flex-start; }
+.p-site[data-layout="phone"] .p-site-footer { padding: var(--space-4); }

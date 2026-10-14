@@ -14,7 +14,7 @@ type Props = { selected: PreviewView; tag?: string; onSelect?: (view: PreviewVie
 
 export function PreviewToolbar({ selected, tag, onSelect, trailing }: Props) {
   return (
-    <div className="p-previewbar">
+    <div className="p-previewbar" data-trailing={trailing ? 'true' : undefined}>
       <div role="tablist" aria-label="View" className="p-tabs">
         {TABS.map((t) => (
           <Tab key={t.value} label={t.label} selected={t.value === selected} onSelect={() => onSelect?.(t.value)} />

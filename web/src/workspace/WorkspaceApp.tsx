@@ -10,6 +10,7 @@ import { HARBOR } from '../product/harbor-bakery.ts';
 import { PreviewToolbar, type PreviewView } from '../product/PreviewToolbar.tsx';
 import { Sidebar } from '../product/Sidebar.tsx';
 import { TopBar } from '../product/TopBar.tsx';
+import { MobileTopBar } from './MobileTopBar.tsx';
 import { PreviewStage } from './PreviewStage.tsx';
 import {
   boardLanes, CHANGES, CHANGE_TITLE, LIVE_URL, PHASE_STATUS, PHASE_VIEW, PREVIEW_TAG, sidebarChanges, USER_REQUEST, WIDE_PHASES,
@@ -17,12 +18,16 @@ import {
 } from './scenario.ts';
 import { SidebarRail } from './SidebarRail.tsx';
 import { Stream } from './Stream.tsx';
+import { TourLayer } from './TourLayer.tsx';
+import { useMediaQuery, PHONE } from './useMediaQuery.ts';
 import { WhatChangedDrawer } from './WhatChangedDrawer.tsx';
 
 type Props = {
   initialPhase?: Phase;
   initialDensity?: Density;
   initialView?: PreviewView;
+  /** Starts the guided tour at this step (1 to 4). Steps 1 to 3 happen while Wursor works; step 4 at the decision point. */
+  tourStep?: 1 | 2 | 3 | 4;
   /** Moves a change along by itself, so the whole life of a change can be watched. Off for fixed states. */
   autoplay?: boolean;
   /** How long the demo spends working and publishing, in ms. */
@@ -33,7 +38,7 @@ type Props = {
 const HREFS = { Home: '/home', Board: '/board', Activity: '/activity', Sites: '/sites' } as const;
 
 /** The workspace: the conversation about one change, the preview, the board, and the decision point. */
-export function WorkspaceApp({ initialPhase = 'plan', initialDensity = 'steps', initialView, autoplay = false, workMs = 6000, publishMs = 3000 }: Props) {
+export function WorkspaceApp({ initialPhase = 'plan', initialDensity = 'steps', initialView, tourStep, autoplay = false, workMs = 6000, publishMs = 3000 }: Props) {
   const [phase, setPhaseState] = useState<Phase>(initialPhase);
   const [density, setDensity] = useState<Density>(initialDensity);
   const [view, setView] = useState<PreviewView>(initialView ?? PHASE_VIEW[initialPhase]);
@@ -42,6 +47,8 @@ export function WorkspaceApp({ initialPhase = 'plan', initialDensity = 'steps', 
   const [progress, setProgress] = useState(0.6);
   const [collapsed, setCollapsed] = useState<boolean | null>(null);
   const [mobileTab, setMobileTab] = useState<'chat' | 'preview' | 'board'>('chat');
+  const compact = useMediaQuery(PHONE);
+  const [tour, setTour] = useState<1 | 2 | 3 | 4 | null>(tourStep ?? null);
 
   const go = (next: Phase, nextView?: PreviewView) => {
     setPhaseState(next);
@@ -88,7 +95,7 @@ export function WorkspaceApp({ initialPhase = 'plan', initialDensity = 'steps', 
     );
 
   return (
-    <div className="ws" data-phase={phase} data-wide={wide ? 'true' : 'false'} data-tab={mobileTab}>
+    <div className="ws" data-phase={phase} data-wide={wide ? 'true' : 'false'} data-board={showBoard ? 'true' : 'false'} data-tab={mobileTab}>
       <TopBar
         site={HARBOR.site.name}
         siteInitial={HARBOR.site.initial}
@@ -98,6 +105,7 @@ export function WorkspaceApp({ initialPhase = 'plan', initialDensity = 'steps', 
         account={HARBOR.account}
         onToggleSidebar={() => setCollapsed(wide)}
       />
+      <MobileTopBar site={HARBOR.site.name} siteInitial={HARBOR.site.initial} />
       <div className="ws-tabs" role="tablist" aria-label="Workspace">
         {(['chat', 'preview', 'board'] as const).map((t) => (
           <button key={t} type="button" role="tab" aria-selected={mobileTab === t} className="ws-tab" onClick={() => setMobileTab(t)}>
@@ -151,17 +159,27 @@ export function WorkspaceApp({ initialPhase = 'plan', initialDensity = 'steps', 
             }
           />
           <div className="ws-stage">
-            <PreviewStage phase={phase} view={view} />
+            <PreviewStage phase={phase} view={view} compact={compact} />
             {approval && <div className="ws-approval">{approval}</div>}
           </div>
-          {showBoard && (
-            <div className="ws-board" data-panel="board">
-              <BoardStrip lanes={boardLanes(phase)} />
-            </div>
-          )}
+          <div className="ws-board" data-panel="board">
+            <BoardStrip lanes={boardLanes(phase)} />
+          </div>
         </div>
         {showDrawer && <WhatChangedDrawer verdict="Wursor checked 9 things. All passed." changes={CHANGES} onClose={() => setDrawer(false)} />}
       </div>
+      {tour && (
+        <TourLayer
+          step={tour}
+          onSkip={() => setTour(null)}
+          onNext={() => {
+            if (tour === 4) return setTour(null);
+            const next = (tour + 1) as 2 | 3 | 4;
+            if (next === 4) go('ready');
+            setTour(next);
+          }}
+        />
+      )}
     </div>
   );
 }
