@@ -147,7 +147,7 @@ function Connection() {
 function MovesOut() {
   return (
     <Definition label="Moves">
-      <Button variant="secondary" size="md" leadingIcon="swap">
+      <Button variant="secondary" size="md" leadingIcon="swap" onClick={() => window.location.assign('/move/out')}>
         Move to my own WordPress
       </Button>
       <Button variant="ghost" size="md" leadingIcon="download">
@@ -225,7 +225,7 @@ function ContentOnly() {
           </a>
         </Definition>
         <Definition label="Moves">
-          <Button variant="secondary" size="md" leadingIcon="cloud">
+          <Button variant="secondary" size="md" leadingIcon="cloud" onClick={() => window.location.assign('/move/in?access=content')}>
             Host on Wursor Cloud
           </Button>
           <p className="app-def-note">Your current site is not changed until you confirm.</p>

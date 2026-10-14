@@ -4,8 +4,9 @@ import { BrandMark } from '../marketing/BrandMark.tsx';
 import { StepIndicator } from './StepIndicator.tsx';
 
 type Props = {
-  step: number;
-  label: string;
+  /** Leave out for a flow with no numbered steps, such as moving a site. */
+  step?: number;
+  label?: string;
   onSaveAndExit?: (() => void) | undefined;
   /** Tighter spacing, used when an extra banner would otherwise push the actions off a 900px screen. */
   compact?: boolean;
@@ -33,7 +34,7 @@ export function WizardShell({ step, label, onSaveAndExit, compact, size = 'narro
         </nav>
       </header>
       <main className="ob-wizard-body" data-compact={compact ? 'true' : undefined} data-size={size}>
-        <StepIndicator step={step} label={label} />
+        {step !== undefined && label !== undefined && <StepIndicator step={step} label={label} />}
         {children}
       </main>
     </div>
