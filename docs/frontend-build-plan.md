@@ -6,7 +6,7 @@ Each screen exists in up to four versions: desktop light (1440 wide), mobile lig
 
 Status key: `todo` · `built` (code written, tests pass) · `verified` (compared to all four frames).
 
-**Progress:** sections 1, 2, 3, 4, A, B0, B, D, 5, 6, C, W1, W2, 7, H, S, T, K, M and AC built. Section 1 and 2: 18 screens. Measured against Figma so far: 1a, 1b, 1c and 2a on desktop light, 1c on desktop dark, and 1a, 1b and 2a on mobile (dark for 2a). D2 checked against Figma geometry on desktop light, and on mobile dark by eye. Everything else shares the same components and is covered by unit tests but has not been compared frame by frame. See `design-discrepancies.md` for places the design and an existing decision disagree.
+**Progress:** sections 1, 2, 3, 4, A, B0, B, D, 5, 6, C, W1, W2, 7, H, S, T, K, M, AC and BD built. Section 1 and 2: 18 screens. Measured against Figma so far: 1a, 1b, 1c and 2a on desktop light, 1c on desktop dark, and 1a, 1b and 2a on mobile (dark for 2a). D2 checked against Figma geometry on desktop light, and on mobile dark by eye. Everything else shares the same components and is covered by unit tests but has not been compared frame by frame. See `design-discrepancies.md` for places the design and an existing decision disagree.
 
 **Totals:** 163 distinct screens · 647 frames to match (desktop light 154, mobile light 170, desktop dark 153, mobile dark 170).
 
@@ -250,20 +250,20 @@ Status key: `todo` · `built` (code written, tests pass) · `verified` (compared
 
 | Screen | Desktop light | Mobile light | Desktop dark | Mobile dark | Status |
 |---|---|---|---|---|---|
-| BD1 · Board, all lanes | `124:22436` | `134:42072` | `136:46971` | `136:62365` | todo |
-| BD2 · Board, empty | `124:22677` | `134:42320` | `136:47006` | `136:62399` | todo |
-| BD3 · Board, loading | `124:22812` | `134:42521` | `136:47021` | `136:62413` | todo |
-| BD4 · Board, list view | `124:22976` | `134:42718` | `136:47077` | `136:62468` | todo |
-| BD5 · Change detail drawer | `125:15782` | `134:42965` | `136:47139` | `136:62529` | todo |
-| BD6 · Dragging a card | `125:15891` | `134:43236` | `136:47215` | `136:62563` | todo |
-| BD7 · All sites board (agency) | `125:22726` | `134:43555` | `136:47253` | `136:62599` | todo |
-| BD8 · New change composer | `125:16031` | `134:43853` | `136:47339` | `136:62684` | todo |
-| BD9 · Filter, nothing matches | `125:22331` | `134:44100` | `136:47392` | `136:62718` | todo |
-| BD10 · Offline | `125:22575` | `134:44281` | `136:47406` | `136:62731` | todo |
-| BD11 · Board, calendar view | `156:72213` | `156:73458` | `156:72853` | — | todo |
-| BD5 · Change detail sheet | — | `134:52948` | — | `136:62766` | todo |
-| BD8 · New change sheet | — | `134:53023` | — | `136:62843` | todo |
-| DK · M · BD11 · Board, calendar view | — | — | — | `156:73900` | todo |
+| BD1 · Board, all lanes | `124:22436` | `134:42072` | `136:46971` | `136:62365` | built |
+| BD2 · Board, empty | `124:22677` | `134:42320` | `136:47006` | `136:62399` | built |
+| BD3 · Board, loading | `124:22812` | `134:42521` | `136:47021` | `136:62413` | built |
+| BD4 · Board, list view | `124:22976` | `134:42718` | `136:47077` | `136:62468` | built |
+| BD5 · Change detail drawer | `125:15782` | `134:42965` | `136:47139` | `136:62529` | built |
+| BD6 · Dragging a card | `125:15891` | `134:43236` | `136:47215` | `136:62563` | built |
+| BD7 · All sites board (agency) | `125:22726` | `134:43555` | `136:47253` | `136:62599` | built |
+| BD8 · New change composer | `125:16031` | `134:43853` | `136:47339` | `136:62684` | built |
+| BD9 · Filter, nothing matches | `125:22331` | `134:44100` | `136:47392` | `136:62718` | built |
+| BD10 · Offline | `125:22575` | `134:44281` | `136:47406` | `136:62731` | built |
+| BD11 · Board, calendar view | `156:72213` | `156:73458` | `156:72853` | — | built |
+| BD5 · Change detail sheet | — | `134:52948` | — | `136:62766` | built |
+| BD8 · New change sheet | — | `134:53023` | — | `136:62843` | built |
+| DK · M · BD11 · Board, calendar view | — | — | — | `156:73900` | built |
 
 ## SY · System states
 
