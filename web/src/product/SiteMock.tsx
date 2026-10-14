@@ -5,10 +5,10 @@ import { HARBOR } from './harbor-bakery.ts';
  * Harbor Bakery contact page, drawn at its design width of 760 px. Before the change the phone number is
  * plain text; after it, a tap-to-call link with a 44 px touch target.
  */
-export function SiteMock({ state }: { state: 'before' | 'after' }) {
+export function SiteMock({ state, layout = 'desktop' }: { state: 'before' | 'after'; layout?: 'desktop' | 'phone' }) {
   const { phone } = HARBOR;
   return (
-    <div className="p-site" data-state={state}>
+    <div className="p-site" data-state={state} data-layout={layout}>
       <div className="p-site-nav">
         <p className="p-site-brand">Harbor Bakery</p>
         <div className="p-site-links">
@@ -17,6 +17,9 @@ export function SiteMock({ state }: { state: 'before' | 'after' }) {
           <span>About</span>
           <span className="p-site-current">Contact</span>
         </div>
+        <span className="p-site-menu">
+          <Icon name="list" size={20} />
+        </span>
       </div>
       <div className="p-site-rule" />
       <div className="p-site-hero">
