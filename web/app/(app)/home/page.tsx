@@ -11,5 +11,5 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
   const q = await searchParams;
   const variant = pick<HomeVariant>(q.state, ['first-run', 'active', 'caught-up', 'problem']) ?? 'active';
   const host = pick<HomeHost>(q.host, ['wordpress', 'cloud']) ?? 'wordpress';
-  return <HomeRoute variant={variant} host={host} part={variant === 'active' || variant === 'first-run' ? 'morning' : 'afternoon'} />;
+  return <HomeRoute variant={variant} host={host} sheet={pick<'sites' | 'notifications'>(q.sheet, ['sites', 'notifications'])} part={variant === 'active' || variant === 'first-run' ? 'morning' : 'afternoon'} />;
 }

@@ -51,3 +51,6 @@ button { font: inherit; color: inherit; }
 .ui-banner[data-tone="warning"] { background: var(--color-status-needs-you-bg); color: var(--color-status-needs-you-fg); }
 .ui-banner-action { flex: none; height: 28px; padding: 0 var(--space-3); border: 0; border-radius: var(--radius-full); background: transparent; color: var(--color-text-primary); cursor: pointer; }
 .ui-banner-action:hover { background: color-mix(in srgb, var(--color-text-primary) 8%, transparent); }
+
+/* ---------- Toast tones (SY9, N4) ---------- */
+.ui-toast[data-tone="warning"] .icon, .ui-toast[data-tone="info"] .icon, .ui-toast[data-tone="success"] .icon { flex: none; }

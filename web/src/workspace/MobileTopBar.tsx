@@ -1,12 +1,12 @@
 import { Icon } from '../ui/Icon.tsx';
 
-type Props = { site: string; siteInitial: string; onSearch?: (() => void) | undefined };
+type Props = { site: string; siteInitial: string; onSearch?: (() => void) | undefined; onSite?: (() => void) | undefined; onNotifications?: (() => void) | undefined };
 
 /** The phone's top bar (56 px): the site, search and notifications. The detail of the desktop bar moves into the screens themselves. */
-export function MobileTopBar({ site, siteInitial, onSearch }: Props) {
+export function MobileTopBar({ site, siteInitial, onSearch, onSite, onNotifications }: Props) {
   return (
     <header className="ws-mtop">
-      <button type="button" className="ws-mtop-site">
+      <button type="button" className="ws-mtop-site" aria-label={`Switch site, now ${site}`} onClick={onSite}>
         <span className="ws-mtop-mark" aria-hidden="true">
           {siteInitial}
         </span>
@@ -17,7 +17,7 @@ export function MobileTopBar({ site, siteInitial, onSearch }: Props) {
       <button type="button" className="ws-mtop-icon" aria-label="Search" onClick={onSearch}>
         <Icon name="search" size={20} />
       </button>
-      <button type="button" className="ws-mtop-icon" aria-label="Notifications">
+      <button type="button" className="ws-mtop-icon" aria-label="Notifications" onClick={onNotifications}>
         <Icon name="bell" size={20} />
       </button>
     </header>
