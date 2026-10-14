@@ -27,6 +27,9 @@ Places where the Figma file ("Wursor - weown.net", page Product Design) and an e
 | H2 | Home, site card preview | The preview frame is 264 px wide in a 262 px card | 262 px, the width the card allows | Looks like a rounding slip in the frame |
 | H3 | Home, on a phone | The time ("1 h ago") is dropped from rows that need you | Same | To make room for the button |
 | H4 | Home, stand-in behaviour | Real data | Fixed example data; `/home?state=first-run|active|caught-up|problem` and `&host=cloud` open each moment | Backend is out of scope for this pass |
-| S1 | Sites, usage meters | "12 of 50" fills 82% of the bar and "9 of 30" about 34% | Kept as designed (fills set in the design, not worked out from the numbers) | Looks like sample fills; worth fixing in Figma so the bar matches the count |
+| S1 | Usage meters (Site overview, Billing) | The fills are fixed sample widths (216 px, then 90 px) whatever the numbers say: "12 of 50" looks four-fifths full on the site overview | The fill is worked out from the numbers (12 of 50 is 24%) | A bar that disagrees with its own count would mislead |
 | S2 | Site detail, spacing | The Overview and own-WordPress frames space breadcrumb, header, tabs and body 20 px apart; the Cloud and Content-only frames use 24 px | Both are kept, chosen by which tab and host is shown | Two spacing conventions in one design |
 | S3 | Site detail, Changes and Settings tabs | Not designed | Each says where that content lives (Board, Settings) with a link | Needs a design |
+| T1 | Settings, dark frame in the light section | The dark T2 frame (62:8721) sits among the light frames | Dark comes from the theme, not a separate screen | Same as the earlier note |
+| T2 | Settings, plan cards | Cards hug their contents (234, 236, 234 px) | Three equal columns; the current plan's thicker border grows 1 px each side | Same look, simpler layout |
+| T3 | Settings, stand-in behaviour | Real saving | Controls change on screen only; nothing is stored | Backend is out of scope for this pass |

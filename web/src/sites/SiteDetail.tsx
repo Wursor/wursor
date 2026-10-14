@@ -59,8 +59,8 @@ function Overview() {
         <SiteCard name="Harbor Bakery" url="harborbakery.com" href="https://harborbakery.com" status="live" detail="Watching for errors since 9:41 AM." actionLabel="Open workspace" actionHref="/workspace" />
         <section aria-label="This month" className="app-card app-usage">
           <h2>This month</h2>
-          <UsageMeter label="Changes" value="12 of 50" fill={0.8244} />
-          <UsageMeter label="Safe copies" value="9 of 30" fill={0.3435} />
+          <UsageMeter label="Changes" value="12 of 50" fill={12 / 50} />
+          <UsageMeter label="Safe copies" value="9 of 30" fill={9 / 30} />
         </section>
       </div>
     </div>
