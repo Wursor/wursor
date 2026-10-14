@@ -112,3 +112,27 @@ describe('what is around the conversation', () => {
     expect(screen.getByRole('list', { name: 'Changes' })).toBeInTheDocument();
   });
 });
+
+describe('building a whole new site (section C)', () => {
+  it('shows what was built, the checks, and the approval for publishing to the owner’s WordPress', () => {
+    const onApprove = vi.fn();
+    render(<WorkspaceApp variant="site" initialPhase="ready" initialView="preview" onApprove={onApprove} />);
+    expect(topStatus().getByText('Build your site')).toBeInTheDocument();
+    expect(topStatus().getByText('Ready for you')).toBeInTheDocument();
+    expect(screen.getByText('Planned 4 pages')).toBeInTheDocument();
+    expect(screen.getByText('Checked 12 things. All passed.', { selector: '.p-check-title' })).toBeInTheDocument();
+    expect(screen.getByText('Your site is ready. Have a look around, then approve to publish it to your WordPress.')).toBeInTheDocument();
+    const drawer = screen.getByRole('complementary', { name: 'What was built' });
+    expect(within(drawer).getByText('4 pages')).toBeInTheDocument();
+    expect(within(drawer).getByText('Your WordPress is not changed until you approve. A backup is taken first.')).toBeInTheDocument();
+    expect(screen.getByText('4 pages · Publishes to harborbakery.com')).toBeInTheDocument();
+  });
+
+  it('hands over to the publish screens when approved', async () => {
+    const onApprove = vi.fn();
+    render(<WorkspaceApp variant="site" initialPhase="ready" initialView="preview" onApprove={onApprove} />);
+    await setup().click(screen.getByRole('button', { name: 'Approve and publish' }));
+    expect(onApprove).toHaveBeenCalledOnce();
+    expect(topStatus().getByText('Ready for you')).toBeInTheDocument();
+  });
+});

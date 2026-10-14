@@ -6,7 +6,7 @@ Each screen exists in up to four versions: desktop light (1440 wide), mobile lig
 
 Status key: `todo` · `built` (code written, tests pass) · `verified` (compared to all four frames).
 
-**Progress:** sections 1, 2, 3, 4, A, B0, B, D, 5 and 6 built. Section 1 and 2: 18 screens. Measured against Figma so far: 1a, 1b, 1c and 2a on desktop light, 1c on desktop dark, and 1a, 1b and 2a on mobile (dark for 2a). D2 checked against Figma geometry on desktop light, and on mobile dark by eye. Everything else shares the same components and is covered by unit tests but has not been compared frame by frame. See `design-discrepancies.md` for places the design and an existing decision disagree.
+**Progress:** sections 1, 2, 3, 4, A, B0, B, D, 5, 6, C, W1, W2 and 7 built. Section 1 and 2: 18 screens. Measured against Figma so far: 1a, 1b, 1c and 2a on desktop light, 1c on desktop dark, and 1a, 1b and 2a on mobile (dark for 2a). D2 checked against Figma geometry on desktop light, and on mobile dark by eye. Everything else shares the same components and is covered by unit tests but has not been compared frame by frame. See `design-discrepancies.md` for places the design and an existing decision disagree.
 
 **Totals:** 163 distinct screens · 647 frames to match (desktop light 154, mobile light 170, desktop dark 153, mobile dark 170).
 
@@ -118,9 +118,9 @@ Status key: `todo` · `built` (code written, tests pass) · `verified` (compared
 
 | Screen | Desktop light | Mobile light | Desktop dark | Mobile dark | Status |
 |---|---|---|---|---|---|
-| C4 · Ready for you, publish to your WordPress | `92:20845` | `134:35029` (Chat), `134:35221` (Preview) | `136:46427` | `136:57758` (Chat), `136:57777` (Preview) | todo |
-| C5a · Publishing to your WordPress | `92:20877` | `134:51614` | `136:46459` | `136:57793` | todo |
-| C5b · Published to your WordPress | `92:20966` | `134:51669` | `136:46482` | `136:57816` | todo |
+| C4 · Ready for you, publish to your WordPress | `92:20845` | `134:35029` (Chat), `134:35221` (Preview) | `136:46427` | `136:57758` (Chat), `136:57777` (Preview) | built |
+| C5a · Publishing to your WordPress | `92:20877` | `134:51614` | `136:46459` | `136:57793` | built |
+| C5b · Published to your WordPress | `92:20966` | `134:51669` | `136:46482` | `136:57816` | built |
 
 ## 5 · Wursor takes a look
 
@@ -143,29 +143,29 @@ Status key: `todo` · `built` (code written, tests pass) · `verified` (compared
 
 | Screen | Desktop light | Mobile light | Desktop dark | Mobile dark | Status |
 |---|---|---|---|---|---|
-| Wa · Plan ready | `51:3705` | `134:45370` (Chat), `134:45597` (Preview) | `136:36917` | `136:62966` (Chat), `136:63002` (Preview) | todo |
-| Wb · Working (Steps) | `51:4012` | `134:45892` (Chat), `134:46129` (Preview) | `136:36992` | `136:63045` (Chat), `136:63065` (Preview) | todo |
-| Wc · Working (Headline) | `51:4359` | `134:46395` (Chat), `134:46596` (Preview) | `136:37052` | `136:63109` (Chat), `136:63125` (Preview) | todo |
-| Wd · Working (Everything) | `51:4670` | `134:46916` (Chat), `134:47171` (Preview) | `136:37108` | `136:63169` (Chat), `136:63191` (Preview) | todo |
-| We · Needs you | `51:5035` | `134:47453` (Chat), `134:47670` (Preview) | `136:37170` | `136:63235` (Chat), `136:63252` (Preview) | todo |
+| Wa · Plan ready | `51:3705` | `134:45370` (Chat), `134:45597` (Preview) | `136:36917` | `136:62966` (Chat), `136:63002` (Preview) | built |
+| Wb · Working (Steps) | `51:4012` | `134:45892` (Chat), `134:46129` (Preview) | `136:36992` | `136:63045` (Chat), `136:63065` (Preview) | built |
+| Wc · Working (Headline) | `51:4359` | `134:46395` (Chat), `134:46596` (Preview) | `136:37052` | `136:63109` (Chat), `136:63125` (Preview) | built |
+| Wd · Working (Everything) | `51:4670` | `134:46916` (Chat), `134:47171` (Preview) | `136:37108` | `136:63169` (Chat), `136:63191` (Preview) | built |
+| We · Needs you | `51:5035` | `134:47453` (Chat), `134:47670` (Preview) | `136:37170` | `136:63235` (Chat), `136:63252` (Preview) | built |
 
 ## W2 · Workspace, review and publish
 
 | Screen | Desktop light | Mobile light | Desktop dark | Mobile dark | Status |
 |---|---|---|---|---|---|
-| Wf · Ready for you (Compare) | `51:5329` | `134:47922` (Chat), `134:48115` (Preview) | `136:37227` | `136:63296` (Chat), `136:63315` (Preview) | todo |
-| Wg · Publishing | `51:5651` | `134:48377` (Chat), `134:48545` (Preview) | `136:37259` | `136:63331` (Chat), `136:63350` (Preview) | todo |
-| Wh · Published | `51:5941` | `134:48791` (Chat), `134:48950` (Preview) | `136:37291` | `136:63366` (Chat), `136:63384` (Preview) | todo |
-| Wi · Proof | `51:6184` | `134:49224` (Chat), `134:49424` (Preview) | `136:37321` | `136:63400` (Chat), `136:63419` (Preview) | todo |
+| Wf · Ready for you (Compare) | `51:5329` | `134:47922` (Chat), `134:48115` (Preview) | `136:37227` | `136:63296` (Chat), `136:63315` (Preview) | built |
+| Wg · Publishing | `51:5651` | `134:48377` (Chat), `134:48545` (Preview) | `136:37259` | `136:63331` (Chat), `136:63350` (Preview) | built |
+| Wh · Published | `51:5941` | `134:48791` (Chat), `134:48950` (Preview) | `136:37291` | `136:63366` (Chat), `136:63384` (Preview) | built |
+| Wi · Proof | `51:6184` | `134:49224` (Chat), `134:49424` (Preview) | `136:37321` | `136:63400` (Chat), `136:63419` (Preview) | built |
 
 ## 7 · Watch it work, approve, publish
 
 | Screen | Desktop light | Mobile light | Desktop dark | Mobile dark | Status |
 |---|---|---|---|---|---|
-| 7a · Guide: conversation | `52:4183` | `134:49725` (Chat), `134:49963` (Preview) | `136:37361` | `136:63444` (Chat), `136:63464` (Preview) | todo |
-| 7b · Guide: preview | `52:4243` | `134:50266` (Chat), `134:50504` (Preview) | `136:37422` | `136:63508` (Chat), `136:63528` (Preview) | todo |
-| 7c · Guide: board | `52:4303` | `134:50807` (Chat), `134:51045` (Preview) | `136:37483` | `136:63572` (Chat), `136:63592` (Preview) | todo |
-| 7d · Guide: approve | `52:4363` | `134:51304` (Chat), `134:51498` (Preview) | `136:37544` | `136:63636` (Chat), `136:63655` (Preview) | todo |
+| 7a · Guide: conversation | `52:4183` | `134:49725` (Chat), `134:49963` (Preview) | `136:37361` | `136:63444` (Chat), `136:63464` (Preview) | built |
+| 7b · Guide: preview | `52:4243` | `134:50266` (Chat), `134:50504` (Preview) | `136:37422` | `136:63508` (Chat), `136:63528` (Preview) | built |
+| 7c · Guide: board | `52:4303` | `134:50807` (Chat), `134:51045` (Preview) | `136:37483` | `136:63572` (Chat), `136:63592` (Preview) | built |
+| 7d · Guide: approve | `52:4363` | `134:51304` (Chat), `134:51498` (Preview) | `136:37544` | `136:63636` (Chat), `136:63655` (Preview) | built |
 
 ## H · Home
 

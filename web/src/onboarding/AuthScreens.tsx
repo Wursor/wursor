@@ -10,6 +10,7 @@ import { ConnectProblemStep } from './ConnectProblemStep.tsx';
 import { ConnectSiteFlow, type ConnectDone, type Scenario } from './ConnectSiteFlow.tsx';
 import { ConnectedStep } from './ConnectSteps.tsx';
 import { FirstChangeStep } from './FirstChangeStep.tsx';
+import { PublishStep } from './PublishStep.tsx';
 import { ScanStep } from './ScanStep.tsx';
 import { DomainFlow, type DomainScenario } from './DomainFlow.tsx';
 import { WpPermissionsStep } from './WpPermissionsStep.tsx';
@@ -178,4 +179,9 @@ export function ScanScreen({ access }: { access: 'full' | 'content' }) {
 export function FirstChangeScreen({ access }: { access: 'full' | 'content' }) {
   const router = useRouter();
   return <FirstChangeStep access={access} onStart={() => router.push('/workspace')} onBack={() => router.back()} onSaveAndExit={() => router.push('/')} />;
+}
+
+export function PublishScreen() {
+  const router = useRouter();
+  return <PublishStep onOpenSite={() => router.push('/home')} onUndo={() => router.push('/workspace/site')} onSaveAndExit={() => router.push('/')} />;
 }

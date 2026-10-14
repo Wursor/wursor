@@ -93,3 +93,25 @@ export function boardLanes(phase: Phase): BoardLaneData[] {
   }
   return [needs, { status: 'working', title: 'Working', cards: [{ title: CHANGE_TITLE, meta: 'Contact page · 1 min ago', status: 'working', risk: mine.risk, progress: 0.42 }] }, idea, done];
 }
+
+/** Building a whole site to publish to the owner's WordPress (section C): the same workspace, a different story. */
+export type Variant = 'change' | 'site';
+
+export const SITE = {
+  title: 'Build your site',
+  tag: 'New site',
+  userRequest: undefined,
+  drawer: {
+    title: 'What was built',
+    verdict: 'Wursor checked 12 things. All passed.',
+    riskNote: 'Your WordPress is not changed until you approve. A backup is taken first.',
+    countLabel: '4 pages',
+    rows: [
+      { place: 'Home page', summary: 'Headline, menu highlights, opening hours, map', added: 120, removed: 0 },
+      { place: 'Menu, About, Contact', summary: 'Three more pages in the same look', added: 85, removed: 0 },
+    ],
+  },
+  approval: { title: 'Ready for you', meta: '4 pages · Publishes to harborbakery.com' },
+  check: { title: 'Checked 12 things. All passed.', detail: '4 pages, 3 screen sizes, contact form sends, loads fast.' },
+  built: { title: 'Built the Home page', meta: '5 sections · Warm look', added: 120, removed: 0 },
+} as const;

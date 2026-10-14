@@ -5,14 +5,27 @@ import { BrowserFrame } from './BrowserFrame.tsx';
 import { FitFrame } from './FitFrame.tsx';
 import { PointOverlay } from './PointOverlay.tsx';
 import { ProofView } from './ProofView.tsx';
-import { PAGE_URL, type Phase } from './scenario.ts';
+import { PAGE_URL, type Phase, type Variant } from './scenario.ts';
 
 /**
  * What the stage shows: the page as it is now (with a marker where Wursor is working), the comparison, or the proof.
  * On a phone the page is drawn in its phone layout at its real size instead of being scaled down.
  */
-export function PreviewStage({ phase, view, compact = false }: { phase: Phase; view: PreviewView; compact?: boolean }) {
+export function PreviewStage({ phase, view, compact = false, variant = 'change' }: { phase: Phase; view: PreviewView; compact?: boolean; variant?: Variant }) {
   if (view === 'proof') return <ProofView />;
+
+  // A whole new site is shown as the page itself, with no browser around it.
+  if (variant === 'site' && view === 'preview') {
+    return compact ? (
+      <div className="ws-phone-frame">
+        <SiteMock state="after" layout="phone" />
+      </div>
+    ) : (
+      <FitFrame>
+        <SiteMock state="after" />
+      </FitFrame>
+    );
+  }
 
   if (view === 'compare') {
     if (compact) {

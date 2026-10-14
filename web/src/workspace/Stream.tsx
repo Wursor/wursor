@@ -9,10 +9,11 @@ import { HarborStream } from '../product/HarborStream.tsx';
 import { CaptureEvent } from './CaptureEvent.tsx';
 import { DecisionCard } from './DecisionCard.tsx';
 import { PlanCard } from './PlanCard.tsx';
-import { DECISION, PLAN_STEPS, USER_REQUEST, type Phase } from './scenario.ts';
+import { DECISION, PLAN_STEPS, SITE, USER_REQUEST, type Phase, type Variant } from './scenario.ts';
 
 type Props = {
   phase: Phase;
+  variant?: Variant;
   density: Density;
   /** True once the owner has answered the question, so the stream says what was chosen. */
   answer?: string | undefined;
@@ -26,9 +27,23 @@ const CHANGE = { title: 'Changed the Contact page', meta: '1 section · 2 places
 const CHECK = { title: 'Checked 9 things. All passed.', detail: 'Phone link works, 3 screen sizes, no new errors, speed unchanged.' } as const;
 
 /** The conversation for a change, in each phase of its life and at each level of detail. */
-export function Stream({ phase, density, answer, onStart, onEditPlan, onAnswer, onSeeChanges }: Props) {
+export function Stream({ phase, variant = 'change', density, answer, onStart, onEditPlan, onAnswer, onSeeChanges }: Props) {
   const steps = density !== 'headline';
   const everything = density === 'everything';
+
+  if (variant === 'site') {
+    return (
+      <>
+        {steps && <StepGroup title="Planned 4 pages" count={4} />}
+        {steps && <ChangeEvent title={SITE.built.title} meta={SITE.built.meta} risk="everyday" added={SITE.built.added} removed={SITE.built.removed} onSeeChanges={onSeeChanges} />}
+        {steps && <StepLine kind="check" time="5s">Checked every page on a phone and a laptop</StepLine>}
+        {steps && <CaptureEvent caption="Home page on a phone" />}
+        <CheckEvent result="passed" {...SITE.check} />
+        <Milestone kind="ready">Ready for you</Milestone>
+        <Message role="wursor">Your site is ready. Have a look around, then approve to publish it to your WordPress.</Message>
+      </>
+    );
+  }
 
   if (phase === 'plan') {
     return (

@@ -5,10 +5,12 @@ type Props = {
   url: string;
   /** Recognised shows the WordPress version; connected shows Connected and the read-only reassurance; live shows Live and where it is hosted. */
   state: 'recognised' | 'connected' | 'live';
+  /** Replaces the line under a live site, for example "Published just now · Backup taken before". */
+  note?: string;
 };
 
 /** Shown the moment an address is recognised as WordPress, and again once it is connected (Figma "Site Confirm Card"). */
-export function SiteConfirmCard({ name, url, state }: Props) {
+export function SiteConfirmCard({ name, url, state, note }: Props) {
   return (
     <div className="ob-siteconfirm" data-state={state}>
       <div className="ob-siteconfirm-top">
@@ -26,8 +28,8 @@ export function SiteConfirmCard({ name, url, state }: Props) {
       </div>
       {state === 'live' && (
         <div className="ob-siteconfirm-note t-body-m">
-          <Icon name="lock" size={20} />
-          <span>Secure connection · Hosted by Wursor Cloud</span>
+          <Icon name={note ? 'shield-check' : 'lock'} size={20} />
+          <span>{note ?? 'Secure connection · Hosted by Wursor Cloud'}</span>
         </div>
       )}
       {state === 'connected' && (

@@ -13,8 +13,8 @@ import { TopBar } from '../product/TopBar.tsx';
 import { MobileTopBar } from './MobileTopBar.tsx';
 import { PreviewStage } from './PreviewStage.tsx';
 import {
-  boardLanes, CHANGES, CHANGE_TITLE, LIVE_URL, PHASE_STATUS, PHASE_VIEW, PREVIEW_TAG, sidebarChanges, USER_REQUEST, WIDE_PHASES,
-  type Phase,
+  boardLanes, CHANGES, CHANGE_TITLE, LIVE_URL, PHASE_STATUS, PHASE_VIEW, PREVIEW_TAG, sidebarChanges, SITE, USER_REQUEST, WIDE_PHASES,
+  type Phase, type Variant,
 } from './scenario.ts';
 import { SidebarRail } from './SidebarRail.tsx';
 import { Stream } from './Stream.tsx';
@@ -24,6 +24,10 @@ import { WhatChangedDrawer } from './WhatChangedDrawer.tsx';
 
 type Props = {
   initialPhase?: Phase;
+  /** `site` is building a whole new site to publish to the owner's WordPress; `change` is one change to a live site. */
+  variant?: Variant;
+  /** Where Approve and publish goes, when it leaves the workspace (a new site publishes in its own screens). */
+  onApprove?: () => void;
   initialDensity?: Density;
   initialView?: PreviewView;
   /** Starts the guided tour at this step (1 to 4). Steps 1 to 3 happen while Wursor works; step 4 at the decision point. */
@@ -38,7 +42,7 @@ type Props = {
 const HREFS = { Home: '/home', Board: '/board', Activity: '/activity', Sites: '/sites' } as const;
 
 /** The workspace: the conversation about one change, the preview, the board, and the decision point. */
-export function WorkspaceApp({ initialPhase = 'plan', initialDensity = 'steps', initialView, tourStep, autoplay = false, workMs = 6000, publishMs = 3000 }: Props) {
+export function WorkspaceApp({ initialPhase = 'plan', variant = 'change', onApprove, initialDensity = 'steps', initialView, tourStep, autoplay = false, workMs = 6000, publishMs = 3000 }: Props) {
   const [phase, setPhaseState] = useState<Phase>(initialPhase);
   const [density, setDensity] = useState<Density>(initialDensity);
   const [view, setView] = useState<PreviewView>(initialView ?? PHASE_VIEW[initialPhase]);
@@ -73,12 +77,13 @@ export function WorkspaceApp({ initialPhase = 'plan', initialDensity = 'steps', 
   }, [autoplay, phase, answer, workMs, publishMs]);
 
   const wide = collapsed === null ? WIDE_PHASES.has(phase) : !collapsed;
-  const showDrawer = (phase === 'ready' || phase === 'publishing') && view === 'compare' && drawer;
+  const site = variant === 'site';
+  const showDrawer = (phase === 'ready' || phase === 'publishing') && (site ? view !== 'proof' : view === 'compare') && drawer;
   const showBoard = WIDE_PHASES.has(phase);
 
   const approval =
     phase === 'ready' ? (
-      <ApprovalBar state="ready" title="Ready for you" meta={view === 'proof' ? '2 changes · Everyday risk · Easy to undo' : '2 changes · Easy to undo'} onApprove={() => go('publishing')} onAskChanges={() => go('working')} />
+      <ApprovalBar state="ready" title="Ready for you" meta={site ? SITE.approval.meta : view === 'proof' ? '2 changes · Everyday risk · Easy to undo' : '2 changes · Easy to undo'} onApprove={() => (onApprove ? onApprove() : go('publishing'))} onAskChanges={() => go('working')} />
     ) : phase === 'publishing' ? (
       <ApprovalBar state="publishing" title={`Publishing to ${LIVE_URL}…`} meta="Wursor takes a safe copy first, then publishes." progress={progress} />
     ) : phase === 'published' ? (
@@ -99,7 +104,7 @@ export function WorkspaceApp({ initialPhase = 'plan', initialDensity = 'steps', 
       <TopBar
         site={HARBOR.site.name}
         siteInitial={HARBOR.site.initial}
-        change={CHANGE_TITLE}
+        change={site ? SITE.title : CHANGE_TITLE}
         status={PHASE_STATUS[phase]}
         autonomy={HARBOR.autonomy}
         account={HARBOR.account}
@@ -124,7 +129,7 @@ export function WorkspaceApp({ initialPhase = 'plan', initialDensity = 'steps', 
             headerExtra={
               phase === 'ready' ? (
                 <span className="ws-publish-mobile">
-                  <Button variant="primary" onClick={() => go('publishing')}>
+                  <Button variant="primary" onClick={() => (onApprove ? onApprove() : go('publishing'))}>
                     Publish
                   </Button>
                 </span>
@@ -133,6 +138,7 @@ export function WorkspaceApp({ initialPhase = 'plan', initialDensity = 'steps', 
           >
             <Stream
               phase={phase}
+              variant={variant}
               density={density}
               answer={answer}
               onStart={() => go('working')}
@@ -148,25 +154,30 @@ export function WorkspaceApp({ initialPhase = 'plan', initialDensity = 'steps', 
         <div className="ws-preview" data-panel="preview">
           <PreviewToolbar
             selected={view}
-            tag={PREVIEW_TAG[phase]}
+            tag={site ? SITE.tag : PREVIEW_TAG[phase]}
             onSelect={setView}
             trailing={
               phase === 'ready' && view === 'compare' ? (
-                <Button variant="primary" onClick={() => go('publishing')}>
+                <Button variant="primary" onClick={() => (onApprove ? onApprove() : go('publishing'))}>
                   Publish
                 </Button>
               ) : undefined
             }
           />
           <div className="ws-stage">
-            <PreviewStage phase={phase} view={view} compact={compact} />
+            <PreviewStage phase={phase} view={view} compact={compact} variant={variant} />
             {approval && <div className="ws-approval">{approval}</div>}
           </div>
           <div className="ws-board" data-panel="board">
             <BoardStrip lanes={boardLanes(phase)} />
           </div>
         </div>
-        {showDrawer && <WhatChangedDrawer verdict="Wursor checked 9 things. All passed." changes={CHANGES} onClose={() => setDrawer(false)} />}
+        {showDrawer &&
+          (site ? (
+            <WhatChangedDrawer {...SITE.drawer} changes={SITE.drawer.rows} onClose={() => setDrawer(false)} />
+          ) : (
+            <WhatChangedDrawer verdict="Wursor checked 9 things. All passed." changes={CHANGES} onClose={() => setDrawer(false)} />
+          ))}
       </div>
       {tour && (
         <TourLayer
