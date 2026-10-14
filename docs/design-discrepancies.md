@@ -23,3 +23,7 @@ Places where the Figma file ("Wursor - weown.net", page Product Design) and an e
 | W5 | Workspace, Plan card steps on a phone | Step numbers hug their width, so text starts 18 or 21 px in | Numbers have a fixed 14 px column, so text starts 26 px in on every row | One alignment on every row |
 | W6 | Workspace, guided tour | The tour arrow on the "You decide" step floats 19 px below the card | The arrow touches the card | Cleaner; same position within 2 px |
 | W7 | Workspace, stand-in behaviour | Everything is real | A timed demo: `/workspace` plays plan, working, a question, review, publishing, live. `?phase=` opens one moment; `?tour=1..4` opens the tour; `/workspace/site` is a new site ready to publish | Backend is out of scope for this pass |
+| H1 | Home, guided setup bar | The progress fill is 190 px wide with no track behind it | Same: the fill is 60% of 316 px with no track | As designed |
+| H2 | Home, site card preview | The preview frame is 264 px wide in a 262 px card | 262 px, the width the card allows | Looks like a rounding slip in the frame |
+| H3 | Home, on a phone | The time ("1 h ago") is dropped from rows that need you | Same | To make room for the button |
+| H4 | Home, stand-in behaviour | Real data | Fixed example data; `/home?state=first-run|active|caught-up|problem` and `&host=cloud` open each moment | Backend is out of scope for this pass |

@@ -347,3 +347,9 @@ button:where([class^="p-"]):focus-visible { outline: 2px solid var(--color-accen
 .p-site[data-layout="phone"] .p-site-col { flex: none; align-items: stretch; }
 .p-site[data-layout="phone"] .p-site-phone { width: 100%; justify-content: flex-start; }
 .p-site[data-layout="phone"] .p-site-footer { padding: var(--space-4); }
+.p-status[data-status="watching"], .p-status[data-status="preview"] { background: var(--color-status-working-bg); color: var(--color-status-working-fg); }
+.p-status[data-status="watching"] .p-dot, .p-status[data-status="preview"] .p-dot { background: var(--color-status-working-dot); }
+.p-status[data-status="stopped"] { background: var(--color-status-danger-bg); color: var(--color-status-danger-fg); }
+.p-status[data-status="stopped"] .p-dot { background: var(--color-status-danger-dot); }
+.p-navitem[aria-current="page"] { background: var(--color-bg-surface); border: 1px solid var(--color-border-subtle); color: var(--color-text-primary); font-weight: 500; }
+.p-navitem[aria-current="page"] .icon { color: var(--color-text-primary); }

@@ -6,7 +6,7 @@ Each screen exists in up to four versions: desktop light (1440 wide), mobile lig
 
 Status key: `todo` · `built` (code written, tests pass) · `verified` (compared to all four frames).
 
-**Progress:** sections 1, 2, 3, 4, A, B0, B, D, 5, 6, C, W1, W2 and 7 built. Section 1 and 2: 18 screens. Measured against Figma so far: 1a, 1b, 1c and 2a on desktop light, 1c on desktop dark, and 1a, 1b and 2a on mobile (dark for 2a). D2 checked against Figma geometry on desktop light, and on mobile dark by eye. Everything else shares the same components and is covered by unit tests but has not been compared frame by frame. See `design-discrepancies.md` for places the design and an existing decision disagree.
+**Progress:** sections 1, 2, 3, 4, A, B0, B, D, 5, 6, C, W1, W2, 7 and H built. Section 1 and 2: 18 screens. Measured against Figma so far: 1a, 1b, 1c and 2a on desktop light, 1c on desktop dark, and 1a, 1b and 2a on mobile (dark for 2a). D2 checked against Figma geometry on desktop light, and on mobile dark by eye. Everything else shares the same components and is covered by unit tests but has not been compared frame by frame. See `design-discrepancies.md` for places the design and an existing decision disagree.
 
 **Totals:** 163 distinct screens · 647 frames to match (desktop light 154, mobile light 170, desktop dark 153, mobile dark 170).
 
@@ -171,12 +171,12 @@ Status key: `todo` · `built` (code written, tests pass) · `verified` (compared
 
 | Screen | Desktop light | Mobile light | Desktop dark | Mobile dark | Status |
 |---|---|---|---|---|---|
-| H1 · First run, guided setup | `60:5467` | `134:35585` | `136:37578` | `136:61471` | todo |
-| H2 · Active, needs you | `60:5675` | `134:35822` | `136:37621` | `136:61513` | todo |
-| H3 · All caught up | `60:5936` | `134:36100` | `136:37673` | `136:61564` | todo |
-| H4 · Site problem | `60:6186` | `134:36349` | `136:37727` | `136:61617` | todo |
-| H5 · First run, Cloud track, building | `95:20577` | `134:36597` | `136:37769` | `136:61658` | todo |
-| H6 · Site problem, Cloud site | `95:20620` | `134:36824` | `136:37812` | `136:61700` | todo |
+| H1 · First run, guided setup | `60:5467` | `134:35585` | `136:37578` | `136:61471` | built |
+| H2 · Active, needs you | `60:5675` | `134:35822` | `136:37621` | `136:61513` | built |
+| H3 · All caught up | `60:5936` | `134:36100` | `136:37673` | `136:61564` | built |
+| H4 · Site problem | `60:6186` | `134:36349` | `136:37727` | `136:61617` | built |
+| H5 · First run, Cloud track, building | `95:20577` | `134:36597` | `136:37769` | `136:61658` | built |
+| H6 · Site problem, Cloud site | `95:20620` | `134:36824` | `136:37812` | `136:61700` | built |
 
 ## S · Sites
 

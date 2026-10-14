@@ -9,6 +9,8 @@ type Props = {
   account: { initials: string; name: string; role: string };
   /** Where each place goes. Defaults to in-page anchors so a mockup has no real links. */
   hrefs?: Partial<Record<'Home' | 'Board' | 'Activity' | 'Sites', string>>;
+  /** The place the owner is in, marked with aria-current. */
+  active?: 'Home' | 'Board' | 'Activity' | 'Sites';
 };
 
 const PLACES: ReadonlyArray<{ label: 'Home' | 'Board' | 'Activity' | 'Sites'; icon: IconName }> = [
@@ -18,12 +20,12 @@ const PLACES: ReadonlyArray<{ label: 'Home' | 'Board' | 'Activity' | 'Sites'; ic
   { label: 'Sites', icon: 'globe' },
 ];
 
-export function Sidebar({ changes, account, hrefs = {} }: Props) {
+export function Sidebar({ changes, account, hrefs = {}, active }: Props) {
   return (
     <aside className="p-sidebar">
       <nav aria-label="Workspace" className="p-sidebar-nav">
         {PLACES.map((p) => (
-          <a key={p.label} href={hrefs[p.label] ?? '#'} className="p-navitem">
+          <a key={p.label} href={hrefs[p.label] ?? '#'} className="p-navitem" aria-current={active === p.label ? 'page' : undefined}>
             <Icon name={p.icon} size={18} />
             <span>{p.label}</span>
           </a>
@@ -33,6 +35,7 @@ export function Sidebar({ changes, account, hrefs = {} }: Props) {
         <span className="t-overline">Changes</span>
         <IconButton icon="plus" label="New change" />
       </div>
+      {changes.length > 0 && (
       <ul aria-label="Changes" className="p-changelist">
         {changes.map((c) => (
           <li key={c.title} className="p-changeitem" aria-current={c.active ? 'true' : undefined} data-status={c.status}>
@@ -41,6 +44,7 @@ export function Sidebar({ changes, account, hrefs = {} }: Props) {
           </li>
         ))}
       </ul>
+      )}
       <span className="p-spacer" />
       <div className="p-account">
         <Avatar kind="initials" initials={account.initials} name={account.name} size="md" />
