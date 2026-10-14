@@ -8,7 +8,7 @@ type Props = {
   risk: 'everyday';
   added: number;
   removed: number;
-  onSeeChanges?: () => void;
+  onSeeChanges?: (() => void) | undefined;
 };
 
 /** A change Wursor made to the draft copy. Always shows the risk, how much changed, and a route to the full comparison. */

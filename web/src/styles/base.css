@@ -46,6 +46,7 @@ button { font: inherit; color: inherit; }
 .ui-banner { display: flex; align-items: center; gap: var(--space-3); width: 100%; min-height: 48px; padding: var(--space-1) var(--space-4); border-radius: var(--radius-md); }
 .ui-banner p { flex: 1 0 0; min-width: 0; margin: 0; }
 .ui-banner[data-tone="info"] { background: var(--color-status-working-bg); color: var(--color-status-working-fg); }
+.ui-banner[data-tone="success"] { background: var(--color-status-success-bg); color: var(--color-status-success-fg); }
 .ui-banner[data-tone="warning"] { background: var(--color-status-needs-you-bg); color: var(--color-status-needs-you-fg); }
 .ui-banner-action { flex: none; height: 28px; padding: 0 var(--space-3); border: 0; border-radius: var(--radius-full); background: transparent; color: var(--color-text-primary); cursor: pointer; }
 .ui-banner-action:hover { background: color-mix(in srgb, var(--color-text-primary) 8%, transparent); }
