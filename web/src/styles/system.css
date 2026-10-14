@@ -6,7 +6,7 @@
 .sy-dialog h2 { font: 500 20px/28px var(--font-sans); letter-spacing: -0.01em; color: var(--color-text-primary); }
 .sy-dialog p { font: 400 14px/20px var(--font-sans); color: var(--color-text-secondary); }
 .sy-dialog-actions { display: flex; align-items: center; justify-content: flex-end; gap: var(--space-2); }
-.sy-scrim { position: fixed; inset: 0; z-index: 60; display: flex; align-items: flex-start; padding-top: 33.333vh; box-sizing: border-box; justify-content: center; background: color-mix(in srgb, var(--color-bg-inverse) 40%, transparent); }
+.sy-scrim { position: fixed; inset: 0; z-index: 60; display: flex; align-items: flex-start; padding-top: min(300px, 40vh); box-sizing: border-box; justify-content: center; background: color-mix(in srgb, var(--color-bg-inverse) 40%, transparent); }
 .sy-dim { pointer-events: none; }
 
 /* Empty state */
@@ -90,5 +90,8 @@
 .mb-sheet-demo p { font: 400 14px/20px var(--font-sans); color: var(--color-text-secondary); }
 
 @media (max-width: 600px) {
-  .sy-dialog-actions .p-btn { height: 44px; padding: 0 var(--space-5); font: 500 14px/20px var(--font-sans); }
+  .sy-dialog-actions .p-btn, .sy-empty .p-btn, .sy-standalone .p-btn { height: 44px; padding: 0 var(--space-5); font: 500 14px/20px var(--font-sans); }
+  .sy-scrim .sy-dialog { width: calc(100vw - 48px); }
+  .sy-standalone { padding: var(--space-4); }
+  .sy-facts .app-settingrow { gap: var(--space-6); }
 }

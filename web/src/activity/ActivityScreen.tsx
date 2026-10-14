@@ -131,11 +131,13 @@ export function ActivityScreen({ state = 'feed', scope = 'site', initialFilter =
       <div className="act-stack">
       {state !== 'empty' && (
         <div className="act-filters">
-          {FILTERS.map((f) => (
-            <button key={f.id} type="button" className="app-filter" aria-pressed={filter === f.id} onClick={() => setFilter(f.id)}>
-              {f.label}
-            </button>
-          ))}
+          <div className="act-chips">
+            {FILTERS.map((f) => (
+              <button key={f.id} type="button" className="app-filter" aria-pressed={filter === f.id} onClick={() => setFilter(f.id)}>
+                {f.label}
+              </button>
+            ))}
+          </div>
           <span className="p-spacer" />
           <label className="p-search act-search">
             <Icon name="search" size={16} />

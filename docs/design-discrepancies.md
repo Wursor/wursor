@@ -52,4 +52,7 @@ Places where the Figma file ("Wursor - weown.net", page Product Design) and an e
 | N1 | Phone sheets | The sheet in the switcher/notifications frames has 16 px side padding, the N4 sample sheet 20 px | Both reproduced as drawn: live sheets 16 px, the N4 sample 20 px | The design uses two sizes for the same component |
 | N2 | More tab copy | "What is new" | "What is new" (not "What's new") | Follows the frame |
 | N3 | Phone top bar | Site name and bell are buttons | They open the site switcher and the notifications sheet. The switcher changes the name on the bar only (stand-in); the desktop bell does nothing yet | Backend is out of scope for this pass |
+| H5 | Home on a phone, "Your site" card | The preview is a phone-sized mock 104 px wide inside a 264 px box, which leaves most of the box empty (card 330 px tall) | The preview fills the card's width (card 312 px tall) | Looks like a scaling slip in the frame, not an intended look |
+| M3 | Phone filters and chips | Chips are 14 px text with 12 px side padding, 34 px tall (the selected chip 32 px) | Same on Board and Activity. Widths land within 1-4 px of the frame | Font metrics differ slightly between Figma and the browser |
+| SY5 | Site unreachable on a phone | The banner frame is 104 px tall | Built from the banner's text and padding (12 px) and it also lands at 104 px with the same copy; the monthly-limit banner lands at 144 px as drawn | Matches |
 
