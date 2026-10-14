@@ -7,8 +7,8 @@ import { StatusPill, type Status } from './StatusPill.tsx';
 type Props = {
   site: string;
   siteInitial: string;
-  change: string;
-  status: Status;
+  change?: string;
+  status?: Status;
   autonomy: string;
   account: { initials: string; name: string };
   onToggleSidebar?: (() => void) | undefined;
@@ -27,10 +27,12 @@ export function TopBar({ site, siteInitial, change, status, autonomy, account, o
         <Icon name="chevron-down" size={20} />
       </button>
       <span className="p-spacer" />
-      <div className="p-topbar-change">
-        <span className="p-topbar-change-title">{change}</span>
-        <StatusPill status={status} />
-      </div>
+      {change && status && (
+        <div className="p-topbar-change">
+          <span className="p-topbar-change-title">{change}</span>
+          <StatusPill status={status} />
+        </div>
+      )}
       <span className="p-spacer" />
       <Button variant="ghost" trailingIcon="chevron-down">
         {autonomy}

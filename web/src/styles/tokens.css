@@ -42,6 +42,7 @@
 
   --color-status-danger-dot: #c93a3a;
   --color-status-danger-fg: #a12a2a;
+  --color-status-danger-bg: #fbe7e7;
   --color-border-focus: #e8590c;
 
   --color-diff-add-fg: #1f6b42;
@@ -115,6 +116,7 @@
 
     --color-status-danger-dot: #e86a6a;
     --color-status-danger-fg: #e86a6a;
+    --color-status-danger-bg: #3a1717;
     --color-border-focus: #ff7a33;
 
     --color-diff-add-fg: #5cc48a;
@@ -160,6 +162,7 @@
 
   --color-status-danger-dot: #e86a6a;
   --color-status-danger-fg: #e86a6a;
+  --color-status-danger-bg: #3a1717;
   --color-border-focus: #ff7a33;
 
   --color-diff-add-fg: #5cc48a;

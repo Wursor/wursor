@@ -7,6 +7,7 @@ import '../../src/styles/tokens.css';
 import '../../src/styles/base.css';
 import '../../src/styles/product.css';
 import '../../src/styles/workspace.css';
+import '../../src/styles/app.css';
 
 export const metadata: Metadata = {
   title: { default: 'Wursor', template: '%s · Wursor' },
