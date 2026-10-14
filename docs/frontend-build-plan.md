@@ -6,7 +6,7 @@ Each screen exists in up to four versions: desktop light (1440 wide), mobile lig
 
 Status key: `todo` · `built` (code written, tests pass) · `verified` (compared to all four frames).
 
-**Progress:** sections 1, 2, 3, 4, A, B0, B, D, 5, 6, C, W1, W2, 7, H, S, T, K and M built. Section 1 and 2: 18 screens. Measured against Figma so far: 1a, 1b, 1c and 2a on desktop light, 1c on desktop dark, and 1a, 1b and 2a on mobile (dark for 2a). D2 checked against Figma geometry on desktop light, and on mobile dark by eye. Everything else shares the same components and is covered by unit tests but has not been compared frame by frame. See `design-discrepancies.md` for places the design and an existing decision disagree.
+**Progress:** sections 1, 2, 3, 4, A, B0, B, D, 5, 6, C, W1, W2, 7, H, S, T, K, M and AC built. Section 1 and 2: 18 screens. Measured against Figma so far: 1a, 1b, 1c and 2a on desktop light, 1c on desktop dark, and 1a, 1b and 2a on mobile (dark for 2a). D2 checked against Figma geometry on desktop light, and on mobile dark by eye. Everything else shares the same components and is covered by unit tests but has not been compared frame by frame. See `design-discrepancies.md` for places the design and an existing decision disagree.
 
 **Totals:** 163 distinct screens · 647 frames to match (desktop light 154, mobile light 170, desktop dark 153, mobile dark 170).
 
@@ -236,15 +236,15 @@ Status key: `todo` · `built` (code written, tests pass) · `verified` (compared
 
 | Screen | Desktop light | Mobile light | Desktop dark | Mobile dark | Status |
 |---|---|---|---|---|---|
-| AC1 · Activity, feed | `124:20127` | `134:40312` | `136:46739` | `136:62164` | todo |
-| AC2 · Activity, filtered to Checks | `124:20353` | `134:40547` | `136:46773` | `136:62197` | todo |
-| AC3 · Activity, loading | `124:20524` | `134:40742` | `136:46798` | `136:62221` | todo |
-| AC4 · Activity, empty | `124:20693` | `134:40921` | `136:46822` | `136:62244` | todo |
-| AC5 · Activity, event proof | `124:20800` | `134:41095` | `136:46831` | `136:62252` | todo |
-| AC6 · Activity, nothing matches | `124:20992` | `134:41290` | `136:46878` | `136:62276` | todo |
-| AC7 · Activity, could not load | `124:21153` | `134:41466` | `136:46898` | `136:62295` | todo |
-| AC8 · Activity, offline | `124:21309` | `134:41656` | `136:46919` | `136:62315` | todo |
-| AC9 · Activity, all sites (agency) | `124:21448` | `134:41861` | `136:46945` | `136:62340` | todo |
+| AC1 · Activity, feed | `124:20127` | `134:40312` | `136:46739` | `136:62164` | built |
+| AC2 · Activity, filtered to Checks | `124:20353` | `134:40547` | `136:46773` | `136:62197` | built |
+| AC3 · Activity, loading | `124:20524` | `134:40742` | `136:46798` | `136:62221` | built |
+| AC4 · Activity, empty | `124:20693` | `134:40921` | `136:46822` | `136:62244` | built |
+| AC5 · Activity, event proof | `124:20800` | `134:41095` | `136:46831` | `136:62252` | built |
+| AC6 · Activity, nothing matches | `124:20992` | `134:41290` | `136:46878` | `136:62276` | built |
+| AC7 · Activity, could not load | `124:21153` | `134:41466` | `136:46898` | `136:62295` | built |
+| AC8 · Activity, offline | `124:21309` | `134:41656` | `136:46919` | `136:62315` | built |
+| AC9 · Activity, all sites (agency) | `124:21448` | `134:41861` | `136:46945` | `136:62340` | built |
 
 ## BD · Board
 
