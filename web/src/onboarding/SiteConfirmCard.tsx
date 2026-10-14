@@ -5,7 +5,7 @@ type Props = {
   url: string;
   /** Recognised shows the WordPress version; connected shows Connected and the read-only reassurance; live shows Live and where it is hosted. */
   state: 'recognised' | 'connected' | 'live';
-  /** Replaces the line under a live site, for example "Published just now · Backup taken before". */
+  /** Replaces the line under a connected or live site, for example "Published just now · Backup taken before". */
   note?: string;
 };
 
@@ -35,7 +35,7 @@ export function SiteConfirmCard({ name, url, state, note }: Props) {
       {state === 'connected' && (
         <div className="ob-siteconfirm-note t-body-m">
           <Icon name="shield-check" size={20} />
-          <span>Wursor can see your site but cannot change it without your approval.</span>
+          <span>{note ?? 'Wursor can see your site but cannot change it without your approval.'}</span>
         </div>
       )}
     </div>

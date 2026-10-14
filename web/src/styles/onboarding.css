@@ -460,3 +460,8 @@
 /* ---------- Section C: publishing to your WordPress ---------- */
 .ob-actions-end { justify-content: flex-end; }
 .ob-undo-row { display: flex; align-items: center; width: 100%; }
+
+/* ---------- Moving a site ---------- */
+.ob-radios { gap: var(--space-5); }
+.ob-findings { gap: var(--space-5); }
+.ob-findings > .ob-finding { margin: 0; }

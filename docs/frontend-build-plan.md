@@ -6,7 +6,7 @@ Each screen exists in up to four versions: desktop light (1440 wide), mobile lig
 
 Status key: `todo` · `built` (code written, tests pass) · `verified` (compared to all four frames).
 
-**Progress:** sections 1, 2, 3, 4, A, B0, B, D, 5, 6, C, W1, W2, 7, H, S, T and K built. Section 1 and 2: 18 screens. Measured against Figma so far: 1a, 1b, 1c and 2a on desktop light, 1c on desktop dark, and 1a, 1b and 2a on mobile (dark for 2a). D2 checked against Figma geometry on desktop light, and on mobile dark by eye. Everything else shares the same components and is covered by unit tests but has not been compared frame by frame. See `design-discrepancies.md` for places the design and an existing decision disagree.
+**Progress:** sections 1, 2, 3, 4, A, B0, B, D, 5, 6, C, W1, W2, 7, H, S, T, K and M built. Section 1 and 2: 18 screens. Measured against Figma so far: 1a, 1b, 1c and 2a on desktop light, 1c on desktop dark, and 1a, 1b and 2a on mobile (dark for 2a). D2 checked against Figma geometry on desktop light, and on mobile dark by eye. Everything else shares the same components and is covered by unit tests but has not been compared frame by frame. See `design-discrepancies.md` for places the design and an existing decision disagree.
 
 **Totals:** 163 distinct screens · 647 frames to match (desktop light 154, mobile light 170, desktop dark 153, mobile dark 170).
 
@@ -220,17 +220,17 @@ Status key: `todo` · `built` (code written, tests pass) · `verified` (compared
 
 | Screen | Desktop light | Mobile light | Desktop dark | Mobile dark | Status |
 |---|---|---|---|---|---|
-| M1 · Move to my own WordPress, choose where | `95:19658` | `134:34316` | `136:46504` | `136:57523` | todo |
-| M2 · Move out, what will move | `95:19729` | `134:34356` | `136:46524` | `136:57543` | todo |
-| M3 · Move out, copying | `95:19834` | `134:34427` | `136:46547` | `136:57566` | todo |
-| M4 · Move out, ready to switch | `95:19916` | `134:34475` | `136:46570` | `136:57589` | todo |
-| M5 · Move out, moved | `95:20013` | `134:34537` | `136:46592` | `136:57611` | todo |
-| M6 · Move out, problem, nothing changed | `95:20089` | `134:34581` | `136:46614` | `136:57633` | todo |
-| M7 · Host on Wursor Cloud, what will move | `95:20177` | `134:34628` | `136:46635` | `136:57654` | todo |
-| M8 · Host on Wursor Cloud, copying | `95:20272` | `134:34689` | `136:46657` | `136:57676` | todo |
-| M9 · Host on Wursor Cloud, review the copy | `95:20343` | `134:34726` | `136:46678` | `136:57697` | todo |
-| M10 · Host on Wursor Cloud, hosted | `95:20419` | `134:34773` | `136:46698` | `136:57717` | todo |
-| M11 · Host on Wursor Cloud, Content only | `95:20490` | `134:34812` | `136:46717` | `136:57736` | todo |
+| M1 · Move to my own WordPress, choose where | `95:19658` | `134:34316` | `136:46504` | `136:57523` | built |
+| M2 · Move out, what will move | `95:19729` | `134:34356` | `136:46524` | `136:57543` | built |
+| M3 · Move out, copying | `95:19834` | `134:34427` | `136:46547` | `136:57566` | built |
+| M4 · Move out, ready to switch | `95:19916` | `134:34475` | `136:46570` | `136:57589` | built |
+| M5 · Move out, moved | `95:20013` | `134:34537` | `136:46592` | `136:57611` | built |
+| M6 · Move out, problem, nothing changed | `95:20089` | `134:34581` | `136:46614` | `136:57633` | built |
+| M7 · Host on Wursor Cloud, what will move | `95:20177` | `134:34628` | `136:46635` | `136:57654` | built |
+| M8 · Host on Wursor Cloud, copying | `95:20272` | `134:34689` | `136:46657` | `136:57676` | built |
+| M9 · Host on Wursor Cloud, review the copy | `95:20343` | `134:34726` | `136:46678` | `136:57697` | built |
+| M10 · Host on Wursor Cloud, hosted | `95:20419` | `134:34773` | `136:46698` | `136:57717` | built |
+| M11 · Host on Wursor Cloud, Content only | `95:20490` | `134:34812` | `136:46717` | `136:57736` | built |
 
 ## AC · Activity
 
