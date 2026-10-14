@@ -93,3 +93,52 @@
 .ws-coach[data-arrow="up"] .ws-coach-arrow { left: 40px; top: -7px; border-top: 0; border-bottom-color: var(--color-bg-inverse); }
 .ws-coach[data-arrow="down"] .ws-coach-arrow { left: 40px; bottom: -7px; border-bottom: 0; border-top-color: var(--color-bg-inverse); }
 @media (max-width: 600px) { .ws-coach { width: auto; } }
+
+/* ---------- Command palette, shortcuts, hints, focus map ---------- */
+.cmd-backdrop { position: fixed; inset: 0; z-index: 60; background: color-mix(in srgb, var(--color-bg-inverse) 40%, transparent); }
+.cmd { position: absolute; box-sizing: border-box; left: 50%; top: 96px; transform: translateX(-50%); display: flex; flex-direction: column; width: min(640px, calc(100vw - 32px)); border: 1px solid var(--color-border-default); max-height: calc(100vh - 128px); overflow: hidden; border-radius: var(--radius-lg); background: var(--color-bg-surface); box-shadow: var(--shadow-modal); font-family: var(--font-sans); text-align: left; }
+.cmd-inputrow { display: flex; align-items: center; gap: var(--space-3); box-sizing: border-box; height: 61px; padding: 0 var(--space-5); border-bottom: 1px solid var(--color-border-subtle); }
+.cmd-inputrow > .icon { flex: none; color: var(--color-text-secondary); }
+.cmd-inputrow input { flex: 1 0 0; min-width: 0; padding: 0; border: 0; outline: 0; background: transparent; color: var(--color-text-primary); font: 400 16px/24px var(--font-sans); }
+.cmd-inputrow input::placeholder { color: var(--color-text-tertiary); opacity: 1; }
+.cmd-list { flex: 1 1 auto; min-height: 0; overflow-y: auto; padding: 0 var(--space-3); }
+.cmd-group { padding-bottom: var(--space-1); }
+.cmd-grouphead { margin: 0; padding: var(--space-2) var(--space-3) 0; font: 600 11px/16px var(--font-sans); letter-spacing: 0.06em; text-transform: uppercase; color: var(--color-text-tertiary); }
+.cmd-item { display: flex; align-items: center; gap: var(--space-3); height: 40px; padding: 0 var(--space-3); border-radius: var(--radius-sm); cursor: pointer; color: var(--color-text-primary); }
+.cmd-item[aria-selected="true"] { background: var(--color-bg-sunken); }
+.cmd-item > .icon { flex: none; color: var(--color-text-primary); }
+.cmd-label { font: 400 14px/20px var(--font-sans); white-space: nowrap; }
+.cmd-meta { font: 400 12px/16px var(--font-sans); color: var(--color-text-tertiary); white-space: nowrap; }
+.cmd-empty { margin: 0; padding: var(--space-4) var(--space-3); font: 400 14px/20px var(--font-sans); color: var(--color-text-secondary); }
+.cmd-footer { display: flex; align-items: center; gap: var(--space-4); box-sizing: border-box; height: 44px; padding: 0 var(--space-5); background: var(--color-bg-sunken); border-top: 1px solid var(--color-border-subtle); font: 400 12px/16px var(--font-sans); color: var(--color-text-secondary); }
+.cmd-footer > span { display: inline-flex; align-items: center; gap: var(--space-1); }
+.cmd-shortcuts { position: absolute; left: 50%; top: 150px; transform: translateX(-50%); width: min(880px, calc(100vw - 32px)); overflow: hidden; border-radius: var(--radius-lg); background: var(--color-bg-surface); box-shadow: var(--shadow-modal); font-family: var(--font-sans); text-align: left; }
+.cmd-shortcuts header { display: flex; align-items: flex-start; justify-content: space-between; padding: var(--space-6) var(--space-7, 28px) var(--space-4); border-bottom: 1px solid var(--color-border-subtle); }
+.cmd-shortcuts h2 { margin: 0; font: 400 20px/28px var(--font-sans); letter-spacing: -0.01em; color: var(--color-text-primary); }
+.cmd-shortcuts header p { margin: var(--space-1) 0 0; font: 400 12px/16px var(--font-sans); color: var(--color-text-secondary); }
+.cmd-shortcuts-body { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-8); padding: var(--space-5) var(--space-7, 28px) var(--space-6); }
+.cmd-shortcuts-body ul { margin: 0; padding: 0; list-style: none; }
+.cmd-shortcuts-body li { display: flex; align-items: center; justify-content: space-between; height: 40px; font: 400 14px/20px var(--font-sans); color: var(--color-text-primary); }
+.cmd-hints, .cmd-focusmap { position: fixed; inset: 0; z-index: 55; pointer-events: none; }
+.cmd-hint { position: fixed; display: flex; align-items: center; gap: var(--space-2); padding: 6px var(--space-2) 6px var(--space-3); border-radius: var(--radius-sm); background: var(--color-bg-inverse); color: var(--color-text-inverse); font: 500 13px/16px var(--font-sans); white-space: nowrap; }
+.cmd-hint kbd { padding: 0 var(--space-1); border-radius: var(--radius-xs); background: color-mix(in srgb, var(--color-text-inverse) 20%, transparent); font: 400 12px/20px var(--font-mono); }
+.cmd-badge { position: fixed; display: flex; align-items: center; justify-content: center; width: 24px; height: 24px; border-radius: var(--radius-full); background: var(--color-accent-fill); color: var(--color-text-on-accent); font: 500 13px/16px var(--font-sans); }
+.cmd-taborder { position: fixed; box-sizing: border-box; width: 560px; padding: var(--space-5); border-radius: var(--radius-lg); background: var(--color-bg-surface); box-shadow: var(--shadow-modal); font-family: var(--font-sans); }
+.cmd-taborder h2 { margin: 0 0 var(--space-2); font: 500 16px/24px var(--font-sans); color: var(--color-text-primary); }
+.cmd-taborder ol { margin: 0; padding: 0; list-style: none; }
+.cmd-taborder li { display: flex; gap: var(--space-3); font: 400 14px/20px var(--font-sans); color: var(--color-text-secondary); padding: 4px 0; }
+.cmd-taborder li span { width: 8px; color: var(--color-text-tertiary); }
+.cmd-taborder p { margin: var(--space-2) 0 0; font: 400 12px/16px var(--font-sans); color: var(--color-text-tertiary); }
+.cmd-card { display: flex; flex-direction: column; min-height: 0; flex: 1 1 auto; }
+@media (max-width: 600px) {
+  /* On a phone the palette is a sheet from the top bar down, with a grab handle, and the card inside it. */
+  .cmd { left: 0; right: 0; width: auto; transform: none; top: 96px; bottom: 0; max-height: none; padding: 28px var(--space-4) var(--space-4); border: 0; border-radius: 20px 20px 0 0; }
+  .cmd::before { content: ""; position: absolute; top: 8px; left: var(--space-4); width: 36px; height: 4px; border-radius: 2px; background: var(--color-border-strong); }
+  .cmd-card { border: 1px solid var(--color-border-subtle); border-radius: var(--radius-lg); overflow: hidden; }
+  .cmd-footer, .cmd-meta { display: none; }
+  .cmd-label { white-space: normal; }
+  .cmd-item { height: auto; min-height: 40px; padding-block: 8px; }
+  .cmd-inputrow { height: auto; min-height: 60px; padding: var(--space-3) var(--space-4); }
+  .cmd-shortcuts { top: 64px; }
+  .cmd-shortcuts-body { grid-template-columns: minmax(0, 1fr); gap: var(--space-4); }
+}

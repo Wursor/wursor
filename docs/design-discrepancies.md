@@ -33,3 +33,8 @@ Places where the Figma file ("Wursor - weown.net", page Product Design) and an e
 | T1 | Settings, dark frame in the light section | The dark T2 frame (62:8721) sits among the light frames | Dark comes from the theme, not a separate screen | Same as the earlier note |
 | T2 | Settings, plan cards | Cards hug their contents (234, 236, 234 px) | Three equal columns; the current plan's thicker border grows 1 px each side | Same look, simpler layout |
 | T3 | Settings, stand-in behaviour | Real saving | Controls change on screen only; nothing is stored | Backend is out of scope for this pass |
+| K1 | Shortcuts shown in context (K5) | Every hint chip shows "K" | Each shows its own shortcut (⌘\, ⇧⌘D, ⌘J, ⌘↵) | The chips look like placeholders |
+| K2 | Command palette on a phone | The search text wraps over several lines | The text stays on one line and scrolls | A single-line field is simpler; wrapping needs an auto-growing field |
+| K3 | Keyboard focus and tab order (K6) | A documentation overlay | Built as a real layer: `/workspace?overlay=tab-order` | Useful for checking focus; not part of the product |
+| K4 | Command palette, hand-drawn icons | Pause and swap icons exist in the design | Hand-drawn to match (Figma exports of swapped icons return the default icon) | See the icons README |
+| K5 | Keyboard, stand-in behaviour | Real actions | The palette runs the action or goes to the screen; asking Wursor starts a new change; `/workspace?overlay=palette|palette-ask|palette-search|shortcuts|hints|tab-order` opens each state | Backend is out of scope for this pass |
