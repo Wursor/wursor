@@ -6,7 +6,7 @@ Each screen exists in up to four versions: desktop light (1440 wide), mobile lig
 
 Status key: `todo` · `built` (code written, tests pass) · `verified` (compared to all four frames).
 
-**Progress:** sections 1, 2, 3, 4, A, B0, B, D, 5, 6, C, W1, W2, 7, H, S and T built. Section 1 and 2: 18 screens. Measured against Figma so far: 1a, 1b, 1c and 2a on desktop light, 1c on desktop dark, and 1a, 1b and 2a on mobile (dark for 2a). D2 checked against Figma geometry on desktop light, and on mobile dark by eye. Everything else shares the same components and is covered by unit tests but has not been compared frame by frame. See `design-discrepancies.md` for places the design and an existing decision disagree.
+**Progress:** sections 1, 2, 3, 4, A, B0, B, D, 5, 6, C, W1, W2, 7, H, S, T and K built. Section 1 and 2: 18 screens. Measured against Figma so far: 1a, 1b, 1c and 2a on desktop light, 1c on desktop dark, and 1a, 1b and 2a on mobile (dark for 2a). D2 checked against Figma geometry on desktop light, and on mobile dark by eye. Everything else shares the same components and is covered by unit tests but has not been compared frame by frame. See `design-discrepancies.md` for places the design and an existing decision disagree.
 
 **Totals:** 163 distinct screens · 647 frames to match (desktop light 154, mobile light 170, desktop dark 153, mobile dark 170).
 
@@ -206,15 +206,15 @@ Status key: `todo` · `built` (code written, tests pass) · `verified` (compared
 
 | Screen | Desktop light | Mobile light | Desktop dark | Mobile dark | Status |
 |---|---|---|---|---|---|
-| K1 · Command palette, open | `86:18930` | — | `136:45238` | — | todo |
-| K2 · Command palette, asking for a change | `86:19134` | — | `136:45335` | — | todo |
-| K3 · Command palette, searching | `86:19273` | — | `136:45422` | — | todo |
-| K4 · Keyboard shortcuts | `86:19435` | — | `136:45513` | — | todo |
-| K5 · Shortcuts shown in context | `86:19580` | — | `136:45617` | — | todo |
-| K6 · Keyboard focus and tab order | `86:19858` | — | `136:45696` | — | todo |
-| K1 · Search and actions, open | — | `134:51964` | — | `136:63672` | todo |
-| K2 · Search and actions, asking for a change | — | `134:52325` | — | `136:63732` | todo |
-| K3 · Search and actions, searching | — | `134:52626` | — | `136:63782` | todo |
+| K1 · Command palette, open | `86:18930` | — | `136:45238` | — | built |
+| K2 · Command palette, asking for a change | `86:19134` | — | `136:45335` | — | built |
+| K3 · Command palette, searching | `86:19273` | — | `136:45422` | — | built |
+| K4 · Keyboard shortcuts | `86:19435` | — | `136:45513` | — | built |
+| K5 · Shortcuts shown in context | `86:19580` | — | `136:45617` | — | built |
+| K6 · Keyboard focus and tab order | `86:19858` | — | `136:45696` | — | built |
+| K1 · Search and actions, open | — | `134:51964` | — | `136:63672` | built |
+| K2 · Search and actions, asking for a change | — | `134:52325` | — | `136:63732` | built |
+| K3 · Search and actions, searching | — | `134:52626` | — | `136:63782` | built |
 
 ## M · Moving a site, both directions
 

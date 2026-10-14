@@ -1,4 +1,7 @@
+'use client';
+
 import type { ReactNode } from 'react';
+import { useCommandLayers } from '../command/useCommandLayers.tsx';
 import { HARBOR } from '../product/harbor-bakery.ts';
 import { Sidebar } from '../product/Sidebar.tsx';
 import type { Status } from '../product/StatusPill.tsx';
@@ -21,10 +24,15 @@ type Props = {
 /** The frame around every screen that is not the workspace: top bar, sidebar, a scrolling main area, and the phone's bottom tabs. */
 export function AppShell({ active, changes = [], children }: Props) {
   const place = active && active !== 'more' ? LABEL[active] : undefined;
+  const layers = useCommandLayers({
+    onRun: (item) => {
+      if (item.href) window.location.assign(item.href);
+    },
+  });
   return (
     <div className="ws app" data-wide="true">
-      <TopBar site={HARBOR.site.name} siteInitial={HARBOR.site.initial} autonomy={HARBOR.autonomy} account={HARBOR.account} />
-      <MobileTopBar site={HARBOR.site.name} siteInitial={HARBOR.site.initial} />
+      <TopBar site={HARBOR.site.name} siteInitial={HARBOR.site.initial} autonomy={HARBOR.autonomy} account={HARBOR.account} onSearch={() => layers.open('palette')} />
+      <MobileTopBar site={HARBOR.site.name} siteInitial={HARBOR.site.initial} onSearch={() => layers.open('palette')} />
       <div className="ws-body">
         <Sidebar changes={changes} account={HARBOR.account} hrefs={HREFS} {...(place ? { active: place } : {})} />
         <main className="app-main">
@@ -32,6 +40,7 @@ export function AppShell({ active, changes = [], children }: Props) {
         </main>
       </div>
       <BottomNav active={active} />
+      {layers.element}
     </div>
   );
 }

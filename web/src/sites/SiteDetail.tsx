@@ -147,7 +147,7 @@ function Connection() {
 function MovesOut() {
   return (
     <Definition label="Moves">
-      <Button variant="secondary" size="md" leadingIcon="refresh">
+      <Button variant="secondary" size="md" leadingIcon="swap">
         Move to my own WordPress
       </Button>
       <Button variant="ghost" size="md" leadingIcon="download">

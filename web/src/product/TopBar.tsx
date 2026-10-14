@@ -12,10 +12,11 @@ type Props = {
   autonomy: string;
   account: { initials: string; name: string };
   onToggleSidebar?: (() => void) | undefined;
+  onSearch?: (() => void) | undefined;
 };
 
 /** Workspace top bar (48 px): sidebar toggle, site switcher, the current change and its status, autonomy, search, notifications, account. */
-export function TopBar({ site, siteInitial, change, status, autonomy, account, onToggleSidebar }: Props) {
+export function TopBar({ site, siteInitial, change, status, autonomy, account, onToggleSidebar, onSearch }: Props) {
   return (
     <header className="p-topbar">
       <IconButton icon="sidebar" label="Toggle sidebar" onClick={onToggleSidebar} />
@@ -37,7 +38,7 @@ export function TopBar({ site, siteInitial, change, status, autonomy, account, o
       <Button variant="ghost" trailingIcon="chevron-down">
         {autonomy}
       </Button>
-      <IconButton icon="search" label="Search" />
+      <IconButton icon="search" label="Search" onClick={onSearch} />
       <IconButton icon="bell" label="Notifications" />
       <Avatar kind="initials" initials={account.initials} name={account.name} />
     </header>

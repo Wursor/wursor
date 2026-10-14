@@ -11,6 +11,7 @@ import { PreviewToolbar, type PreviewView } from '../product/PreviewToolbar.tsx'
 import { Sidebar } from '../product/Sidebar.tsx';
 import { TopBar } from '../product/TopBar.tsx';
 import { MobileTopBar } from './MobileTopBar.tsx';
+import { useCommandLayers, type Layer } from '../command/useCommandLayers.tsx';
 import { PreviewStage } from './PreviewStage.tsx';
 import {
   boardLanes, CHANGES, CHANGE_TITLE, LIVE_URL, PHASE_STATUS, PHASE_VIEW, PREVIEW_TAG, sidebarChanges, SITE, USER_REQUEST, WIDE_PHASES,
@@ -32,6 +33,10 @@ type Props = {
   initialView?: PreviewView;
   /** Starts the guided tour at this step (1 to 4). Steps 1 to 3 happen while Wursor works; step 4 at the decision point. */
   tourStep?: 1 | 2 | 3 | 4;
+  /** Opens a layer over the workspace: the command palette (and its asking and searching states), the shortcuts, the hints, or the tab order. */
+  overlay?: Layer;
+  /** Where a chosen palette item that goes elsewhere is sent. */
+  onNavigate?: (href: string) => void;
   /** Moves a change along by itself, so the whole life of a change can be watched. Off for fixed states. */
   autoplay?: boolean;
   /** How long the demo spends working and publishing, in ms. */
@@ -42,7 +47,7 @@ type Props = {
 const HREFS = { Home: '/home', Board: '/board', Activity: '/activity', Sites: '/sites' } as const;
 
 /** The workspace: the conversation about one change, the preview, the board, and the decision point. */
-export function WorkspaceApp({ initialPhase = 'plan', variant = 'change', onApprove, initialDensity = 'steps', initialView, tourStep, autoplay = false, workMs = 6000, publishMs = 3000 }: Props) {
+export function WorkspaceApp({ initialPhase = 'plan', variant = 'change', onApprove, initialDensity = 'steps', initialView, tourStep, overlay, onNavigate = (href) => window.location.assign(href), autoplay = false, workMs = 6000, publishMs = 3000 }: Props) {
   const [phase, setPhaseState] = useState<Phase>(initialPhase);
   const [density, setDensity] = useState<Density>(initialDensity);
   const [view, setView] = useState<PreviewView>(initialView ?? PHASE_VIEW[initialPhase]);
@@ -53,6 +58,17 @@ export function WorkspaceApp({ initialPhase = 'plan', variant = 'change', onAppr
   const [mobileTab, setMobileTab] = useState<'chat' | 'preview' | 'board'>('chat');
   const compact = useMediaQuery(PHONE);
   const [tour, setTour] = useState<1 | 2 | 3 | 4 | null>(tourStep ?? null);
+  const [boardOpen, setBoardOpen] = useState(true);
+  const layers = useCommandLayers({
+    initial: overlay,
+    onRun: (item) => {
+      if (item.group === 'ask' || item.id === 'new') return go('plan');
+      if (item.id === 'approve') return go(phase === 'ready' ? 'publishing' : 'ready');
+      if (item.id === 'undo') return go(phase === 'published' ? 'ready' : phase);
+      if (item.id === 'pause') return go('plan');
+      if (item.href) onNavigate(item.href);
+    },
+  });
 
   const go = (next: Phase, nextView?: PreviewView) => {
     setPhaseState(next);
@@ -76,10 +92,39 @@ export function WorkspaceApp({ initialPhase = 'plan', variant = 'change', onAppr
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [autoplay, phase, answer, workMs, publishMs]);
 
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      const mod = e.metaKey || e.ctrlKey;
+      if (!mod) return;
+      const key = e.key.toLowerCase();
+      if (key === '\\') {
+        e.preventDefault();
+        setCollapsed((c) => (c === null ? WIDE_PHASES.has(phase) : !c));
+      } else if (key === 'j') {
+        e.preventDefault();
+        setBoardOpen((b) => !b);
+      } else if (key === 'd' && e.shiftKey) {
+        e.preventDefault();
+        setDensity((d) => (d === 'headline' ? 'steps' : d === 'steps' ? 'everything' : 'headline'));
+      } else if (key === 'n') {
+        e.preventDefault();
+        go('plan');
+      } else if (key === 'enter' && phase === 'ready' && !(e.target instanceof HTMLTextAreaElement)) {
+        e.preventDefault();
+        if (onApprove) onApprove();
+        else go('publishing');
+      }
+    };
+    document.addEventListener('keydown', onKey);
+    return () => document.removeEventListener('keydown', onKey);
+    // `go` only sets state.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [phase, onApprove]);
+
   const wide = collapsed === null ? WIDE_PHASES.has(phase) : !collapsed;
   const site = variant === 'site';
   const showDrawer = (phase === 'ready' || phase === 'publishing') && (site ? view !== 'proof' : view === 'compare') && drawer;
-  const showBoard = WIDE_PHASES.has(phase);
+  const showBoard = WIDE_PHASES.has(phase) && boardOpen;
 
   const approval =
     phase === 'ready' ? (
@@ -109,8 +154,9 @@ export function WorkspaceApp({ initialPhase = 'plan', variant = 'change', onAppr
         autonomy={HARBOR.autonomy}
         account={HARBOR.account}
         onToggleSidebar={() => setCollapsed(wide)}
+        onSearch={() => layers.open('palette')}
       />
-      <MobileTopBar site={HARBOR.site.name} siteInitial={HARBOR.site.initial} />
+      <MobileTopBar site={HARBOR.site.name} siteInitial={HARBOR.site.initial} onSearch={() => layers.open('palette')} />
       <div className="ws-tabs" role="tablist" aria-label="Workspace">
         {(['chat', 'preview', 'board'] as const).map((t) => (
           <button key={t} type="button" role="tab" aria-selected={mobileTab === t} className="ws-tab" onClick={() => setMobileTab(t)}>
@@ -179,6 +225,7 @@ export function WorkspaceApp({ initialPhase = 'plan', variant = 'change', onAppr
             <WhatChangedDrawer verdict="Wursor checked 9 things. All passed." changes={CHANGES} onClose={() => setDrawer(false)} />
           ))}
       </div>
+      {layers.element}
       {tour && (
         <TourLayer
           step={tour}

@@ -136,3 +136,74 @@ describe('building a whole new site (section C)', () => {
     expect(topStatus().getByText('Ready for you')).toBeInTheDocument();
   });
 });
+
+describe('keyboard and the command palette', () => {
+  it('opens the palette with Cmd+K and closes it with Escape', async () => {
+    const user = setup();
+    render(<WorkspaceApp initialPhase="plan" />);
+    await user.keyboard('{Meta>}k{/Meta}');
+    expect(screen.getByRole('dialog', { name: 'Command palette' })).toBeInTheDocument();
+    await user.keyboard('{Escape}');
+    expect(screen.queryByRole('dialog', { name: 'Command palette' })).not.toBeInTheDocument();
+  });
+
+  it('opens the palette from the search button, and runs an action', async () => {
+    const user = setup();
+    render(<WorkspaceApp initialPhase="ready" />);
+    await user.click(screen.getAllByRole('button', { name: 'Search' })[0]!);
+    await user.click(screen.getByRole('option', { name: /Approve and publish/ }));
+    expect(topStatus().getByText('Approved')).toBeInTheDocument();
+  });
+
+  it('sends a navigation item where it goes', async () => {
+    const user = setup();
+    const onNavigate = vi.fn();
+    render(<WorkspaceApp initialPhase="plan" onNavigate={onNavigate} />);
+    await user.keyboard('{Meta>}k{/Meta}');
+    await user.click(screen.getByRole('option', { name: /Sites/ }));
+    expect(onNavigate).toHaveBeenCalledWith('/sites');
+  });
+
+  it('lists the shortcuts when ? is pressed, but not while typing', async () => {
+    const user = setup();
+    render(<WorkspaceApp initialPhase="plan" />);
+    await user.click(screen.getByRole('textbox', { name: 'Message to Wursor' }));
+    await user.keyboard('?');
+    expect(screen.queryByRole('dialog', { name: 'Keyboard shortcuts' })).not.toBeInTheDocument();
+    await user.click(document.body);
+    await user.keyboard('?');
+    expect(screen.getByRole('dialog', { name: 'Keyboard shortcuts' })).toBeInTheDocument();
+  });
+
+  it('toggles the board with Cmd+J and cycles the detail with Shift+Cmd+D', async () => {
+    const user = setup();
+    render(<WorkspaceApp initialPhase="plan" />);
+    expect(document.querySelector('.ws')).toHaveAttribute('data-board', 'true');
+    await user.keyboard('{Meta>}j{/Meta}');
+    expect(document.querySelector('.ws')).toHaveAttribute('data-board', 'false');
+    await user.keyboard('{Meta>}{Shift>}d{/Shift}{/Meta}');
+    expect(screen.getByRole('radio', { name: 'Everything' })).toBeChecked();
+  });
+
+  it('approves with Cmd+Enter when the change is ready', async () => {
+    const user = setup();
+    render(<WorkspaceApp initialPhase="ready" />);
+    await user.keyboard('{Meta>}{Enter}{/Meta}');
+    expect(topStatus().getByText('Approved')).toBeInTheDocument();
+  });
+
+  it('shows the shortcut hints while the shortcut key is held', async () => {
+    const user = setup();
+    render(<WorkspaceApp initialPhase="plan" />);
+    await user.keyboard('{Control>}');
+    tick(700);
+    expect(screen.getByText('Toggle sidebar')).toBeInTheDocument();
+    await user.keyboard('{/Control}');
+    expect(screen.queryByText('Toggle sidebar')).not.toBeInTheDocument();
+  });
+
+  it('opens a layer straight away for the fixed states', () => {
+    render(<WorkspaceApp initialPhase="ready" overlay="tab-order" />);
+    expect(screen.getByRole('region', { name: 'Tab order' })).toBeInTheDocument();
+  });
+});
