@@ -6,7 +6,7 @@ Each screen exists in up to four versions: desktop light (1440 wide), mobile lig
 
 Status key: `todo` · `built` (code written, tests pass) · `verified` (compared to all four frames).
 
-**Progress:** sections 1, 2, 3, 4, A, B0, B, D, 5, 6, C, W1, W2, 7 and H built. Section 1 and 2: 18 screens. Measured against Figma so far: 1a, 1b, 1c and 2a on desktop light, 1c on desktop dark, and 1a, 1b and 2a on mobile (dark for 2a). D2 checked against Figma geometry on desktop light, and on mobile dark by eye. Everything else shares the same components and is covered by unit tests but has not been compared frame by frame. See `design-discrepancies.md` for places the design and an existing decision disagree.
+**Progress:** sections 1, 2, 3, 4, A, B0, B, D, 5, 6, C, W1, W2, 7, H and S built. Section 1 and 2: 18 screens. Measured against Figma so far: 1a, 1b, 1c and 2a on desktop light, 1c on desktop dark, and 1a, 1b and 2a on mobile (dark for 2a). D2 checked against Figma geometry on desktop light, and on mobile dark by eye. Everything else shares the same components and is covered by unit tests but has not been compared frame by frame. See `design-discrepancies.md` for places the design and an existing decision disagree.
 
 **Totals:** 163 distinct screens · 647 frames to match (desktop light 154, mobile light 170, desktop dark 153, mobile dark 170).
 
@@ -182,14 +182,14 @@ Status key: `todo` · `built` (code written, tests pass) · `verified` (compared
 
 | Screen | Desktop light | Mobile light | Desktop dark | Mobile dark | Status |
 |---|---|---|---|---|---|
-| S1 · Sites, one site | `61:6042` | `134:37052` | `136:37855` | `136:61742` | todo |
-| S2 · Sites, agency (many) | `61:6175` | `134:37229` | `136:37869` | `136:61755` | todo |
-| S3 · Site detail, overview | `61:6410` | `134:37587` | `136:37895` | `136:61780` | todo |
-| S4 · Site detail, own WordPress, connection | `61:6672` | `134:37850` | `136:37945` | `136:61829` | todo |
-| S5 · Sites, empty | `61:6901` | `134:38044` | `136:37980` | `136:61863` | todo |
-| S6 · Site detail, where it lives (Wursor Cloud) | `95:19095` | `134:38194` | `136:37994` | `136:61876` | todo |
-| S7 · Site detail, where it lives (Content only) | `95:19279` | `134:38401` | `136:38018` | `136:61899` | todo |
-| S8 · Site detail, Cloud site on preview address | `95:19455` | `134:38596` | `136:38041` | `136:61921` | todo |
+| S1 · Sites, one site | `61:6042` | `134:37052` | `136:37855` | `136:61742` | built |
+| S2 · Sites, agency (many) | `61:6175` | `134:37229` | `136:37869` | `136:61755` | built |
+| S3 · Site detail, overview | `61:6410` | `134:37587` | `136:37895` | `136:61780` | built |
+| S4 · Site detail, own WordPress, connection | `61:6672` | `134:37850` | `136:37945` | `136:61829` | built |
+| S5 · Sites, empty | `61:6901` | `134:38044` | `136:37980` | `136:61863` | built |
+| S6 · Site detail, where it lives (Wursor Cloud) | `95:19095` | `134:38194` | `136:37994` | `136:61876` | built |
+| S7 · Site detail, where it lives (Content only) | `95:19279` | `134:38401` | `136:38018` | `136:61899` | built |
+| S8 · Site detail, Cloud site on preview address | `95:19455` | `134:38596` | `136:38041` | `136:61921` | built |
 
 ## T · Settings
 

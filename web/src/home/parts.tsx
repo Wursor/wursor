@@ -90,10 +90,10 @@ export function LogList({ label, rows }: { label: string; rows: readonly LogRow[
   );
 }
 
-type SiteCardProps = { name: string; url: string; status: Status; detail: string; href: string };
+type SiteCardProps = { name: string; url: string; status: Status; detail: string; href: string; actionLabel?: string; actionHref?: string };
 
 /** The site in a card: a small picture of it, its address and state, and a way to open it. */
-export function SiteCard({ name, url, status, detail, href }: SiteCardProps) {
+export function SiteCard({ name, url, status, detail, href, actionLabel = 'Open site', actionHref }: SiteCardProps) {
   return (
     <section aria-label="Your site" className="app-card app-sitecard">
       <div className="app-sitecard-preview" aria-hidden="true">
@@ -109,8 +109,8 @@ export function SiteCard({ name, url, status, detail, href }: SiteCardProps) {
         <StatusPill status={status} />
       </div>
       <p className="app-sitecard-detail">{detail}</p>
-      <a href={href} className="p-btn p-btn-secondary p-btn-md app-fullwidth">
-        Open site
+      <a href={actionHref ?? href} className="p-btn p-btn-secondary p-btn-md app-fullwidth">
+        {actionLabel}
       </a>
     </section>
   );

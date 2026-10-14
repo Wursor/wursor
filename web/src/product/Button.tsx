@@ -3,7 +3,7 @@ import { Icon, type IconName } from '../ui/Icon.tsx';
 
 type Props = {
   children: ReactNode;
-  variant?: 'primary' | 'secondary' | 'ghost';
+  variant?: 'primary' | 'secondary' | 'ghost' | 'danger';
   size?: 'sm' | 'md';
   leadingIcon?: IconName;
   trailingIcon?: IconName;

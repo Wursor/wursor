@@ -4,6 +4,31 @@ import { Button } from '../product/Button.tsx';
 export type GuidedStep = { state: 'done' | 'next' | 'todo'; title: string; detail: string };
 const STATE_LABEL = { done: 'Done', next: 'Next', todo: 'To do' } as const;
 
+/** Steps with a marker each: done, the one to do next (with Continue), and the ones after. */
+export function StepList({ steps, onContinue, label = 'Setup steps' }: { steps: readonly GuidedStep[]; onContinue?: (() => void) | undefined; label?: string }) {
+  return (
+    <ol aria-label={label} className="p-setup">
+      {steps.map((s) => (
+        <li key={s.title} className="p-setupstep" data-state={s.state} aria-current={s.state === 'next' ? 'step' : undefined}>
+          <span className="p-setup-marker" aria-hidden="true">
+            {s.state === 'done' && <Icon name="check" size={20} />}
+          </span>
+          <span className="p-setup-text">
+            <span className="sr-only">{STATE_LABEL[s.state]}</span>
+            <span className="p-setup-title">{s.title}</span>
+            <span className="p-setup-detail">{s.detail}</span>
+          </span>
+          {s.state === 'next' && (
+            <Button variant="primary" onClick={onContinue}>
+              Continue
+            </Button>
+          )}
+        </li>
+      ))}
+    </ol>
+  );
+}
+
 /** The first-run checklist on Home: how far along the owner is, and the one thing to do next. */
 export function GuidedSetup({ steps, onContinue }: { steps: readonly GuidedStep[]; onContinue?: (() => void) | undefined }) {
   const done = steps.filter((s) => s.state === 'done').length;
@@ -20,25 +45,7 @@ export function GuidedSetup({ steps, onContinue }: { steps: readonly GuidedStep[
           <span style={{ width: `calc(${done / steps.length} * 316px)` }} />
         </div>
       </div>
-      <ol aria-label="Setup steps" className="p-setup">
-        {steps.map((s) => (
-          <li key={s.title} className="p-setupstep" data-state={s.state} aria-current={s.state === 'next' ? 'step' : undefined}>
-            <span className="p-setup-marker" aria-hidden="true">
-              {s.state === 'done' && <Icon name="check" size={20} />}
-            </span>
-            <span className="p-setup-text">
-              <span className="sr-only">{STATE_LABEL[s.state]}</span>
-              <span className="p-setup-title">{s.title}</span>
-              <span className="p-setup-detail">{s.detail}</span>
-            </span>
-            {s.state === 'next' && (
-              <Button variant="primary" onClick={onContinue}>
-                Continue
-              </Button>
-            )}
-          </li>
-        ))}
-      </ol>
+      <StepList steps={steps} onContinue={onContinue} />
     </section>
   );
 }
