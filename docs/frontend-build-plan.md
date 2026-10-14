@@ -43,65 +43,65 @@ Status key: `todo` · `built` (code written, tests pass) · `verified` (compared
 
 | Screen | Desktop light | Mobile light | Desktop dark | Mobile dark | Status |
 |---|---|---|---|---|---|
-| 3a · Empty | `42:640` | `134:29588` | `136:36281` | `136:56204` | todo |
-| 3b · Owner, one site | `42:723` | `134:29663` | `136:36309` | `136:56232` | todo |
-| 3c · Agency, several sites | `42:805` | `134:29739` | `136:36337` | `136:56260` | todo |
+| 3a · Empty | `42:640` | `134:29588` | `136:36281` | `136:56204` | built |
+| 3b · Owner, one site | `42:723` | `134:29663` | `136:36309` | `136:56232` | built |
+| 3c · Agency, several sites | `42:805` | `134:29739` | `136:36337` | `136:56260` | built |
 
 ## 4 · Where should your site live? (the fork)
 
 | Screen | Desktop light | Mobile light | Desktop dark | Mobile dark | Status |
 |---|---|---|---|---|---|
-| 4a · Nothing chosen | `92:16444` | `134:31999` | `136:45751` | `136:57015` | todo |
-| 4b · Wursor Cloud chosen | `92:16589` | `134:32101` | `136:45774` | `136:57038` | todo |
-| 4c · Connect my WordPress chosen | `92:16726` | `134:32204` | `136:45797` | `136:57061` | todo |
-| 4d · Build here, publish to my WordPress chosen | `92:16863` | `134:32307` | `136:45820` | `136:57084` | todo |
+| 4a · Nothing chosen | `92:16444` | `134:31999` | `136:45751` | `136:57015` | built |
+| 4b · Wursor Cloud chosen | `92:16589` | `134:32101` | `136:45774` | `136:57038` | built |
+| 4c · Connect my WordPress chosen | `92:16726` | `134:32204` | `136:45797` | `136:57061` | built |
+| 4d · Build here, publish to my WordPress chosen | `92:16863` | `134:32307` | `136:45820` | `136:57084` | built |
 
 ## A · Start on Wursor Cloud
 
 | Screen | Desktop light | Mobile light | Desktop dark | Mobile dark | Status |
 |---|---|---|---|---|---|
-| A1a · About your site, empty | `92:17814` | `134:32411` | `136:45844` | `136:57108` | todo |
-| A1b · About your site, answered | `92:17950` | `134:32501` | `136:45878` | `136:57142` | todo |
-| A2a · Pick a look, still designing | `92:18081` | `134:32591` | `136:45912` | `136:57176` | todo |
-| A2b · Pick a look, three ready | `92:18181` | `134:32670` | `136:45934` | `136:57198` | todo |
-| A2c · Pick a look, one chosen | `92:18300` | `134:32768` | `136:45957` | `136:57221` | todo |
-| A4a · Setting up your site | `92:18415` | `134:32867` | `136:45980` | `136:57244` | todo |
-| A4b · Your site is live | `92:18509` | `134:32927` | `136:46006` | `136:57270` | todo |
-| A3a · Building your site (first build) | `92:18616` | `134:33197` (Chat), `134:33428` (Preview) | `136:46026` | `136:57290` (Chat), `136:57310` (Preview) | todo |
-| A3b · Your site is ready for you | `92:18932` | `134:33685` (Chat), `134:33877` (Preview) | `136:46086` | `136:57354` (Chat), `136:57373` (Preview) | todo |
+| A1a · About your site, empty | `92:17814` | `134:32411` | `136:45844` | `136:57108` | built |
+| A1b · About your site, answered | `92:17950` | `134:32501` | `136:45878` | `136:57142` | built |
+| A2a · Pick a look, still designing | `92:18081` | `134:32591` | `136:45912` | `136:57176` | built |
+| A2b · Pick a look, three ready | `92:18181` | `134:32670` | `136:45934` | `136:57198` | built |
+| A2c · Pick a look, one chosen | `92:18300` | `134:32768` | `136:45957` | `136:57221` | built |
+| A4a · Setting up your site | `92:18415` | `134:32867` | `136:45980` | `136:57244` | built |
+| A4b · Your site is live | `92:18509` | `134:32927` | `136:46006` | `136:57270` | built |
+| A3a · Building your site (first build) | `92:18616` | `134:33197` (Chat), `134:33428` (Preview) | `136:46026` | `136:57290` (Chat), `136:57310` (Preview) | built |
+| A3b · Your site is ready for you | `92:18932` | `134:33685` (Chat), `134:33877` (Preview) | `136:46086` | `136:57354` (Chat), `136:57373` (Preview) | built |
 
 ## B0 · Where is your WordPress, and WordPress.com sign-in
 
 | Screen | Desktop light | Mobile light | Desktop dark | Mobile dark | Status |
 |---|---|---|---|---|---|
-| 5a · Where is your site, nothing chosen | `92:19256` | `134:30860` | `136:46119` | `136:56648` | todo |
-| 5b · WordPress.com chosen | `92:19346` | `134:30917` | `136:46143` | `136:56672` | todo |
-| 5c · Somewhere else chosen | `92:19432` | `134:30975` | `136:46167` | `136:56696` | todo |
-| 5d · Sign in with WordPress.com | `92:19518` | `134:31033` | `136:46191` | `136:56720` | todo |
-| 5e · Finish signing in on WordPress.com | `92:19598` | `134:31098` | `136:46228` | `136:56757` | todo |
-| 5f · Choose a WordPress.com site | `92:19689` | `134:31165` | `136:46252` | `136:56781` | todo |
-| 5g · Problem: sign-in window closed | `92:19764` | `134:31224` | `136:46274` | `136:56803` | todo |
+| 5a · Where is your site, nothing chosen | `92:19256` | `134:30860` | `136:46119` | `136:56648` | built |
+| 5b · WordPress.com chosen | `92:19346` | `134:30917` | `136:46143` | `136:56672` | built |
+| 5c · Somewhere else chosen | `92:19432` | `134:30975` | `136:46167` | `136:56696` | built |
+| 5d · Sign in with WordPress.com | `92:19518` | `134:31033` | `136:46191` | `136:56720` | built |
+| 5e · Finish signing in on WordPress.com | `92:19598` | `134:31098` | `136:46228` | `136:56757` | built |
+| 5f · Choose a WordPress.com site | `92:19689` | `134:31165` | `136:46252` | `136:56781` | built |
+| 5g · Problem: sign-in window closed | `92:19764` | `134:31224` | `136:46274` | `136:56803` | built |
 
 ## B · Connect my WordPress
 
 | Screen | Desktop light | Mobile light | Desktop dark | Mobile dark | Status |
 |---|---|---|---|---|---|
-| 4a · Enter site address | `42:905` | `134:29823` | `136:36367` | `136:56290` | todo |
-| 4b · Checking address | `42:962` | `134:29875` | `136:36389` | `136:56312` | todo |
-| 4c · Site recognised, choose a route | `42:1018` | `134:29926` | `136:36411` | `136:56334` | todo |
-| 4d · Waiting for approval | `42:1084` | `134:29991` | `136:36433` | `136:56356` | todo |
-| 4e · Pairing code route | `42:1161` | `134:30065` | `136:36457` | `136:56380` | todo |
-| 4f · Connecting, in progress | `42:1263` | `134:30141` | `136:36498` | `136:56421` | todo |
-| 4g · Connected | `42:1319` | `134:30198` | `136:36520` | `136:56443` | todo |
-| 4h · Problem: site not reachable | `42:1403` | `134:30289` | `136:36545` | `136:56468` | todo |
-| 4i · Problem: not WordPress | `42:1473` | `134:30352` | `136:36565` | `136:56488` | todo |
-| 4j · Problem: helper blocked | `42:1542` | `134:30416` | `136:36585` | `136:56508` | todo |
-| 4k · Problem: code expired | `42:1609` | `134:30484` | `136:36605` | `136:56528` | todo |
-| 4l · Problem: no permission | `42:1678` | `134:30554` | `136:36625` | `136:56548` | todo |
-| 4m · Connected, Content only | `92:19846` | `134:30609` | `136:36641` | `136:56564` | todo |
-| 4n · Problem: host does not allow plugins | `92:19939` | `134:30683` | `136:36662` | `136:56585` | todo |
-| 4o · Empty site found | `92:20011` | `134:30733` | `136:36681` | `136:56604` | todo |
-| 4p · This site already has pages | `92:20097` | `134:30803` | `136:36704` | `136:56627` | todo |
+| 4a · Enter site address | `42:905` | `134:29823` | `136:36367` | `136:56290` | built |
+| 4b · Checking address | `42:962` | `134:29875` | `136:36389` | `136:56312` | built |
+| 4c · Site recognised, choose a route | `42:1018` | `134:29926` | `136:36411` | `136:56334` | built |
+| 4d · Waiting for approval | `42:1084` | `134:29991` | `136:36433` | `136:56356` | built |
+| 4e · Pairing code route | `42:1161` | `134:30065` | `136:36457` | `136:56380` | built |
+| 4f · Connecting, in progress | `42:1263` | `134:30141` | `136:36498` | `136:56421` | built |
+| 4g · Connected | `42:1319` | `134:30198` | `136:36520` | `136:56443` | built |
+| 4h · Problem: site not reachable | `42:1403` | `134:30289` | `136:36545` | `136:56468` | built |
+| 4i · Problem: not WordPress | `42:1473` | `134:30352` | `136:36565` | `136:56488` | built |
+| 4j · Problem: helper blocked | `42:1542` | `134:30416` | `136:36585` | `136:56508` | built |
+| 4k · Problem: code expired | `42:1609` | `134:30484` | `136:36605` | `136:56528` | built |
+| 4l · Problem: no permission | `42:1678` | `134:30554` | `136:36625` | `136:56548` | built |
+| 4m · Connected, Content only | `92:19846` | `134:30609` | `136:36641` | `136:56564` | built |
+| 4n · Problem: host does not allow plugins | `92:19939` | `134:30683` | `136:36662` | `136:56585` | built |
+| 4o · Empty site found | `92:20011` | `134:30733` | `136:36681` | `136:56604` | built |
+| 4p · This site already has pages | `92:20097` | `134:30803` | `136:36704` | `136:56627` | built |
 
 ## D · Connect your web address
 
