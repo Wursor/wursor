@@ -5,9 +5,9 @@ import { Icon } from '../ui/Icon.tsx';
 import { Toggle } from '../sites/Toggle.tsx';
 
 /** A drop-down choice. The label is its name; the text beside it explains it. */
-export function Select({ label, options, value, onChange }: { label: string; options: readonly string[]; value: string; onChange: (v: string) => void }) {
+export function Select({ label, options, value, onChange, narrow }: { label: string; options: readonly string[]; value: string; onChange: (v: string) => void; narrow?: boolean }) {
   return (
-    <span className="app-select">
+    <span className="app-select" data-narrow={narrow ? 'true' : undefined}>
       <select aria-label={label} value={value} onChange={(e) => onChange(e.target.value)}>
         {options.map((o) => (
           <option key={o}>{o}</option>
