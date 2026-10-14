@@ -357,3 +357,8 @@ button:where([class^="p-"]):focus-visible { outline: 2px solid var(--color-accen
 .p-risk[data-level="noticeable"] .icon { color: var(--color-status-working-fg); }
 .p-risk[data-level="sensitive"] .icon { color: var(--color-status-needs-you-fg); }
 .p-risk[data-level="careful"] .icon { color: var(--color-status-danger-fg); }
+
+.p-status[data-status="healthy"] { background: var(--color-status-success-bg); color: var(--color-status-success-fg); }
+.p-status[data-status="healthy"] .p-dot { background: var(--color-status-success-dot); }
+.p-status[data-status="reconnecting"] { background: var(--color-status-checking-bg); color: var(--color-status-checking-fg); }
+.p-status[data-status="reconnecting"] .p-dot { background: var(--color-status-checking-dot); }

@@ -1,4 +1,4 @@
-export type Status = 'idea' | 'plan-ready' | 'working' | 'needs-you' | 'ready' | 'approved' | 'live' | 'done' | 'watching' | 'preview' | 'stopped';
+export type Status = 'idea' | 'plan-ready' | 'working' | 'needs-you' | 'ready' | 'approved' | 'live' | 'done' | 'watching' | 'preview' | 'stopped' | 'reconnecting' | 'healthy';
 
 export const STATUS_LABEL: Record<Status, string> = {
   idea: 'Idea',
@@ -12,6 +12,8 @@ export const STATUS_LABEL: Record<Status, string> = {
   watching: 'Watching',
   preview: 'Preview',
   stopped: 'Stopped',
+  reconnecting: 'Reconnecting',
+  healthy: 'Healthy',
 };
 
 /** Where a change is, in plain words. The colour is never the only signal; the label is always shown. */

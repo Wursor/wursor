@@ -12,6 +12,8 @@ type Props = {
   variant: HomeVariant;
   host?: HomeHost;
   part?: 'morning' | 'afternoon';
+  /** A phone sheet that is already open. */
+  sheet?: 'sites' | 'notifications' | undefined;
   onContinue?: (() => void) | undefined;
   onNewChange?: (() => void) | undefined;
   onAnswer?: (() => void) | undefined;
@@ -80,7 +82,7 @@ function stats(variant: HomeVariant): StatData[] {
 }
 
 /** Home: what needs the owner, how the site is doing, and what just happened (Figma H1 to H6). */
-export function HomeScreen({ variant, host = 'wordpress', part = 'morning', onContinue, onNewChange, onAnswer, onLook, onFix, onSeeAll, onOpenActivity }: Props) {
+export function HomeScreen({ variant, host = 'wordpress', part = 'morning', onContinue, onNewChange, onAnswer, onLook, onFix, onSeeAll, onOpenActivity, sheet }: Props) {
   const greeting = `Good ${part}, Amara`;
   const first = variant === 'first-run';
   const cloud = host === 'cloud';
@@ -92,7 +94,7 @@ export function HomeScreen({ variant, host = 'wordpress', part = 'morning', onCo
   );
 
   return (
-    <AppShell active="home" changes={first ? [] : sidebarChanges('working')}>
+    <AppShell active="home" sheet={sheet} changes={first ? [] : sidebarChanges('working')}>
       {variant === 'caught-up' && (
         <div className="app-banner">
           <Banner tone="success">Everything is up to date. Nothing needs you right now.</Banner>

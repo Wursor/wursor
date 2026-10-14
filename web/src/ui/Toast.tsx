@@ -1,11 +1,14 @@
 import type { ReactNode } from 'react';
-import { Icon } from './Icon.tsx';
+import { Icon, type IconName } from './Icon.tsx';
 
-/** Transient dark confirmation with a check mark (Figma "Toast"). Place it in a live region so it is announced. */
-export function Toast({ children }: { children: ReactNode }) {
+export type ToastTone = 'info' | 'success' | 'warning';
+const ICON: Record<ToastTone, IconName> = { info: 'info', success: 'check-circle', warning: 'alert-triangle' };
+
+/** Transient dark message (Figma "Toast"): info, success or warning. Place it in a live region so it is announced. */
+export function Toast({ children, tone = 'success' }: { children: ReactNode; tone?: ToastTone }) {
   return (
-    <div className="ui-toast">
-      <Icon name="check-circle" size={18} />
+    <div className="ui-toast" data-tone={tone}>
+      <Icon name={ICON[tone]} size={18} />
       <span className="t-body-m">{children}</span>
     </div>
   );

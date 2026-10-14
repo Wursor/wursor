@@ -6,7 +6,7 @@ Each screen exists in up to four versions: desktop light (1440 wide), mobile lig
 
 Status key: `todo` · `built` (code written, tests pass) · `verified` (compared to all four frames).
 
-**Progress:** sections 1, 2, 3, 4, A, B0, B, D, 5, 6, C, W1, W2, 7, H, S, T, K, M, AC and BD built. Section 1 and 2: 18 screens. Measured against Figma so far: 1a, 1b, 1c and 2a on desktop light, 1c on desktop dark, and 1a, 1b and 2a on mobile (dark for 2a). D2 checked against Figma geometry on desktop light, and on mobile dark by eye. Everything else shares the same components and is covered by unit tests but has not been compared frame by frame. See `design-discrepancies.md` for places the design and an existing decision disagree.
+**Progress:** sections 1, 2, 3, 4, A, B0, B, D, 5, 6, C, W1, W2, 7, H, S, T, K, M, AC, BD, SY and N built. Section 1 and 2: 18 screens. Measured against Figma so far: 1a, 1b, 1c and 2a on desktop light, 1c on desktop dark, and 1a, 1b and 2a on mobile (dark for 2a). D2 checked against Figma geometry on desktop light, and on mobile dark by eye. Everything else shares the same components and is covered by unit tests but has not been compared frame by frame. See `design-discrepancies.md` for places the design and an existing decision disagree.
 
 **Totals:** 163 distinct screens · 647 frames to match (desktop light 154, mobile light 170, desktop dark 153, mobile dark 170).
 
@@ -269,22 +269,22 @@ Status key: `todo` · `built` (code written, tests pass) · `verified` (compared
 
 | Screen | Desktop light | Mobile light | Desktop dark | Mobile dark | Status |
 |---|---|---|---|---|---|
-| SY1 · Content only, code change blocked | `125:23147` | `134:44531` | `136:47443` | `136:62898` | todo |
-| SY2 · Something went wrong | `125:23256` | `134:44666` | `136:47451` | `136:62905` | todo |
-| SY3 · Monthly limit reached | `125:23360` | `134:44799` | `136:47459` | `136:62912` | todo |
-| SY4 · Session expired | `125:23472` | `134:52807` | `136:47468` | `136:62946` | todo |
-| SY5 · Maintenance | `125:23579` | `134:52862` | `136:47477` | `136:62954` | todo |
-| SY6 · Page not found | `125:23591` | `134:52872` | `136:47482` | `136:62959` | todo |
-| SY7 · Site unreachable | `125:23604` | `134:44941` | `136:47488` | `136:62920` | todo |
-| SY8 · Home loading | `125:23715` | `134:45095` | `136:47500` | `136:62931` | todo |
-| SY9 · Toasts and dialogs | `125:23845` | — | `136:47516` | — | todo |
-| SY10 · Empty states | `125:23889` | — | `136:47528` | — | todo |
+| SY1 · Content only, code change blocked | `125:23147` | `134:44531` | `136:47443` | `136:62898` | built |
+| SY2 · Something went wrong | `125:23256` | `134:44666` | `136:47451` | `136:62905` | built |
+| SY3 · Monthly limit reached | `125:23360` | `134:44799` | `136:47459` | `136:62912` | built |
+| SY4 · Session expired | `125:23472` | `134:52807` | `136:47468` | `136:62946` | built |
+| SY5 · Maintenance | `125:23579` | `134:52862` | `136:47477` | `136:62954` | built |
+| SY6 · Page not found | `125:23591` | `134:52872` | `136:47482` | `136:62959` | built |
+| SY7 · Site unreachable | `125:23604` | `134:44941` | `136:47488` | `136:62920` | built |
+| SY8 · Home loading | `125:23715` | `134:45095` | `136:47500` | `136:62931` | built |
+| SY9 · Toasts and dialogs | `125:23845` | — | `136:47516` | — | built |
+| SY10 · Empty states | `125:23889` | — | `136:47528` | — | built |
 
 ## N · Navigation and feedback
 
 | Screen | Desktop light | Mobile light | Desktop dark | Mobile dark | Status |
 |---|---|---|---|---|---|
-| N1 · More tab | — | `134:59417` | — | `136:63837` | todo |
-| N2 · Site switcher | — | `134:59524` | — | `136:63886` | todo |
-| N3 · Notifications | — | `134:59608` | — | `136:63958` | todo |
-| N4 · Toasts, dialog and sheet | — | `134:59690` | — | `136:64018` | todo |
+| N1 · More tab | — | `134:59417` | — | `136:63837` | built |
+| N2 · Site switcher | — | `134:59524` | — | `136:63886` | built |
+| N3 · Notifications | — | `134:59608` | — | `136:63958` | built |
+| N4 · Toasts, dialog and sheet | — | `134:59690` | — | `136:64018` | built |
