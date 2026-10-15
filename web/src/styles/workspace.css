@@ -32,6 +32,7 @@
 .ws-mtop, .ws-tabs { display: none; }
 .ws-compare-phone { position: relative; width: 100%; height: 287px; flex: none; }
 .ws-phone-frame { width: 100%; flex: none; overflow: hidden; border-radius: var(--radius-lg); background: var(--color-bg-surface); }
+.ws-phone-frame .ws-browser { width: 100%; }
 .ws-mtop { align-items: center; gap: var(--space-2); height: 56px; padding: var(--space-2) var(--space-4); background: var(--color-bg-surface); border-bottom: 1px solid var(--color-border-subtle); }
 .ws-mtop button { padding: 0; border: 0; background: transparent; color: var(--color-text-primary); font: inherit; cursor: pointer; }
 .ws-mtop-site { display: inline-flex; align-items: center; gap: var(--space-2); font: 500 13px/16px var(--font-sans); }

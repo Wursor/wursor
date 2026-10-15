@@ -56,4 +56,12 @@ Places where the Figma file ("Wursor - weown.net", page Product Design) and an e
 | M3 | Phone filters and chips | Chips are 14 px text with 12 px side padding, 34 px tall (the selected chip 32 px) | Same on Board and Activity. Widths land within 1-4 px of the frame | Font metrics differ slightly between Figma and the browser |
 | SY5 | Site unreachable on a phone | The banner frame is 104 px tall | Built from the banner's text and padding (12 px) and it also lands at 104 px with the same copy; the monthly-limit banner lands at 144 px as drawn | Matches |
 | SY6 | Banner height on a phone | Most phone frames hug the text (4 lines is 104 px, 6 lines 144 px, 12 px padding); the move frame (M2) shows a two-line banner at a fixed 48 px | Hugs the text with 12 px padding, so M2's two-line banner is 64 px | A fixed 48 px would clip the second line; the other frames show the intended behaviour |
+| V1 | Sites, Activity, Board, Settings on a phone | Frames show details the earlier build missed | Fixed from the pixel diff: stacked setting rows and filters, full-width actions, 44 px controls, chips 34 px, drawer and composer as phone sheets | See Verification in the build plan |
+| V2 | Site preview in dark | Stays light (it is the owner's own site) | `.p-site` keeps light colours in dark mode; the Look previews in section A follow the theme | Matches the frames |
+| V3 | Scrim behind dialogs and sheets | Dark in light mode, 60% black in dark mode | `--color-scrim` token | Matches the frames |
+| V4 | Banner height on a phone | 48 px for one or two lines, grows from three lines or with a button | Measured in the Banner component | Matches H3, H4, M2, 3c, SY3, SY7 |
+| V5 | Workspace Board strip in Wa | One lane is 216 px, the others 155 px | Equal lanes | The frame uses the component's default width for one lane |
+| V6 | Phone AC5 (event proof) | The frame shows the feed, no sheet | A full-screen proof sheet | The frame has nothing to copy |
+| V7 | Phone 2d (new code sent) | No toast | A toast, as on desktop | The desktop frame shows it |
+| V8 | Tall phone pages (scan, first change, fork) | Frame ends about 22 px lower than the build's minimum spacing | Actions keep 26 px more space from the content, as the frames draw | Matches within a few px |
 
