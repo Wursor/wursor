@@ -465,3 +465,5 @@
 .ob-radios { gap: var(--space-5); }
 .ob-findings { gap: var(--space-5); }
 .ob-findings > .ob-finding { margin: 0; }
+
+@media (max-width: 600px) { .ob-finding-text, .ob-siteconfirm-text { white-space: normal; } .ob-siteconfirm-text .t-caption { overflow-wrap: anywhere; } .ob-siteconfirm-status { flex: none; } }

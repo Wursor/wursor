@@ -132,7 +132,7 @@
 .cmd-card { display: flex; flex-direction: column; min-height: 0; flex: 1 1 auto; }
 @media (max-width: 600px) {
   /* On a phone the palette is a sheet from the top bar down, with a grab handle, and the card inside it. */
-  .cmd { left: 0; right: 0; width: auto; transform: none; top: 96px; bottom: 0; max-height: none; padding: 28px var(--space-4) var(--space-4); border: 0; border-radius: 20px 20px 0 0; }
+  .cmd { left: 0; right: 0; width: auto; transform: none; top: 52px; bottom: 0; max-height: none; padding: 28px var(--space-4) var(--space-4); border: 0; border-radius: 20px 20px 0 0; }
   .cmd::before { content: ""; position: absolute; top: 8px; left: var(--space-4); width: 36px; height: 4px; border-radius: 2px; background: var(--color-border-strong); }
   .cmd-card { border: 1px solid var(--color-border-subtle); border-radius: var(--radius-lg); overflow: hidden; }
   .cmd-footer, .cmd-meta { display: none; }
