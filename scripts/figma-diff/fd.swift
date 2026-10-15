@@ -35,6 +35,22 @@ func placed(_ a: CGImage, _ b: CGImage, _ dy: Int) -> (fa: [UInt8], fb: [UInt8],
 }
 
 let args = CommandLine.arguments
+if args[1] == "px" {
+    // fd px image.png x y [x y ...]   prints rgb at each point, in the first image's scale
+    let a = loadCG(args[2])!
+    let sc = Double(a.width) / Double(args.count > 2 ? (Int(args[3]) != nil ? 1440 : a.width) : a.width)
+    _ = sc
+    let w = a.width, h = a.height
+    let r = rgba(a, w, h)
+    var i = 3
+    while i + 1 < args.count {
+        let x = Int(args[i])!, y = Int(args[i+1])!
+        let k = (y*w+x)*4
+        print("\(x),\(y): #\(String(format:"%02x%02x%02x", r[k], r[k+1], r[k+2]))")
+        i += 2
+    }
+    exit(0)
+}
 if args[1] == "side" {
     let a = loadCG(args[2])!, b = loadCG(args[3])!, d = loadCG(args[4])!
     let p = placed(a, b, args.count > 6 ? Int(args[6])! : 0)
