@@ -145,7 +145,10 @@ export function DomainFlow({ scenario = 'ok', siteName = 'Harbor Bakery', checkM
             inputRef={input}
             helper="Example: yourbusiness.com"
           />
-          <Banner>Your site stays at harborbakery.wursor.site until you switch.</Banner>
+          <p className="ob-note t-body-m">
+            <Icon name="info" size={20} />
+            <span>Your site stays at harborbakery.wursor.site until you switch.</span>
+          </p>
         </div>
         <WizardFooter onBack={onLater} backLabel="Do this later">
           <Cta label="Check this address" ready={valid} onClick={() => setPhase('record')} />
@@ -161,7 +164,7 @@ export function DomainFlow({ scenario = 'ok', siteName = 'Harbor Bakery', checkM
         <Heading title="Add this record where you bought it" sub="Sign in to your domain provider, open DNS settings, and add the record below." />
         <div className="ob-fork-content ob-live">
           <RecordTable />
-          <ProviderPicker />
+          {phase !== 'wrong' && <ProviderPicker />}
           <DomainStatusRow state={phase === 'wrong' ? 'wrong' : 'waiting'} note={checking ? 'Checking now' : note} />
         </div>
         <WizardFooter onBack={() => setPhase('address')}>

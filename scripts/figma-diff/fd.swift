@@ -80,11 +80,11 @@ if args[1] == "diff" {
     print(String(format: "%.2f", Double(bad)*100/Double(max(total,1)))); exit(0)
 }
 
-struct Job { let id, url: String; let w, h: Int; let theme: String; let script: String }
+struct Job { let id, url: String; let w, h: Int; let theme: String; let script: String; let delay: Double }
 let lines = try! String(contentsOfFile: args[2], encoding: .utf8).split(separator: "\n").map(String.init)
 let jobs = lines.compactMap { l -> Job? in
     let p = l.split(separator: "\t", omittingEmptySubsequences: false).map(String.init)
-    return p.count >= 5 ? Job(id: p[0], url: p[1], w: Int(p[2])!, h: Int(p[3])!, theme: p[4], script: p.count > 5 ? p[5] : "") : nil
+    return p.count >= 5 ? Job(id: p[0], url: p[1], w: Int(p[2])!, h: Int(p[3])!, theme: p[4], script: p.count > 5 ? p[5] : "", delay: p.count > 6 ? (Double(p[6]) ?? 1400) : 1400) : nil
 }
 let outdir = args[3]
 let app = NSApplication.shared
@@ -114,12 +114,12 @@ class Runner: NSObject, WKNavigationDelegate {
     }
     func webView(_ w: WKWebView, didFinish n: WKNavigation!) {
         let j = jobs[idx]
-        let prelude = "const sleep=ms=>new Promise(r=>setTimeout(r,ms));const q=s=>document.querySelector(s);const qa=s=>[...document.querySelectorAll(s)];const setv=(el,v)=>{const d=Object.getOwnPropertyDescriptor(Object.getPrototypeOf(el),'value');d.set.call(el,v);el.dispatchEvent(new Event('input',{bubbles:true}));};const btn=t=>qa('button,a,[role=radio],[role=button],[role=tab],label,li').find(e=>(e.textContent||'').trim().startsWith(t));const click=t=>{const e=typeof t==='string'?(btn(t)||q(t)):t;if(!e)throw new Error('no '+t);e.click();};const type=(s,v)=>setv(q(s),v);document.documentElement.setAttribute('data-theme','\(j.theme)');document.head.insertAdjacentHTML('beforeend','<style>nextjs-portal{display:none!important}</style>');await sleep(500);"
+        let prelude = "const sleep=ms=>new Promise(r=>setTimeout(r,ms));const q=s=>document.querySelector(s);const qa=s=>[...document.querySelectorAll(s)];const setv=(el,v)=>{const d=Object.getOwnPropertyDescriptor(Object.getPrototypeOf(el),'value');d.set.call(el,v);el.dispatchEvent(new Event('input',{bubbles:true}));};const btns=qa('button,a,[role=radio],[role=button],[role=tab],label,li');const btn=t=>btns.find(e=>(e.textContent||'').trim().startsWith(t))||btns.find(e=>(e.textContent||'').includes(t));const click=t=>{const e=typeof t==='string'?(btn(t)||q(t)):t;if(!e)throw new Error('no '+t);e.click();};const type=(s,v)=>setv(q(s),v);document.documentElement.setAttribute('data-theme','\(j.theme)');document.head.insertAdjacentHTML('beforeend','<style>nextjs-portal{display:none!important}</style>');await sleep(500);"
         let probe = j.script.contains("PROBE:")
         w.callAsyncJavaScript(prelude + j.script.replacingOccurrences(of: "PROBE:", with: "") + (probe ? "" : ";return 1"), arguments: [:], in: nil, in: .page) { res in
             if case .failure(let e) = res { print("js fail \(j.id): \(e)") }
             if probe, case .success(let v) = res { print("probe \(j.id): \(v ?? "nil")") }
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.4) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + j.delay / 1000) {
                 let c = WKSnapshotConfiguration()
                 c.rect = CGRect(x: 0, y: 0, width: j.w, height: j.h)
                 c.snapshotWidth = NSNumber(value: j.w)

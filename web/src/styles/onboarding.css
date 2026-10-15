@@ -206,7 +206,7 @@
   .ob-wizard-header { height: auto; padding: var(--space-4) var(--space-5); padding-top: calc(var(--space-4) + env(safe-area-inset-top, 0px)); }
   .ob-wizard-header .ob-help { display: none; }
   .ob-wizard-body { flex: 1 0 auto; width: 100%; padding: var(--space-2) var(--space-5) 48px; gap: var(--space-6); }
-  .ob-wizard-actions { flex-direction: column-reverse; justify-content: flex-end; gap: 0; margin-top: auto; }
+  .ob-wizard-actions { flex-direction: column-reverse; justify-content: flex-end; gap: 0; margin-top: auto; padding-top: 26px; }
   .ob-continue-auto { width: 100%; }
   .ob-wizard-left { width: 100%; }
   .ob-wizard-back { flex: 1 0 0; padding: 0 var(--space-5) 0 0; }
@@ -467,3 +467,4 @@
 .ob-findings > .ob-finding { margin: 0; }
 
 @media (max-width: 600px) { .ob-finding-text, .ob-siteconfirm-text { white-space: normal; } .ob-siteconfirm-text .t-caption { overflow-wrap: anywhere; } .ob-siteconfirm-status { flex: none; } }
+@media (max-width: 600px) { .ob-provider-seg .p-segment { flex: 1 0 0; } }

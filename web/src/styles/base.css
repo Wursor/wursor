@@ -55,8 +55,8 @@ button { font: inherit; color: inherit; }
 /* ---------- Toast tones (SY9, N4) ---------- */
 .ui-toast[data-tone="warning"] .icon, .ui-toast[data-tone="info"] .icon, .ui-toast[data-tone="success"] .icon { flex: none; }
 
-/* On a phone a banner grows with its wrapped text and keeps 12 px around it (Figma H4 84 px, SY7 104, SY3 144). Two frames (H3, M2) draw a wrapped banner at a fixed 48 px; that would clip the text. */
+/* On a phone a banner with a button grows with its wrapped text and keeps 12 px around it (Figma SY3 144 px, SY7 104 px). One without a button stays 48 px for one or two lines (Figma H3, M2, 3c) and grows from three lines (H4). */
 @media (max-width: 600px) {
-  .ui-banner { padding: var(--space-3) var(--space-4); }
+  .ui-banner:has(.ui-banner-action), .ui-banner[data-tall="true"] { padding: var(--space-3) var(--space-4); }
   .ui-banner-action { height: 36px; padding: 0 var(--space-4); }
 }
