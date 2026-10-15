@@ -71,26 +71,6 @@
 
 /* ---------- The phone's bottom tabs ---------- */
 .app-tabs { display: none; }
-@media (max-width: 600px) {
-  .app .p-topbar, .app .ws-body > .p-sidebar { display: none; }
-  .app .ws-mtop { display: flex; }
-  .app-content { padding: var(--space-4) var(--space-4) var(--space-6); }
-  .app-pageheader { flex-direction: column; gap: var(--space-4); }
-  .app-pageheader h1 { font-size: 28px; }
-  .app-pageheader > .p-btn { width: 100%; height: 44px; }
-  .app-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: start; }
-  .app-stat { white-space: normal; }
-  .app-attention-time { display: none; }
-  .app-columns { grid-template-columns: minmax(0, 1fr); }
-  .app-filters { flex-wrap: wrap; }
-  .app-filters-search { width: 100%; }
-  .app-def { flex-direction: column; gap: var(--space-2); }
-  .app-tabs { display: flex; flex: none; background: var(--color-bg-surface); border-top: 1px solid var(--color-border-subtle); padding-bottom: env(safe-area-inset-bottom, 0px); }
-  .app-tab { position: relative; display: flex; flex: 1 0 0; flex-direction: column; align-items: center; gap: 2px; padding: var(--space-2) 0 var(--space-3); color: var(--color-text-tertiary); font: 500 12px/16px var(--font-sans); text-decoration: none; }
-  .app-tab i { width: 4px; height: 4px; border-radius: var(--radius-full); background: transparent; }
-  .app-tab[aria-current="page"] { color: var(--color-text-primary); }
-  .app-tab[aria-current="page"] i { background: var(--color-accent-default); }
-}
 
 /* ---------- Sites ---------- */
 .app-sitelist { display: flex; flex-direction: column; gap: var(--space-2); margin: var(--space-6) 0 0; padding: 0; list-style: none; }
@@ -232,7 +212,8 @@
   .app-settingrow { gap: var(--space-4); }
   /* A setting with a choice stacks: its words, then the choice at full width (Figma T1 mobile). */
   .app-field input { height: 44px; }
-  .app-settingrow:has(.app-select) { flex-direction: column; align-items: stretch; gap: 10px; }
+  .app-settingrow:has(.app-select), .app-settingrow:has(> .p-btn) { flex-direction: column; align-items: stretch; gap: 10px; }
+  .app-settingrow > .p-btn { height: 36px; justify-content: center; }
   .app-settingrow:has(.app-select) .app-select { width: 100%; }
   .app-settingrow:has(.app-select) .app-select select { height: 44px; }
   .app-settingrow:has(.app-select) .app-select .icon { top: 14px; }
@@ -426,4 +407,39 @@
   .app-siterow .app-badge { grid-area: 3 / 3; justify-self: end; margin-top: 10px; }
   .app-dashed { padding: var(--space-6) var(--space-4); }
   .app-dashed .p-btn { margin-top: 0; }
+}
+
+@media (max-width: 600px) {
+  /* The phone frames split a section's heading in two equal halves, so its link starts at the middle (Figma H2, S3). */
+  .app-sectionheading > * { flex: 0 0 50%; min-width: 0; text-align: left; justify-content: flex-start; }
+  .app-pageactions { display: flex; gap: var(--space-2); width: 100%; }
+  .app-pageactions > .p-btn { flex: 1 0 0; justify-content: center; height: 44px; font: 500 14px/20px var(--font-sans); }
+}
+
+/* The phone's base rules. Kept last so they win over the desktop rules above them. */
+@media (max-width: 600px) {
+  .app .p-topbar, .app .ws-body > .p-sidebar { display: none; }
+  .app .ws-mtop { display: flex; }
+  .app-content { padding: var(--space-4) var(--space-4) var(--space-6); }
+  .app-pageheader { flex-direction: column; gap: var(--space-4); }
+  .app-pageheader h1 { font-size: 28px; }
+  .app-pageheader > .p-btn { width: 100%; height: 44px; }
+  .app-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: start; }
+  .app-stat { white-space: normal; }
+  .app-attention-time { display: none; }
+  .app-columns { grid-template-columns: minmax(0, 1fr); }
+  .app-filters { flex-wrap: wrap; }
+  .app-filters-search { width: 100%; }
+  .app-def { flex-direction: column; gap: 6px; }
+  .app-def-value { align-self: stretch; align-items: stretch; }
+  .app-def-value > .p-btn, .app-empty .p-btn, .app-dashed .p-btn { height: 44px; padding: 0 var(--space-5); font: 500 14px/20px var(--font-sans); justify-content: center; }
+  .app-bigempty { padding: 64px var(--space-6) 62px; }
+  .app-bigempty h2 { font-size: 20px; line-height: 28px; }
+  .app-bigempty .p-btn { height: 44px; padding: 0 var(--space-5); font: 500 14px/20px var(--font-sans); }
+  .app-def-value > .app-badge { align-self: flex-start; }
+  .app-tabs { display: flex; flex: none; background: var(--color-bg-surface); border-top: 1px solid var(--color-border-subtle); padding-bottom: env(safe-area-inset-bottom, 0px); }
+  .app-tab { position: relative; display: flex; flex: 1 0 0; flex-direction: column; align-items: center; gap: 2px; padding: var(--space-2) 0 var(--space-3); color: var(--color-text-tertiary); font: 500 12px/16px var(--font-sans); text-decoration: none; }
+  .app-tab i { width: 4px; height: 4px; border-radius: var(--radius-full); background: transparent; }
+  .app-tab[aria-current="page"] { color: var(--color-text-primary); }
+  .app-tab[aria-current="page"] i { background: var(--color-accent-default); }
 }
