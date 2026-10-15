@@ -44,3 +44,5 @@ test-results/
 .idea/
 .vscode/
 e2e/fixtures/large-exports/
+.next/
+next-env.d.ts

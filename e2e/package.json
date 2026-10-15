@@ -6,7 +6,8 @@
     "test": "vitest run",
     "golden": "tsx golden/src/run-golden.ts",
     "mirror:time": "tsx golden/src/run-mirror-timing.ts",
-    "agent:spike": "tsx agent/run-agent-spike.ts"
+    "agent:spike": "tsx agent/run-agent-spike.ts",
+    "test:marketing": "playwright test --config playwright.marketing.config.ts"
   },
   "devDependencies": {
     "@playwright/test": "^1.62.1",

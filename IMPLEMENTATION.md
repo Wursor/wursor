@@ -1,13 +1,14 @@
 # Implementation Guide — Wursor v2
 
-**Version:** 2.0  
-**Source:** [PRD.md](./PRD.md) v2.0  
+**Version:** 2.1 (direction update, October 12, 2026)  
+**Source:** [PRD.md](./PRD.md) Headless revision 4  
 **Method:** Test-driven development (TDD) — every module is written against its tests before its implementation.
 
 ---
 
 ## Table of Contents
 
+0. [Direction update (October 2026)](#0-direction-update-october-2026)
 1. [Architecture Overview](#1-architecture-overview)
 2. [Project Structure](#2-project-structure)
 3. [Build Phases](#3-build-phases)
@@ -25,6 +26,70 @@
 7. [TDD Rules](#7-tdd-rules)
 8. [CI/CD Pipeline](#8-cicd-pipeline)
 9. [Glossary](#9-glossary)
+
+---
+
+## 0. Direction update (October 2026)
+
+[PRD.md](./PRD.md) is now **Wursor PRD: Headless, revision 4**. It replaces the v2.0 PRD (August 2026) that the sprints below were written against. The Phase 0 spikes, the pairing model, the semantic tool schema and the golden harness still stand. What changes is the shape of the product around them. Read this section first. Where it conflicts with a sprint below, this section wins until the sprint is rewritten.
+
+### 0.1 What changed
+
+| Area | v2.0 (sprints below) | Headless rev 4 | PRD |
+| :--- | :--- | :--- | :--- |
+| Control plane | Wursor API and Postgres, with WordPress as the target | Wursor owns accounts, projects, tasks, approvals, policy and audit log. Nothing product-related is stored in a customer site. | HL-02 |
+| Frontend | React + Vite | Next.js (App Router) with a server layer that holds tokens. The browser gets only a session cookie and a short-lived stream token. | HL-01, HL-04 |
+| Identity | In-memory user store, session token | Wursor-owned sign-in (emailed 8-character code as designed, passkeys), authorization code flow with PKCE | HL-03, PX-01, PX-02 |
+| Platforms | WordPress plugin only | A platform interface (connect, describe, back up, copy, apply, check, roll back, export, import, provision) with WordPress as the first implementation and a fake target for tests | HL-09 to HL-11 |
+| Where a site lives | Connected WordPress only | Wursor Cloud, connect my WordPress, or build here and publish. Moves work both ways. | SH-01 to SH-16 |
+| Access | Capability tiers in the plugin | Two named levels, Full access and Content only, shown on every site and enforced before a run starts | SH-06 |
+| Approval | Approve in preview | Approval bound to evidence hashes. A visible Publish button (and the P shortcut) opens the approval step and never releases directly. | PX-03, SH-10 |
+| Surfaces | Chat, preview, approve | Home, Sites, Activity, Board with a calendar view, Settings, command palette, system states, mobile and dark parity | PX-04 to PX-12 |
+
+### 0.2 Decisions to ratify before building on them
+
+These conflicted with existing ADRs or code. All four were decided on October 12, 2026 and recorded as ADRs 0018 to 0021.
+
+1. **Decided: Next.js ([ADR 0018](docs/decisions/0018-nextjs-web-app.md)).** Was: Next.js versus React + Vite. [ADR 0011](docs/decisions/0011-fastify-react-stack.md) chose Fastify and React. Headless rev 4 needs a server layer for token handling. Options: adopt Next.js, or keep Vite and add a small backend-for-frontend inside the API. Decide before more of `web/` is built.
+2. **Decided: code, link and passkeys ([ADR 0019](docs/decisions/0019-sign-in-methods.md)).** Was: sign-in method. The design uses an emailed 8-character code. HL-03 still says passkey or emailed link (PRD D-HL-13).
+3. **Decided: WeOwn Cloud ([ADR 0020](docs/decisions/0020-weown-cloud-provisioning.md)).** Was: who provisions Cloud sites. WeOwn Cloud infrastructure or a partner behind the same interface (PRD D-HL-7). Do not build the hosting plane until this is decided.
+4. **Decided: leave the wording ([ADR 0021](docs/decisions/0021-keep-no-diff-rule-wording.md)).** Was: "The user never sees a diff" (AGENTS.md rule 3). The PRD keeps technical detail one tap away in an expandable section for owners who want it. Confirm the wording of the rule.
+
+### 0.3 How the existing sprints map
+
+| Existing work | Status under the new direction |
+| :--- | :--- |
+| Phase 0 spikes and golden harness | Keep as they are. |
+| Sprint 1, web app scaffold and sandbox orchestration | Keep the sandbox work. Move the web scaffold to Next.js (ADR 0018). |
+| Sprint 2, WordPress plugin connector | Keep. Extend `site-info` to report the access level (Full access or Content only) and the operations the site supports. Wrap it behind the platform interface. |
+| Sprint 3, agent orchestrator and playbooks | Keep. Add the pre-run access check so a task that needs more access stops in the composer before any run starts. |
+| Sprints 4 and 5, content and design playbooks | Keep. Design playbooks gain the new-site path: a five-question brief and three design directions. |
+| Sprint 6, deploy and rollback | Extend deploy into a release with evidence, an approval bound to hashes, and a rollback point. Add the Publish entry point. |
+| Sprints 7 and 8, integration and alpha | Rewrite the exit criteria around the three starting paths (below). |
+
+### 0.4 New work, in order
+
+| Step | Work | PRD |
+| :--- | :--- | :--- |
+| A | Platform interface and a fake target, with one contract suite that runs against both the WordPress target and the fake. Dependency check that blocks platform-specific code outside platform packages. | HL-09, HL-11 |
+| B | Access levels and capability discovery in the plugin and the API. | SH-06 |
+| C | Identity: sign-up, sign-in, verify states, workspace naming, then Home. | PX-01, PX-02 |
+| D | Evidence-bound approval and the Publish entry point on desktop and mobile. | PX-03, SH-10 |
+| E | New-site path on Cloud: brief, three design directions, build on a safe copy, preview, approval. | SH-03 |
+| F | Hosting plane: provisioning, temporary address, backups, domain connection. Unblocked by ADR 0020; staffing readiness still applies. | SH-04, SH-12, SH-14 |
+| G | Moves in both directions as releases, with dry run, page-by-page comparison and rollback. | SH-08 to SH-11 |
+| H | Surfaces: Home, Sites, Activity, Board with calendar, Settings, command palette, system states. | PX-04 to PX-08 |
+| I | Mobile and dark parity audits, accessibility scan, touch-target and contrast checks. | PX-09 to PX-12 |
+
+Each step follows the TDD rules in section 7. Hosting (F and G) is the largest new commitment and the PRD's rollout plan puts hardening at about 46 weeks, against about 32 for the previous plan.
+
+### 0.5 Updated Phase 1 exit criteria
+
+A first-time owner, using each of the three starting paths, reaches a first preview without help (target: at least four of five testers). A connected site reports its access level, and a request that needs more access is stopped before a run starts. An approval cannot release a change unless it matches the evidence hashes. The prototype's usability targets are still hypotheses until tested with real owners.
+
+### 0.6 Design reference
+
+The screens live in one Figma file ("Wursor - Experiment") with five pages: Cover, Design system, Brand Guideline, Product Design and Marketing site. It holds about 650 product frames in light and dark, desktop and mobile, built from about 94 component sets. PRD section 26 maps screens to requirements and lists the known design gaps.
 
 ---
 
