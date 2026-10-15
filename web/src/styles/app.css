@@ -471,3 +471,4 @@
   .app-tab[aria-current="page"] { color: var(--color-text-primary); }
   .app-tab[aria-current="page"] i { background: var(--color-accent-default); }
 }
+@media (max-width: 600px) { .ob-finding-text { white-space: normal; } }
