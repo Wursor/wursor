@@ -247,7 +247,7 @@
 .act-skeleton span:nth-child(1) { flex: none; width: 32px; height: 32px; border-radius: var(--radius-full); }
 .act-skeleton span:nth-child(2) { flex: 0 0 320px; }
 .act-skeleton span:nth-child(3) { flex: none; width: 44px; margin-left: auto; }
-.act-drawer { position: fixed; z-index: 40; top: 48px; right: 0; bottom: 0; display: flex; flex-direction: column; gap: var(--space-4); box-sizing: border-box; width: 440px; max-width: 100%; padding: var(--space-6) 24px; overflow-y: auto; background: var(--color-bg-surface); border-left: 1px solid var(--color-border-subtle); }
+.act-drawer { position: fixed; z-index: 40; top: 48px; right: 0; bottom: 0; display: flex; flex-direction: column; gap: var(--space-5); box-sizing: border-box; width: 440px; max-width: 100%; padding: var(--space-6) 24px; overflow-y: auto; background: var(--color-bg-surface); border-left: 1px solid var(--color-border-subtle); }
 .act-drawer p, .act-drawer h2 { margin: 0; }
 .act-drawer-head { display: flex; align-items: flex-start; gap: var(--space-4); }
 .act-drawer-head h2 { flex: 1 0 0; font: 400 20px/28px var(--font-sans); letter-spacing: -0.01em; color: var(--color-text-primary); }
@@ -344,7 +344,7 @@
 .bd-sites-cell { display: flex; flex-direction: column; gap: 12px; min-height: 1px; }
 .bd-scrim { position: fixed; inset: 0; z-index: 60; background: var(--color-scrim); }
 .bd-scrim-center { display: flex; align-items: center; justify-content: center; }
-.bd-drawer { position: absolute; right: 0; top: 0; bottom: 0; display: flex; flex-direction: column; width: 440px; max-width: 100%; background: var(--color-bg-surface); font-family: var(--font-sans); text-align: left; }
+.bd-drawer { position: absolute; right: 0; top: 0; bottom: 0; display: flex; flex-direction: column; width: 520px; max-width: 100%; background: var(--color-bg-surface); font-family: var(--font-sans); text-align: left; }
 .bd-drawer p, .bd-drawer h2, .bd-drawer ol, .bd-drawer ul { margin: 0; }
 .bd-drawer-head { display: flex; align-items: center; justify-content: space-between; padding: var(--space-5) var(--space-6) 0; }
 .bd-overline { font: 600 11px/16px var(--font-sans); letter-spacing: 0.06em; text-transform: uppercase; color: var(--color-text-tertiary); }
@@ -368,11 +368,13 @@
 .bd-dialog p, .bd-dialog h2 { margin: 0; }
 .bd-dialog-head { display: flex; align-items: center; justify-content: space-between; }
 .bd-dialog-head h2 { font: 400 20px/28px var(--font-sans); letter-spacing: -0.01em; color: var(--color-text-primary); }
-.bd-dialog textarea { box-sizing: border-box; width: 100%; height: 90px; padding: var(--space-3) var(--space-4); resize: none; border: 1px solid var(--color-border-default); border-radius: var(--radius-md); background: var(--color-bg-canvas); color: var(--color-text-primary); font: 400 14px/20px var(--font-sans); }
+.bd-dialog textarea { box-sizing: border-box; width: 100%; height: 120px; padding: var(--space-3) var(--space-4); resize: none; border: 1px solid var(--color-border-default); border-radius: var(--radius-md); background: var(--color-bg-canvas); color: var(--color-text-primary); font: 400 14px/20px var(--font-sans); }
 .bd-dialog textarea::placeholder { color: var(--color-text-tertiary); }
 .bd-dialog textarea:focus-visible { outline: 2px solid var(--color-accent-default); outline-offset: 0; }
 .bd-dialog-row { display: flex; align-items: flex-end; gap: var(--space-4); }
 .bd-dialog-field { display: flex; flex: 1 0 0; flex-direction: column; gap: var(--space-1); min-width: 0; }
+.bd-dialog-row > .bd-dialog-field:first-child { flex: 0 0 240px; }
+.bd-scrim-center { align-items: flex-start; padding-top: min(190px, 20vh); box-sizing: border-box; }
 .bd-dialog-field > span { font: 500 12px/16px var(--font-sans); color: var(--color-text-secondary); }
 .bd-dialog-field .app-select { width: 100%; }
 .bd-dialog-help { font: 400 12px/16px var(--font-sans); color: var(--color-text-tertiary); }
@@ -389,9 +391,25 @@
   .bd-lane { width: 280px; scroll-snap-align: start; }
   .bd-listrow { flex-wrap: wrap; height: auto; padding: var(--space-3) var(--space-4); gap: var(--space-2); }
   .bd-listrow-status, .bd-listrow-page, .bd-listrow-when { width: auto; }
-  .bd-drawer { top: auto; height: 90%; width: 100%; border-radius: 20px 20px 0 0; }
+  .bd-drawer { top: auto; height: calc(100% - 36px); width: 100%; border-radius: 20px 20px 0 0; }
+  .bd-drawer::before { content: ""; position: absolute; left: 16px; top: 12px; width: 36px; height: 4px; border-radius: 2px; background: #ccc9bf; }
+  .bd-drawer-head { padding: 44px 40px 0; }
+  .bd-drawer-body { padding: var(--space-3) 40px var(--space-6); }
+  .bd-drawer-foot { padding: var(--space-4) 40px; }
+  .bd-drawer-pills { flex-direction: column; align-items: stretch; margin-bottom: 0; }
+  .bd-drawer-pills > * { justify-content: flex-start; }
   .bd-scrim:not(.bd-scrim-center) .bd-drawer { bottom: 0; }
+  /* The composer is a bottom sheet on a phone (Figma BD8 mobile). */
+  .bd-scrim-center { align-items: flex-end; padding-top: 0; }
+  .bd-dialog { position: relative; box-sizing: border-box; width: 100%; height: 644px; max-height: calc(100% - 36px); padding: 56px 40px 48px; gap: var(--space-4); border-radius: 20px 20px 0 0; overflow-y: auto; }
+  .bd-dialog::before { content: ""; position: absolute; left: 16px; top: 12px; width: 36px; height: 4px; border-radius: 2px; background: #ccc9bf; }
+  .bd-dialog textarea { height: 72px; }
+  .bd-dialog-field .p-segmented { align-self: flex-start; }
   .bd-dialog-row { flex-direction: column; align-items: stretch; }
+  .bd-dialog-row > .bd-dialog-field:first-child { flex: none; }
+  .bd-dialog-field .app-select select { height: 44px; }
+  .bd-dialog-field .app-select .icon { top: 14px; }
+  .bd-dialog-actions .p-btn { height: 44px; padding: 0 var(--space-5); font: 500 14px/20px var(--font-sans); }
 }
 
 @media (max-width: 600px) {
@@ -415,6 +433,16 @@
   .app-pageactions { display: flex; gap: var(--space-2); width: 100%; }
   .app-pageactions > .p-btn { flex: 1 0 0; justify-content: center; height: 44px; font: 500 14px/20px var(--font-sans); }
 }
+
+/* One line of a list of checks, shared with the first-scan screen (the same component is used in the proof drawer). */
+.ob-finding { display: flex; align-items: center; gap: var(--space-3); width: 100%; padding: var(--space-3) var(--space-4); border-radius: var(--radius-md); background: var(--color-bg-surface); border: 1px solid var(--color-border-subtle); }
+.ob-finding-tile { display: flex; align-items: center; justify-content: center; flex: none; width: 32px; height: 32px; overflow: hidden; border-radius: var(--radius-sm); background: var(--color-bg-sunken); color: var(--color-text-secondary); }
+.ob-finding-text { display: flex; flex: 1 0 0; flex-direction: column; min-width: 0; white-space: nowrap; }
+.ob-finding-text .t-caption { color: var(--color-text-tertiary); }
+.ob-finding-result { display: flex; align-items: center; gap: var(--space-2); flex: none; color: var(--color-text-primary); white-space: nowrap; }
+.ob-finding-dot { width: 8px; height: 8px; border-radius: var(--radius-full); background: var(--color-status-needs-you-dot); }
+.ob-finding-looking { color: var(--color-text-tertiary); font-weight: 500; }
+.ob-finding[data-state="running"] .ob-finding-result > .icon { color: var(--color-status-working-dot); }
 
 /* The phone's base rules. Kept last so they win over the desktop rules above them. */
 @media (max-width: 600px) {

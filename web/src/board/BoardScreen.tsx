@@ -221,6 +221,13 @@ export function BoardScreen({ state = 'board', scope = 'site', initialView = 'bo
     <AppShell active="board" changes={sidebarChanges('working')}>
       <div className="bd-page">
         <PageHeader title={all ? 'All sites' : 'Board'} sub={all ? 'Every change across the 8 sites you manage.' : 'Every change on Harbor Bakery, from idea to done.'} action={newChange} />
+        {offline && (
+          <div className="bd-banner">
+            <Banner tone="warning" action={{ label: 'Retry', onClick: () => undefined }}>
+              You’re offline. Changes already running keep going; you can’t start or move changes until you’re back.
+            </Banner>
+          </div>
+        )}
         <div className="bd-toolbar">
           <SegmentedControl label="View" options={VIEWS} value={view} onChange={setView} />
           {FILTERS.map((f) => (
@@ -229,13 +236,6 @@ export function BoardScreen({ state = 'board', scope = 'site', initialView = 'bo
             </button>
           ))}
         </div>
-        {offline && (
-          <div className="bd-banner">
-            <Banner tone="warning" action={{ label: 'Retry', onClick: () => undefined }}>
-              You’re offline. Changes already running keep going; you can’t start or move changes until you’re back.
-            </Banner>
-          </div>
-        )}
 
         {state === 'loading' && (
           <div role="status" aria-label="Loading the board" className="bd-skeleton">
