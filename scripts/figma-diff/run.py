@@ -29,8 +29,8 @@ def fetch_fig(node):
     subprocess.run(['curl', '-sL', '-o', f, u], check=True)
     return f if os.path.getsize(f) > 500 else None
 
-SIZE = {'d': (1440, 900), 'm': (390, 800), 'mf': (390, 844)}
-REGION = {'d': ['0', '0', '1440', '900', '0'], 'm': ['0', '44', '390', '709', '44'], 'mf': ['0', '44', '390', '766', '0']}
+SIZE = {'d': (1440, 900), 'm': (390, 800), 'mf': (390, 844), 'mt': (390, 800)}
+REGION = {'d': ['0', '0', '1440', '900', '0'], 'm': ['0', '44', '390', '709', '44'], 'mf': ['0', '44', '390', '766', '0'], 'mt': ['0', '44', '390', '700', '44']}
 
 def fig_height(node):
     f = fetch_fig(node)
@@ -43,8 +43,9 @@ def run(entries):
     for e in entries:
         w, h = SIZE[e['kind']]
         if e['kind'] == 'd': h = e['h'] = fig_height(e['node'])
+        if e['kind'] == 'mt': h = e['h'] = fig_height(e['node']) - 44  # a phone page taller than the screen: the frame shows all of it
         s = e.get('script', '').replace('\t', ' ').replace('\n', ' ')
-        jobs.append(f"{e['key']}\t{BASE}{e['path']}\t{w}\t{h}\t{e['theme']}\t{s}")
+        jobs.append(f"{e['key']}\t{BASE}{e['path']}\t{w}\t{h}\t{e['theme']}\t{s}\t{e.get('delay', 1400)}")
     open(D + '/jobs.tsv', 'w').write('\n'.join(jobs) + '\n')
     r = subprocess.run([D + '/fd', 'shot', D + '/jobs.tsv', D + '/out'], capture_output=True, text=True, timeout=3000)
     if r.stdout.strip() != 'done': print(r.stdout[-800:], r.stderr[-300:])
@@ -53,7 +54,7 @@ def run(entries):
         fig, mine = fetch_fig(e['node']), f"{D}/out/{e['key']}.png"
         if not fig or not os.path.exists(mine):
             res.append((e['key'], None)); continue
-        reg = ['0', '0', '1440', str(e['h']), '0'] if e['kind'] == 'd' else REGION[e['kind']]
+        reg = ['0', '0', '1440', str(e['h']), '0'] if e['kind'] == 'd' else (['0', '44', '390', str(e['h']), '44'] if e['kind'] == 'mt' else REGION[e['kind']])
         o = subprocess.run([D + '/fd', 'diff', fig, mine, f"{D}/diff/{e['key']}.png"] + reg, capture_output=True, text=True)
         res.append((e['key'], float(o.stdout.strip() or -1)))
     return res
