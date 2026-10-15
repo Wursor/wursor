@@ -190,7 +190,13 @@ button:where([class^="p-"]):focus-visible { outline: 2px solid var(--color-accen
 .p-cursor-name { padding: var(--space-1) var(--space-2); border-radius: var(--radius-full); background: var(--color-accent-fill); color: var(--color-text-on-accent); font: 500 12px/16px var(--font-sans); }
 
 /* ---------- Site mock (Harbor Bakery, 760 px design width) ---------- */
-.p-site { width: 760px; background: var(--color-bg-surface); font-family: var(--font-sans); }
+.p-site {
+  width: 760px; background: var(--color-bg-surface); font-family: var(--font-sans);
+  /* The mock stands for the owner's own website, which stays light whatever theme Wursor is in (Figma dark frames show it light). */
+  --color-bg-surface: #ffffff; --color-bg-sunken: #f1f0eb; --color-bg-inverse: #14120b;
+  --color-text-primary: #14120b; --color-text-secondary: #6b675e; --color-text-tertiary: #8f8b80; --color-text-inverse: #f2f1ec; --color-text-link: #2a52b0;
+  --color-border-subtle: #14120b14; --color-accent-subtle: #fdede3; --icon-color: #14120b;
+}
 .p-site-nav { display: flex; align-items: center; justify-content: space-between; padding: var(--space-4) var(--space-6); font-weight: 500; }
 .p-site-brand { font: 500 16px/24px var(--font-sans); letter-spacing: -0.005em; color: var(--color-text-primary); }
 .p-site-links { display: flex; gap: var(--space-5); font: 500 13px/16px var(--font-sans); color: var(--color-text-secondary); }

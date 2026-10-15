@@ -258,6 +258,7 @@ export function SiteDetail({ tab: initialTab = 'overview', host = 'wordpress' }:
           title="Harbor Bakery"
           sub={SUB[host]}
           action={
+            tab === 'where' ? undefined : (
             <div className="app-pageactions">
               <a href="https://harborbakery.com" className="p-btn p-btn-secondary p-btn-md">
                 Open site
@@ -266,6 +267,7 @@ export function SiteDetail({ tab: initialTab = 'overview', host = 'wordpress' }:
                 New change
               </Button>
             </div>
+            )
           }
         />
         <div role="tablist" aria-label="Site" className="app-tabbar">
