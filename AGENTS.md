@@ -10,7 +10,7 @@ Non-technical WordPress site owners describe what they want; Wursor makes it hap
 
 ```
 api/               Node.js + TypeScript API server (empty until Phase 0 gate)
-web/               React + TypeScript frontend (empty until Phase 0 gate)
+web/               Next.js (App Router) + TypeScript frontend (ADR 0018): app/ routes, src/product (app UI components), src/marketing, src/ui, src/styles (tokens)
 plugin/            WordPress plugin (PHP) — empty until Phase 0 gate
 infrastructure/    Docker images, warm pool, GC, deploy scripts
 e2e/               Playwright + e2e/golden/ harness
@@ -46,8 +46,12 @@ The `.agents/skills/` directory is a family of rigor skills modeled on Cursor's 
 
 ## Stack notes
 
-- Backend: Node.js + TypeScript, Express/Fastify, PostgreSQL (Wursor data), Redis (SSE/queue)
-- Frontend: React + TypeScript, Vite
+- Backend: Node.js + TypeScript, Fastify (Wursor API), PostgreSQL (Wursor data), Redis (SSE/queue)
+- Frontend: Next.js (App Router) + React + TypeScript. Server layer holds tokens; browser gets a session cookie only (ADR 0018). Existing Vite shell is being migrated.
+- Sign-in: emailed 8-character code, emailed link and passkeys (ADR 0019)
+- Cloud sites: provisioned on WeOwn Cloud behind the platform interface (ADR 0020)
+- Hosting: DigitalOcean for Wursor and WeOwn Cloud, one VPC per plane, Terraform (ADR 0022)
+- Direction: see PRD.md (Headless, revision 4) and IMPLEMENTATION.md section 0
 - Sandboxes: Docker on VPS, pre-baked WordPress image, overlayfs layers, media proxied (not copied)
 - Plugin: standard WordPress PHP plugin, REST API + token auth
 - Tests: vitest (api, web), phpunit (plugin), Playwright (e2e)

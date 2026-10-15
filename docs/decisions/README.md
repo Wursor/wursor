@@ -24,13 +24,19 @@ Each ADR is a single file following the [Nygard format](https://cognitect.com/bl
 | [0008](0008-empty-packages-not-stubs.md) | Workspace ships empty packages, not placeholder source | Accepted |
 | [0009](0009-repo-rename.md) | Repository renamed originmain → wursor | Accepted |
 | [0010](0010-openrouter-live-golden.md) | Golden harness scores live runs through a provider-agnostic LLM client (OpenRouter first) | Accepted |
-| [0011](0011-fastify-react-stack.md) | Fastify is the API server; React + Vite is the web shell | Accepted |
+| [0011](0011-fastify-react-stack.md) | Fastify is the API server; React + Vite is the web shell | Partially superseded by [0018](0018-nextjs-web-app.md) (web half) |
 | [0012](0012-in-memory-user-store.md) | In-memory user store behind a UserStore interface; Postgres deferred | Accepted |
 | [0013](0013-docker-boundary-mock.md) | Sandbox orchestration mocks the Docker boundary; real daemon client deferred | Accepted |
 | [0014](0014-postgres-queryable.md) | Postgres user store via a Queryable boundary; schema in SQL migrations | Accepted |
 | [0015](0015-dockerode-engine-gating.md) | Docker daemon client via dockerode behind an injected engine; sandbox gated by env | Accepted |
 | [0016](0016-pairing-code-ownership.md) | Pairing-code TTL/lockout lives on the Wursor API; the plugin enforces token/HMAC/scope | Accepted |
 | [0017](0017-semantic-tool-schema.md) | The agent is given a semantic, allowlisted tool schema — not a raw wp_cli surface | Accepted |
+| [0018](0018-nextjs-web-app.md) | The web app is Next.js (App Router); Fastify stays as the Wursor API | Accepted |
+| [0019](0019-sign-in-methods.md) | Sign-in supports an emailed code, an emailed link and passkeys | Accepted |
+| [0020](0020-weown-cloud-provisioning.md) | Cloud sites are provisioned on WeOwn Cloud | Accepted |
+| [0021](0021-keep-no-diff-rule-wording.md) | Keep the "never sees a diff" rule in AGENTS.md as written | Accepted |
+| [0022](0022-digitalocean-hosting.md) | Wursor and WeOwn Cloud run on DigitalOcean | Accepted (service picks to confirm) |
+| [0023](0023-product-components-and-contrast.md) | Product UI is built once at design size and reused; text contrast tokens meet AA | Accepted |
 
 ## How to add one
 

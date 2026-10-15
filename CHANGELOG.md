@@ -8,6 +8,11 @@ The project is pre-1.0. Versions below `1.0.0` are internal milestones, not publ
 
 ### Added
 
+- Web: working site search on the marketing site. Cmd+K (Ctrl+K on Windows and Linux), a Search button in the navigation and the Docs search field open a command palette over every page. It searches the pages, docs topics and any docs article that has a page, with arrow keys and Enter to choose and Escape to close. Docs topics now live in `content.ts` so the page and the search share one source.
+- Web: light/dark theme toggle in the marketing navigation. It follows the device until the visitor chooses, remembers the choice in `localStorage`, and sets the theme before first paint so there is no flash. Sun and moon icons added to `public/icons` (hand-drawn, not Figma exports).
+- Web: the five other marketing pages (Product, How it works, Trust, Pricing, Docs), a marketing e2e check (`pnpm --filter @wursor/e2e test:marketing`), and product components for setup, activity and search. Web: Next.js app with design tokens (light and dark, AA contrast), the marketing Home page (desktop and phone), and a product component library built at design size (conversation, workspace, board, compare and approval) that the marketing mockups use and the app will reuse (ADR 0023). ADRs 0018 to 0022 (0022: hosting on DigitalOcean): Next.js web app (partly supersedes ADR 0011), sign-in by code, link and passkeys, Cloud provisioning on WeOwn Cloud, and keeping the "never sees a diff" rule wording. PRD, IMPLEMENTATION and AGENTS.md updated to match.
+- `docs/prd-assets/headless-architecture.png`, the architecture diagram used in the PRD.
+- Design reference: Figma file "Wursor - Experiment" (Design system, Product Design, Marketing site and Brand Guideline pages).
 - **Monorepo workspace** — `pnpm` workspace (`api`, `web`, `e2e`), root `package.json` / `pnpm-workspace.yaml` / `tsconfig.base.json`, and a PHP `plugin` package (`composer.json`). Empty packages by design (see [ADR 8](docs/decisions/0008-empty-packages-not-stubs.md)).
 - **Phase 0 spike records** under `spikes/`:
   - `pairing-threat-model.md` — pairing protocol: 8+ char code, 5-min TTL, 5-attempt lockout, HMAC, scoped `read`/`deploy` tokens, threat table T1–T10.
@@ -24,6 +29,8 @@ The project is pre-1.0. Versions below `1.0.0` are internal milestones, not publ
 
 ### Changed
 
+- **PRD.md replaced with Wursor PRD: Headless, revision 4** (October 10, 2026). Wursor owns its control plane (Next.js app, Wursor API, Conductor), WordPress is the first target platform behind a platform interface, and a site can live on Wursor Cloud, on a connected WordPress, or be built here and published, with moves in both directions. Adds access levels (Full access, Content only), evidence-bound approval, and the PX requirement family for the designed surfaces. The v2.0 text (August 13, 2026) remains in git history at `e9de6ba`.
+- **IMPLEMENTATION.md** gains section 0, "Direction update (October 2026)": what changed, four decisions to ratify (Next.js versus Vite, sign-in method, Cloud provisioning, wording of the "no diff" rule), how existing sprints map, new work steps A to I, and updated Phase 1 exit criteria. Sprints 1 to 8 are unchanged and marked as superseded where they conflict.
 - **Repository identity** — renamed from `originmain` to `wursor`; description set to the product tagline; stale homepage cleared; topics `wordpress`, `ai`, `agent` added (see [ADR 9](docs/decisions/0009-repo-rename.md)).
 - **PRD / IMPLEMENTATION** — expanded risk register (R1–R14 with mitigations and sprint ownership), media-proxy and capability-tier decisions locked, pairing and warm-pool details corrected.
 - **README / AGENTS.md** — repo layout and Phase 0 gate documented; status updated to reflect the workspace existing while product code remains gated.
