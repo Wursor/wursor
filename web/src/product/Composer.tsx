@@ -67,7 +67,7 @@ export function Composer({ state, autonomy, placeholder, defaultValue = '', onSt
             aria-pressed={pointing}
             onClick={() => {
               setPointing(!pointing);
-              notify(pointing ? 'Pointing is off' : 'Click anything in the preview to point at it', 'info');
+              notify(pointing ? 'Pointing is off' : 'Pointing is on. Name the part of the page in your message', 'info');
             }}
           />
           <ModeMenu mode={autonomy} />

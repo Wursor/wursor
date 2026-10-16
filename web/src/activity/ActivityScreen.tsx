@@ -231,7 +231,7 @@ export function ActivityScreen({ state = 'feed', scope = 'site', initialFilter =
               </div>
             ))}
             <div className="act-more">
-              <Button variant="secondary" size="md" onClick={() => notify('That’s everything from the last 30 days. Pick a longer range to go further back.', 'info')}>
+              <Button variant="secondary" size="md" onClick={() => notify(scope === 'all' || range === 'Last 90 days' ? `That’s everything from ${range.toLowerCase()}.` : `That’s everything from ${range.toLowerCase()}. Choose a longer time range to go further back.`, 'info')}>
                 Load earlier activity
               </Button>
             </div>

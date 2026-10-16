@@ -385,3 +385,4 @@ a.p-board-link:hover { color: var(--color-text-primary); }
 .p-modemenu-more:hover { color: var(--color-text-primary); }
 .p-composer .p-modemenu-list { top: auto; bottom: calc(100% + 4px); }
 @media (max-width: 600px) { .p-modemenu-list { width: min(288px, calc(100vw - 32px)); } }
+.p-topbar .p-modemenu-list { left: auto; right: 0; max-width: calc(100vw - 16px); }

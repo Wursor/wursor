@@ -24,7 +24,7 @@ describe('Composer tools answer', () => {
     expect(point).toHaveAttribute('aria-pressed', 'false');
     await user.click(point);
     expect(point).toHaveAttribute('aria-pressed', 'true');
-    expect(screen.getByRole('status')).toHaveTextContent(/Click anything in the preview/);
+    expect(screen.getByRole('status')).toHaveTextContent(/Pointing is on/);
   });
   it('attach opens the file picker and names what was chosen', async () => {
     const user = userEvent.setup();

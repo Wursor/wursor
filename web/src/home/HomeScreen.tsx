@@ -235,7 +235,7 @@ export function HomeScreen({ variant, host = 'wordpress', part = 'morning', onCo
                   <Icon name="external-link-16" size={16} />
                 </a>
               ) : (
-                <button type="button" className="p-btn p-btn-ghost p-btn-md app-fullwidth" onClick={() => notify('Your host looks after the server. Wursor has noted the time it went down to share with them.', 'info')}>
+                <button type="button" className="p-btn p-btn-ghost p-btn-md app-fullwidth" onClick={() => notify('Your host looks after the server. Tell them your site stopped working after 2:13 PM.', 'info')}>
                   <span>Contact your host</span>
                   <Icon name="external-link-16" size={16} />
                 </button>

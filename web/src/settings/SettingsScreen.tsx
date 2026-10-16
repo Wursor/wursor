@@ -297,8 +297,8 @@ function Billing() {
       <Section title="Payment and invoices">
         <Rows>
           <SettingRow title="Payment method" detail="Visa ending 4242." control="button" label="Update" done="Payment details can be updated once billing is connected." />
-          <SettingRow title="Invoice, September" detail="Paid 1 Sep. $49.00." control="button" label="Download" done="Invoice for September saved to your downloads." />
-          <SettingRow title="Invoice, August" detail="Paid 1 Aug. $49.00." control="button" label="Download" done="Invoice for August saved to your downloads." />
+          <SettingRow title="Invoice, September" detail="Paid 1 Sep. $49.00." control="button" label="Download" done="Invoices become available to download once billing is connected." />
+          <SettingRow title="Invoice, August" detail="Paid 1 Aug. $49.00." control="button" label="Download" done="Invoices become available to download once billing is connected." />
         </Rows>
       </Section>
     </>

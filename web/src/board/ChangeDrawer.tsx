@@ -72,7 +72,7 @@ export function ChangeDrawer({ change, onClose }: { change: Change; onClose: () 
             onClick={() =>
               confirm({
                 title: 'Stop this change?',
-                body: 'Wursor stops working on it. Nothing is published, and you can start it again from the board.',
+                body: 'Wursor stops working on it. Nothing is published.',
                 confirmLabel: 'Stop',
                 done: 'Stopped. Nothing was published.',
                 onConfirm: onClose,
