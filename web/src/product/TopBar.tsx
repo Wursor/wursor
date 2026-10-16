@@ -3,7 +3,7 @@
 import { useFeedback } from '../system/Feedback.tsx';
 import { Icon } from '../ui/Icon.tsx';
 import { Avatar } from './Avatar.tsx';
-import { Button } from './Button.tsx';
+import { ModeMenu } from './ModeMenu.tsx';
 import { IconButton } from './IconButton.tsx';
 import { StatusPill, type Status } from './StatusPill.tsx';
 
@@ -17,12 +17,11 @@ type Props = {
   onToggleSidebar?: (() => void) | undefined;
   onSearch?: (() => void) | undefined;
   onSite?: (() => void) | undefined;
-  onAutonomy?: (() => void) | undefined;
   onNotifications?: (() => void) | undefined;
 };
 
 /** Workspace top bar (48 px): sidebar toggle, site switcher, the current change and its status, autonomy, search, notifications, account. */
-export function TopBar({ site, siteInitial, change, status, autonomy, account, onToggleSidebar, onSearch, onSite, onAutonomy, onNotifications }: Props) {
+export function TopBar({ site, siteInitial, change, status, autonomy, account, onToggleSidebar, onSearch, onSite, onNotifications }: Props) {
   const { notify } = useFeedback();
   return (
     <header className="p-topbar">
@@ -42,9 +41,7 @@ export function TopBar({ site, siteInitial, change, status, autonomy, account, o
         </div>
       )}
       <span className="p-spacer" />
-      <Button variant="ghost" trailingIcon="chevron-down" onClick={onAutonomy ?? (() => notify("Change how much Wursor asks first in Settings, under Autonomy.", 'info'))}>
-        {autonomy}
-      </Button>
+      <ModeMenu mode={autonomy} />
       <IconButton icon="search" label="Search" onClick={onSearch} />
       <IconButton icon="bell" label="Notifications" onClick={onNotifications ?? (() => notify("You're all caught up.", 'info'))} />
       <Avatar kind="initials" initials={account.initials} name={account.name} />

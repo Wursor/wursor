@@ -2,7 +2,7 @@
 
 import { useRef, useState } from 'react';
 import { useFeedback } from '../system/Feedback.tsx';
-import { Button } from './Button.tsx';
+import { ModeMenu } from './ModeMenu.tsx';
 import { IconButton } from './IconButton.tsx';
 import { Icon } from '../ui/Icon.tsx';
 
@@ -70,9 +70,7 @@ export function Composer({ state, autonomy, placeholder, defaultValue = '', onSt
               notify(pointing ? 'Pointing is off' : 'Click anything in the preview to point at it', 'info');
             }}
           />
-          <Button variant="ghost" trailingIcon="chevron-down" onClick={() => notify("Change how much Wursor asks first in Settings, under Autonomy.", 'info')}>
-            {autonomy}
-          </Button>
+          <ModeMenu mode={autonomy} />
         </div>
         <div className="p-composer-side">
           <IconButton icon="mic" label="Dictate" onClick={() => notify("Dictation isn't switched on yet. Typing works as usual.", 'info')} />

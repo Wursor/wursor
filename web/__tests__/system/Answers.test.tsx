@@ -36,11 +36,11 @@ describe('Composer tools answer', () => {
     await user.upload(input, new File(['x'], 'logo.png', { type: 'image/png' }));
     expect(screen.getByRole('status')).toHaveTextContent('logo.png attached');
   });
-  it('the autonomy button points to where it is changed', async () => {
+  it('the autonomy button opens a menu of ways to work, not a hint about settings', async () => {
     const user = userEvent.setup();
     wrap(<Composer state="empty" autonomy="Ask first" />);
     await user.click(screen.getByRole('button', { name: /Ask first/ }));
-    expect(screen.getByRole('status')).toHaveTextContent(/Settings/);
+    expect(screen.getByRole('menu', { name: 'How Wursor works' })).toBeInTheDocument();
   });
 });
 
