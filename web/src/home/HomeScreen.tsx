@@ -139,7 +139,7 @@ export function HomeScreen({ variant, host = 'wordpress', part = 'morning', onCo
               </section>
               <section className="app-section">
                 <SectionHeading title="Recent activity" link="Open activity" onLink={onOpenActivity} />
-                <LogList label="Recent activity" rows={ACTIVITY} />
+                <LogList label="Recent activity" rows={ACTIVITY} href="/activity" />
               </section>
             </>
           )}
@@ -158,7 +158,7 @@ export function HomeScreen({ variant, host = 'wordpress', part = 'morning', onCo
               </section>
               <section className="app-section">
                 <SectionHeading title="Recent activity" link="Open activity" onLink={onOpenActivity} />
-                <LogList label="Recent activity" rows={ACTIVITY.slice(0, 4)} />
+                <LogList label="Recent activity" rows={ACTIVITY.slice(0, 4)} href="/activity" />
               </section>
             </>
           )}

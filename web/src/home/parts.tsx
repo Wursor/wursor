@@ -74,16 +74,28 @@ export function AttentionRow({ tone, title, body, time, action, onAction }: Atte
 export type LogRow = { icon: IconName; text: string; trailing: string; tone?: 'success' };
 
 /** A short list in a card: an icon, one line, and a time or result on the right. */
-export function LogList({ label, rows }: { label: string; rows: readonly LogRow[] }) {
+export function LogList({ label, rows, href }: { label: string; rows: readonly LogRow[]; href?: string }) {
   return (
     <ul aria-label={label} className="app-log">
       {rows.map((r) => (
-        <li key={r.text} className="app-logrow">
-          <span className="app-logrow-icon" data-tone={r.tone} aria-hidden="true">
-            <Icon name={r.icon} size={20} />
-          </span>
-          <span className="app-logrow-text">{r.text}</span>
-          <span className="app-logrow-trailing">{r.trailing}</span>
+        <li key={r.text} {...(href ? {} : { className: 'app-logrow' })}>
+          {href ? (
+            <a href={href} className="app-logrow">
+              <span className="app-logrow-icon" data-tone={r.tone} aria-hidden="true">
+                <Icon name={r.icon} size={20} />
+              </span>
+              <span className="app-logrow-text">{r.text}</span>
+              <span className="app-logrow-trailing">{r.trailing}</span>
+            </a>
+          ) : (
+            <>
+              <span className="app-logrow-icon" data-tone={r.tone} aria-hidden="true">
+                <Icon name={r.icon} size={20} />
+              </span>
+              <span className="app-logrow-text">{r.text}</span>
+              <span className="app-logrow-trailing">{r.trailing}</span>
+            </>
+          )}
         </li>
       ))}
     </ul>
@@ -124,8 +136,10 @@ export function TryAsking({ ideas }: { ideas: readonly string[] }) {
       <ul>
         {ideas.map((i) => (
           <li key={i}>
-            <Icon name="sparkles" size={20} />
-            <span>{i}</span>
+            <a href={`/board?composer=1&text=${encodeURIComponent(i)}`} className="app-idea">
+              <Icon name="sparkles" size={20} />
+              <span>{i}</span>
+            </a>
           </li>
         ))}
       </ul>

@@ -19,6 +19,7 @@ export default async function BoardPage({ searchParams }: { searchParams: Promis
       scope={q.scope === 'all' ? 'all' : 'site'}
       {...(view ? { initialView: view } : {})}
       {...(q.open ? { initialOpen: q.open } : {})}
+      {...(q.text ? { initialText: q.text } : {})}
       {...(q.composer ? { initialComposer: true } : {})}
       {...(q.drag ? { dragDemo: true } : {})}
     />

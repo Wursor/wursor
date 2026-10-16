@@ -25,6 +25,8 @@ type Props = {
   scope?: 'site' | 'all';
   initialView?: View;
   initialOpen?: string;
+  /** Words already in the new-change box, for example a suggestion the owner picked. */
+  initialText?: string;
   /** Opens the new-change dialog straight away. */
   initialComposer?: boolean;
   /** Shows a card mid-drag, for the fixed design state. */
@@ -185,7 +187,7 @@ function AllSites() {
 }
 
 /** The board: every change as a card that moves from idea to done, as lanes, a list, or a calendar (Figma BD1 to BD11). */
-export function BoardScreen({ state = 'board', scope = 'site', initialView = 'board', initialOpen, initialComposer = false, dragDemo = false, onStart }: Props) {
+export function BoardScreen({ state = 'board', scope = 'site', initialView = 'board', initialOpen, initialText, initialComposer = false, dragDemo = false, onStart }: Props) {
   const [view, setView] = useState<View>(initialView);
   const [filter, setFilter] = useState<Filter>(state === 'nothing-matches' ? 'needs-you' : 'all');
   const [changes, setChanges] = useState<Change[]>(CHANGES);
@@ -320,7 +322,7 @@ export function BoardScreen({ state = 'board', scope = 'site', initialView = 'bo
         {(state === 'board' || offline) && view === 'calendar' && <Calendar today={new Date(2026, 9, 14)} />}
       </div>
       {selected && <ChangeDrawer change={selected} onClose={() => setOpen(null)} />}
-      {composer && <NewChangeDialog onStart={(c) => onStart?.(c)} onClose={() => setComposer(false)} />}
+      {composer && <NewChangeDialog {...(initialText ? { initialText } : {})} onStart={(c) => onStart?.(c)} onClose={() => setComposer(false)} />}
     </AppShell>
   );
 }

@@ -20,8 +20,8 @@ const HELP: Record<NewChange['mode'], (site: string) => string> = {
 const SITES = ['Harbor Bakery', 'Northline Studio', 'Kestrel Coffee', 'Lumen Studio'];
 
 /** Say what you want in your own words, pick the site and how Wursor should work, and start (Figma BD8). */
-export function NewChangeDialog({ onStart, onClose }: { onStart: (c: NewChange) => void; onClose: () => void }) {
-  const [text, setText] = useState('');
+export function NewChangeDialog({ onStart, onClose, initialText = '' }: { onStart: (c: NewChange) => void; onClose: () => void; initialText?: string }) {
+  const [text, setText] = useState(initialText);
   const [site, setSite] = useState('Harbor Bakery');
   const [mode, setMode] = useState<NewChange['mode']>('Ask first');
   const id = useId();

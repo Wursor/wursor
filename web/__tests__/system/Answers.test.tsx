@@ -101,3 +101,39 @@ describe('Drawers close with Escape', () => {
     expect(screen.queryByRole('complementary', { name: 'Proof' })).not.toBeInTheDocument();
   });
 });
+
+describe('The board strip under the preview', () => {
+  it('"Open board" and every card lead to the board', async () => {
+    const { BoardStrip } = await import('../../src/product/BoardStrip.tsx');
+    const { HARBOR } = await import('../../src/product/harbor-bakery.ts');
+    render(<BoardStrip lanes={HARBOR.board} />);
+    expect(screen.getByRole('link', { name: 'Open board' })).toHaveAttribute('href', '/board');
+    const card = screen.getByRole('link', { name: /Update opening hours/ });
+    expect(card).toHaveAttribute('href', '/board?open=hours');
+    for (const l of screen.getAllByRole('link', { name: /Home page|Contact page|Footer|Suggested|Yesterday|ago|Just now/ })) expect(l.getAttribute('href')).toMatch(/^\/board/);
+  });
+});
+
+describe('Home suggestions and recent activity lead somewhere', () => {
+  it('each "Try asking" idea opens the new-change box with that idea filled in', () => {
+    wrap(<HomeScreen variant="caught-up" />);
+    const ideas = screen.getByRole('region', { name: 'Try asking' });
+    const first = within(ideas).getAllByRole('link')[0]!;
+    const href = first.getAttribute('href')!;
+    expect(href).toMatch(/^\/board\?composer=1&text=/);
+    expect(decodeURIComponent(href.split('text=')[1]!)).toBe(first.textContent);
+  });
+  it('recent activity rows open Activity', () => {
+    wrap(<HomeScreen variant="caught-up" />);
+    const list = screen.getByRole('list', { name: 'Recent activity' });
+    for (const a of within(list).getAllByRole('link')) expect(a).toHaveAttribute('href', '/activity');
+  });
+});
+
+describe('New change dialog can start with text', () => {
+  it('fills the box from the idea that was chosen', async () => {
+    const { BoardScreen } = await import('../../src/board/BoardScreen.tsx');
+    wrap(<BoardScreen initialComposer initialText="Add Sunday hours" />);
+    expect(screen.getByDisplayValue('Add Sunday hours')).toBeInTheDocument();
+  });
+});
