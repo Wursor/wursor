@@ -98,3 +98,7 @@
 
 .sy-stack .app-meter-track span { background: var(--color-status-needs-you-dot); }
 .sy-spec .sy-dialog { box-shadow: none; }
+
+/* Toasts raised by actions (FeedbackProvider): bottom centre, above the phone's tabs. */
+.fb-toasts { position: fixed; left: 50%; bottom: var(--space-6); z-index: 70; display: flex; flex-direction: column; gap: var(--space-2); transform: translateX(-50%); pointer-events: none; }
+@media (max-width: 600px) { .fb-toasts { bottom: 88px; width: calc(100vw - 32px); } .fb-toasts .ui-toast { box-sizing: border-box; width: 100%; } }

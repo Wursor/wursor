@@ -61,7 +61,7 @@ export function AboutSiteScreen() {
 
 export function PickLookScreen() {
   const router = useRouter();
-  return <PickLookStep onContinue={() => router.push('/start/cloud/build')} onBack={() => router.back()} onSaveAndExit={() => router.push('/')} />;
+  return <PickLookStep onContinue={() => router.push('/workspace')} onBack={() => router.back()} onSaveAndExit={() => router.push('/')} />;
 }
 
 export function SetupScreen() {

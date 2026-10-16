@@ -15,7 +15,7 @@ type Props = {
 };
 
 /** The decision point. Ready: approve or ask for changes. Publishing: progress. Published: confirmation with Undo always one click away. */
-export function ApprovalBar({ title, meta, state = 'ready', progress = 0, onApprove, onAskChanges, onUndo, liveUrl = '#' }: Props) {
+export function ApprovalBar({ title, meta, state = 'ready', progress = 0, onApprove, onAskChanges, onUndo, liveUrl = 'https://harborbakery.com' }: Props) {
   return (
     <div className="p-approval" data-state={state}>
       <span className="p-approval-icon" data-state={state}>

@@ -3,6 +3,7 @@
 import { useId, useState, type ReactNode } from 'react';
 import { Icon } from '../ui/Icon.tsx';
 import { Toggle } from '../sites/Toggle.tsx';
+import { useFeedback } from '../system/Feedback.tsx';
 
 /** A drop-down choice. The label is its name; the text beside it explains it. */
 export function Select({ label, options, value, onChange, narrow }: { label: string; options: readonly string[]; value: string; onChange: (v: string) => void; narrow?: boolean }) {
@@ -35,7 +36,7 @@ type RowProps = { title: string; detail: string } & (
   | { control: 'toggle'; initial: boolean }
   | { control: 'locked' }
   | { control: 'state'; text: string }
-  | { control: 'button'; label: string }
+  | { control: 'button'; label: string; done?: string }
   | { control?: undefined }
 );
 
@@ -43,6 +44,7 @@ type RowProps = { title: string; detail: string } & (
 export function SettingRow(p: RowProps) {
   const [text, setText] = useState(p.control === 'select' ? p.initial : '');
   const [on, setOn] = useState(p.control === 'toggle' ? p.initial : false);
+  const { notify } = useFeedback();
   let control: ReactNode = null;
   if (p.control === 'select') control = <Select label={p.title} options={p.options} value={text} onChange={setText} />;
   if (p.control === 'toggle') control = <Toggle label={p.title} checked={on} onChange={setOn} />;
@@ -54,7 +56,11 @@ export function SettingRow(p: RowProps) {
       </span>
     );
   if (p.control === 'state') control = <span className="app-row-state">{p.text}</span>;
-  if (p.control === 'button') control = <button type="button" className="p-btn p-btn-secondary p-btn-sm">{p.label}</button>;
+  if (p.control === 'button') control = (
+      <button type="button" className="p-btn p-btn-secondary p-btn-sm" onClick={() => notify(p.done ?? `${p.title}: ${p.label.toLowerCase()} is on its way.`, 'info')}>
+        {p.label}
+      </button>
+    );
   return (
     <div className="app-settingrow">
       <div className="app-settingrow-text">

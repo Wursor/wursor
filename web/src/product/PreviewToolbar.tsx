@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react';
+import { useState, type ReactNode } from 'react';
 import { IconButton } from './IconButton.tsx';
 import { Tab } from './Tab.tsx';
 import { Tag } from './Tag.tsx';
@@ -10,9 +10,15 @@ const TABS: ReadonlyArray<{ value: PreviewView; label: string }> = [
   { value: 'proof', label: 'Proof' },
 ];
 
-type Props = { selected: PreviewView; tag?: string; onSelect?: (view: PreviewView) => void; trailing?: ReactNode };
+export type PreviewDevice = 'desktop' | 'phone';
+type Props = { selected: PreviewView; tag?: string; onSelect?: (view: PreviewView) => void; onDevice?: (device: PreviewDevice) => void; trailing?: ReactNode };
 
-export function PreviewToolbar({ selected, tag, onSelect, trailing }: Props) {
+export function PreviewToolbar({ selected, tag, onSelect, onDevice, trailing }: Props) {
+  const [device, setDevice] = useState<PreviewDevice>('desktop');
+  const pick = (d: PreviewDevice) => {
+    setDevice(d);
+    onDevice?.(d);
+  };
   return (
     <div className="p-previewbar" data-trailing={trailing ? 'true' : undefined}>
       <div role="tablist" aria-label="View" className="p-tabs">
@@ -22,8 +28,8 @@ export function PreviewToolbar({ selected, tag, onSelect, trailing }: Props) {
       </div>
       <span className="p-spacer" />
       {tag && <Tag label={tag} />}
-      <IconButton icon="monitor" label="Desktop" />
-      <IconButton icon="smartphone" label="Phone" />
+      <IconButton icon="monitor" label="Desktop" aria-pressed={device === 'desktop'} onClick={() => pick('desktop')} />
+      <IconButton icon="smartphone" label="Phone" aria-pressed={device === 'phone'} onClick={() => pick('phone')} />
       {trailing}
     </div>
   );

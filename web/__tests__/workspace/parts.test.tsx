@@ -135,7 +135,7 @@ describe('SidebarRail', () => {
   it('keeps only icons: places, changes, new change, account', () => {
     render(<SidebarRail account={{ initials: 'AO', name: 'Amara Okoye' }} />);
     for (const name of ['Home', 'Board', 'Activity', 'Sites']) expect(screen.getByRole('link', { name })).toBeInTheDocument();
-    for (const name of ['Changes', 'New change']) expect(screen.getByRole('button', { name })).toBeInTheDocument();
+    for (const name of ['Changes', 'New change']) expect(screen.getByRole('link', { name })).toBeInTheDocument();
     expect(screen.getByRole('img', { name: 'Amara Okoye' })).toBeInTheDocument();
   });
 });
@@ -171,5 +171,14 @@ describe('ChangeRow and the What changed drawer', () => {
     await userEvent.click(screen.getByRole('button', { name: 'Close' }));
     expect(onClose).toHaveBeenCalledOnce();
     expect(within(screen.getByRole('complementary')).getAllByRole('listitem')).toHaveLength(2);
+  });
+});
+
+describe('Navigation never dead-ends', () => {
+  it('the rail points its icons at real places', () => {
+    render(<SidebarRail account={{ initials: 'AO', name: 'Amara Okoye' }} />);
+    expect(screen.getByRole('link', { name: 'Home' })).toHaveAttribute('href', '/home');
+    expect(screen.getByRole('link', { name: 'New change' })).toHaveAttribute('href', '/workspace');
+    expect(screen.getByRole('link', { name: 'Changes' })).toHaveAttribute('href', '/board');
   });
 });

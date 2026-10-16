@@ -12,7 +12,7 @@ const GROUPS: ReadonlyArray<ReadonlyArray<Row>> = [
     { label: 'Safety and approvals', icon: 'shield-check', href: '/settings/safety' },
   ],
   [
-    { label: 'Help and docs', icon: 'help', href: '/help' },
+    { label: 'Help and docs', icon: 'help', href: '/docs' },
     { label: 'What is new', icon: 'sparkles', href: '/whats-new' },
     { label: 'Contact support', icon: 'mail', href: '/support' },
   ],

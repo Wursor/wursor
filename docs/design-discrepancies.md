@@ -64,4 +64,7 @@ Places where the Figma file ("Wursor - weown.net", page Product Design) and an e
 | V6 | Phone AC5 (event proof) | The frame shows the feed, no sheet | A full-screen proof sheet | The frame has nothing to copy |
 | V7 | Phone 2d (new code sent) | No toast | A toast, as on desktop | The desktop frame shows it |
 | V8 | Tall phone pages (scan, first change, fork) | Frame ends about 22 px lower than the build's minimum spacing | Actions keep 26 px more space from the content, as the frames draw | Matches within a few px |
+| I1 | Actions with no server (delete, undo, restore, stop, invite, plan change, helper update, downloads) | Frames show only the button | Each opens a question where it matters and answers with a toast, using local state; nothing is sent anywhere | Backend is out of scope; the owner always sees a response |
+| I2 | Desktop top bar: site switcher, autonomy, bell | Frames show no open state | Site and bell open the same sheets as on a phone; autonomy goes to Settings, Safety and approvals | Gives the controls somewhere real to go |
+| I3 | Support and What is new | No frames | Minimal pages built from the existing page frame | Linked from the More tab |
 

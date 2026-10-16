@@ -36,7 +36,7 @@ export function AppShell({ active, changes = [], sheet: initialSheet, children }
   });
   return (
     <div className="ws app" data-wide="true">
-      <TopBar site={HARBOR.site.name} siteInitial={HARBOR.site.initial} autonomy={HARBOR.autonomy} account={HARBOR.account} onSearch={() => layers.open('palette')} />
+      <TopBar site={HARBOR.site.name} siteInitial={HARBOR.site.initial} autonomy={HARBOR.autonomy} account={HARBOR.account} onSearch={() => layers.open('palette')} onSite={() => setSheet('sites')} onAutonomy={() => window.location.assign('/settings/safety')} onNotifications={() => setSheet('notifications')} />
       <MobileTopBar site={site} siteInitial={site.charAt(0)} onSearch={() => layers.open('palette')} onSite={() => setSheet('sites')} onNotifications={() => setSheet('notifications')} />
       <div className="ws-body">
         <Sidebar changes={changes} account={HARBOR.account} hrefs={HREFS} {...(place ? { active: place } : {})} />

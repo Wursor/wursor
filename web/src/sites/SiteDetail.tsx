@@ -9,6 +9,7 @@ import { Banner } from '../ui/Banner.tsx';
 import { sidebarChanges } from '../workspace/scenario.ts';
 import { StepList, type GuidedStep } from '../home/GuidedSetup.tsx';
 import { LogList, PageHeader, SectionHeading, SiteCard, type LogRow } from '../home/parts.tsx';
+import { useFeedback } from '../system/Feedback.tsx';
 import { AccessBadge } from './AccessBadge.tsx';
 import { Toggle } from './Toggle.tsx';
 import { UsageMeter } from './UsageMeter.tsx';
@@ -99,21 +100,37 @@ function Definition({ label, children }: { label: string; children: ReactNode })
 }
 
 function Connection() {
+  const { notify, confirm } = useFeedback();
+  const [latest, setLatest] = useState(false);
   const [perms, setPerms] = useState({ pages: true, menus: true, theme: false, plugins: false });
   const set = (k: keyof typeof perms) => (v: boolean) => setPerms((p) => ({ ...p, [k]: v }));
   return (
     <>
-      <Banner tone="warning">The Wursor helper on harborbakery.com is one version behind. Update it to keep checks accurate.</Banner>
+      {!latest && <Banner tone="warning">The Wursor helper on harborbakery.com is one version behind. Update it to keep checks accurate.</Banner>}
       <Group title="Connection">
         <div className="app-rows">
-          <Row title="Wursor helper" detail="Version 1.4.2. The latest is 1.5.0.">
-            <Button variant="secondary">Update</Button>
+          <Row title="Wursor helper" detail={latest ? 'Version 1.5.0. This is the latest.' : 'Version 1.4.2. The latest is 1.5.0.'}>
+            {latest ? (
+              <span className="app-row-state">Up to date</span>
+            ) : (
+              <Button
+                variant="secondary"
+                onClick={() => {
+                  setLatest(true);
+                  notify('Wursor helper updated to 1.5.0');
+                }}
+              >
+                Update
+              </Button>
+            )}
           </Row>
           <Row title="Paired" detail="12 days ago from this computer.">
             <span className="app-row-state">Healthy</span>
           </Row>
           <Row title="Pairing code" detail="Make a new code if you move the site or reinstall the helper.">
-            <Button variant="secondary">Pair again</Button>
+            <Button variant="secondary" onClick={() => notify('A new pairing code was made. The old one no longer works.', 'info')}>
+              Pair again
+            </Button>
           </Row>
         </div>
       </Group>
@@ -136,7 +153,20 @@ function Connection() {
       <section className="app-danger" aria-label="Disconnect this site">
         <h2>Disconnect this site</h2>
         <p>Wursor stops watching this site and can no longer make changes. Your site and its content are not touched.</p>
-        <Button variant="danger" size="md">
+        <Button
+          variant="danger"
+          size="md"
+          onClick={() =>
+            confirm({
+              title: 'Disconnect harborbakery.com?',
+              body: 'Wursor stops watching this site and can no longer make changes. Your site and its content are not touched.',
+              confirmLabel: 'Disconnect',
+              tone: 'danger',
+              done: 'harborbakery.com was disconnected',
+              onConfirm: () => window.location.assign('/sites'),
+            })
+          }
+        >
           Disconnect harborbakery.com
         </Button>
       </section>
@@ -145,12 +175,13 @@ function Connection() {
 }
 
 function MovesOut() {
+  const { notify } = useFeedback();
   return (
     <Definition label="Moves">
       <Button variant="secondary" size="md" leadingIcon="swap" onClick={() => window.location.assign('/move/out')}>
         Move to my own WordPress
       </Button>
-      <Button variant="ghost" size="md" leadingIcon="download">
+      <Button variant="ghost" size="md" leadingIcon="download" onClick={() => notify('Getting everything together. We’ll email you a link when it’s ready.', 'info')}>
         Download everything
       </Button>
       <p className="app-def-note">Moving out is free. Your site stays live until you confirm.</p>
@@ -199,7 +230,9 @@ function Cloud({ preview }: { preview: boolean }) {
               <span className="app-row-state">Valid</span>
             </Row>
             <Row title="Change domain" detail="Point a different domain at this site.">
-              <Button variant="secondary">Manage</Button>
+              <Button variant="secondary" onClick={() => window.location.assign('/start/domain')}>
+                Manage
+              </Button>
             </Row>
           </div>
         </Group>
@@ -234,7 +267,9 @@ function ContentOnly() {
       <Group title="Allow more" description="Full access lets Wursor fix errors in your theme and update plugins on a safe copy first.">
         <div className="app-rows">
           <Row title="Give Wursor full access" detail="You’ll sign in to WordPress once more and approve the extra permissions.">
-            <Button variant="secondary">Manage</Button>
+            <Button variant="secondary" onClick={() => window.location.assign('/start/connect')}>
+              Manage
+            </Button>
           </Row>
         </div>
       </Group>
@@ -263,7 +298,7 @@ export function SiteDetail({ tab: initialTab = 'overview', host = 'wordpress' }:
               <a href="https://harborbakery.com" className="p-btn p-btn-secondary p-btn-md">
                 Open site
               </a>
-              <Button variant="primary" size="md" leadingIcon="plus">
+              <Button variant="primary" size="md" leadingIcon="plus" onClick={() => window.location.assign('/workspace')}>
                 New change
               </Button>
             </div>

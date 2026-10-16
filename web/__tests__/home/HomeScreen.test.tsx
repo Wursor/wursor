@@ -119,7 +119,7 @@ describe('Home, site problem (H4, H6)', () => {
     const options = screen.getByRole('region', { name: 'What you can do' });
     expect(within(options).getByRole('button', { name: 'Undo today’s change' })).toBeInTheDocument();
     expect(within(options).getByRole('button', { name: 'Restore the safe copy' })).toBeInTheDocument();
-    expect(within(options).getByRole('link', { name: 'Contact your host' })).toBeInTheDocument();
+    expect(within(options).getByRole('button', { name: 'Contact your host' })).toBeInTheDocument();
   });
 
   it('on Cloud, says Wursor is looking at the hosting side and offers support', () => {
@@ -127,7 +127,7 @@ describe('Home, site problem (H4, H6)', () => {
     expect(screen.getByRole('alert')).toHaveTextContent('harborbakery.com isn’t responding. Wursor is checking it on WeOwn Cloud and paused publishing.');
     expect(screen.getByText('Wursor can undo today’s change, or keep waiting. Wursor is already looking at the hosting side.')).toBeInTheDocument();
     expect(screen.getByRole('link', { name: 'Contact Wursor support' })).toBeInTheDocument();
-    expect(screen.queryByRole('link', { name: 'Contact your host' })).not.toBeInTheDocument();
+    expect(screen.queryByRole('button', { name: 'Contact your host' })).not.toBeInTheDocument();
   });
 });
 

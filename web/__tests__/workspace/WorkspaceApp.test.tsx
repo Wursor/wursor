@@ -83,7 +83,7 @@ describe('what is around the conversation', () => {
   it('keeps only the icon rail once there is something to review, and drops the board', () => {
     render(<WorkspaceApp initialPhase="ready" />);
     expect(screen.queryByRole('list', { name: 'Changes' })).not.toBeInTheDocument();
-    expect(screen.getByRole('button', { name: 'New change' })).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: 'New change' })).toBeInTheDocument();
     expect(document.querySelector('.ws')).toHaveAttribute('data-board', 'false');
   });
 

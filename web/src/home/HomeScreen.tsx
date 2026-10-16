@@ -1,6 +1,9 @@
+'use client';
+
 import { Button } from '../product/Button.tsx';
 import { Icon } from '../ui/Icon.tsx';
 import { AppShell } from '../shell/AppShell.tsx';
+import { useFeedback } from '../system/Feedback.tsx';
 import { sidebarChanges } from '../workspace/scenario.ts';
 import { GuidedSetup, type GuidedStep } from './GuidedSetup.tsx';
 import { AttentionRow, Banner, LogList, OptionsCard, PageHeader, SectionHeading, SiteCard, Stats, TryAsking, type LogRow, type StatData } from './parts.tsx';
@@ -83,6 +86,7 @@ function stats(variant: HomeVariant): StatData[] {
 
 /** Home: what needs the owner, how the site is doing, and what just happened (Figma H1 to H6). */
 export function HomeScreen({ variant, host = 'wordpress', part = 'morning', onContinue, onNewChange, onAnswer, onLook, onFix, onSeeAll, onOpenActivity, sheet }: Props) {
+  const { confirm, notify } = useFeedback();
   const greeting = `Good ${part}, Amara`;
   const first = variant === 'first-run';
   const cloud = host === 'cloud';
@@ -196,16 +200,46 @@ export function HomeScreen({ variant, host = 'wordpress', part = 'morning', onCo
           />
           {variant === 'problem' ? (
             <OptionsCard title="What you can do">
-              <Button variant="primary" size="md" leadingIcon="undo-16">
+              <Button
+                variant="primary"
+                size="md"
+                leadingIcon="undo-16"
+                onClick={() =>
+                  confirm({
+                    title: 'Undo today’s change?',
+                    body: 'Your site goes back to how it was this morning. A safe copy of today’s version is kept.',
+                    confirmLabel: 'Undo today’s change',
+                    done: 'Undone. Wursor is checking that your site is back.',
+                  })
+                }
+              >
                 Undo today’s change
               </Button>
-              <Button variant="secondary" size="md">
+              <Button
+                variant="secondary"
+                size="md"
+                onClick={() =>
+                  confirm({
+                    title: 'Restore the safe copy?',
+                    body: 'Your site is replaced with the last copy Wursor saved before the problem, from 9:41 AM today.',
+                    confirmLabel: 'Restore',
+                    done: 'Restoring the safe copy. This takes about a minute.',
+                  })
+                }
+              >
                 Restore the safe copy
               </Button>
-              <a href={cloud ? '/support' : '#'} className="p-btn p-btn-ghost p-btn-md app-fullwidth">
-                <span>{cloud ? 'Contact Wursor support' : 'Contact your host'}</span>
-                <Icon name="external-link-16" size={16} />
-              </a>
+              {cloud ? (
+                <a href="/support" className="p-btn p-btn-ghost p-btn-md app-fullwidth">
+                  <span>Contact Wursor support</span>
+                  <Icon name="external-link-16" size={16} />
+                </a>
+              ) : (
+                <button type="button" className="p-btn p-btn-ghost p-btn-md app-fullwidth" onClick={() => notify('Your host looks after the server. Wursor has noted the time it went down to share with them.', 'info')}>
+                  <span>Contact your host</span>
+                  <Icon name="external-link-16" size={16} />
+                </button>
+              )}
             </OptionsCard>
           ) : (
             <TryAsking ideas={IDEAS} />

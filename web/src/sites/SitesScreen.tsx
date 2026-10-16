@@ -43,7 +43,7 @@ export function SitesScreen({ variant, onAddSite }: { variant: SitesVariant; onA
             <Button variant="primary" size="md" leadingIcon="plus" onClick={onAddSite}>
               Add a site
             </Button>
-            <Button variant="secondary" size="md">
+            <Button variant="secondary" size="md" onClick={() => window.location.assign('/how-it-works')}>
               How it works
             </Button>
           </div>

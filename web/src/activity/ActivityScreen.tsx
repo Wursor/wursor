@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { AppShell } from '../shell/AppShell.tsx';
 import { Button } from '../product/Button.tsx';
 import { IconButton } from '../product/IconButton.tsx';
@@ -10,6 +10,7 @@ import { Icon } from '../ui/Icon.tsx';
 import { PageHeader } from '../home/parts.tsx';
 import { ScanFinding } from '../onboarding/ScanFinding.tsx';
 import { Select } from '../settings/controls.tsx';
+import { useFeedback } from '../system/Feedback.tsx';
 import { sidebarChanges } from '../workspace/scenario.ts';
 import { EVENTS, FILTERS, type ActivityEvent, type Kind } from './data.ts';
 
@@ -52,6 +53,12 @@ function EmptyCard({ title, text, action, onAction }: { title: string; text: str
 }
 
 function ProofDrawer({ event, onClose }: { event: ActivityEvent; onClose: () => void }) {
+  const { confirm } = useFeedback();
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => e.key === 'Escape' && !document.querySelector('[role="alertdialog"]') && onClose();
+    document.addEventListener('keydown', onKey);
+    return () => document.removeEventListener('keydown', onKey);
+  }, [onClose]);
   const published = event.kind === 'published' && event.id === 'pub1';
   return (
     <aside aria-label="Proof" className="act-drawer">
@@ -96,10 +103,22 @@ function ProofDrawer({ event, onClose }: { event: ActivityEvent; onClose: () => 
       )}
       <span className="p-spacer" />
       <div className="act-drawer-actions">
-        <Button variant="secondary" size="md">
+        <Button
+          variant="secondary"
+          size="md"
+          onClick={() =>
+            confirm({
+              title: 'Undo this change?',
+              body: 'Your site goes back to how it was before. A safe copy of today’s version is kept, so you can redo it.',
+              confirmLabel: 'Undo this change',
+              done: 'Undone. Your site is back to how it was.',
+              onConfirm: onClose,
+            })
+          }
+        >
           Undo this change
         </Button>
-        <Button variant="primary" size="md">
+        <Button variant="primary" size="md" onClick={() => window.location.assign('/workspace?phase=ready&view=proof')}>
           Open proof
         </Button>
       </div>
@@ -114,6 +133,7 @@ export function ActivityScreen({ state = 'feed', scope = 'site', initialFilter =
   const [range, setRange] = useState('Last 30 days');
   const [site, setSite] = useState('All 7 sites');
   const [open, setOpen] = useState<string | null>(initialOpen ?? null);
+  const { notify } = useFeedback();
 
   const q = query.trim().toLowerCase();
   const shown = useMemo(
@@ -172,11 +192,11 @@ export function ActivityScreen({ state = 'feed', scope = 'site', initialFilter =
         <div className="act-day">
           <DayHeader label="Today" />
           <div role="alert">
-            <Banner tone="danger" action={{ label: 'Details', onClick: () => undefined }}>
+            <Banner tone="danger" action={{ label: 'Details', onClick: () => notify('The connection to Wursor timed out. Nothing on your site changed.', 'warning') }}>
               We could not load your activity. Your site is not affected. Check your connection and try again.
             </Banner>
           </div>
-          <EmptyCard title="Activity did not load" text="Nothing was lost. Everything Wursor did is still recorded." action="Try again" />
+          <EmptyCard title="Activity did not load" text="Nothing was lost. Everything Wursor did is still recorded." action="Try again" onAction={() => notify('Still can’t reach Wursor. Check your connection and try again.', 'warning')} />
         </div>
       )}
 
@@ -211,7 +231,7 @@ export function ActivityScreen({ state = 'feed', scope = 'site', initialFilter =
               </div>
             ))}
             <div className="act-more">
-              <Button variant="secondary" size="md">
+              <Button variant="secondary" size="md" onClick={() => notify('That’s everything from the last 30 days. Pick a longer range to go further back.', 'info')}>
                 Load earlier activity
               </Button>
             </div>

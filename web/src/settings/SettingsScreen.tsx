@@ -9,6 +9,7 @@ import { Icon, type IconName } from '../ui/Icon.tsx';
 import { sidebarChanges } from '../workspace/scenario.ts';
 import { PageHeader } from '../home/parts.tsx';
 import { UsageMeter } from '../sites/UsageMeter.tsx';
+import { useFeedback } from '../system/Feedback.tsx';
 import { Field, Section, SettingRow } from './controls.tsx';
 
 export type SettingsSection = 'workspace' | 'safety' | 'team' | 'billing' | 'notifications' | 'account';
@@ -30,12 +31,13 @@ function Rows({ children, label }: { children: React.ReactNode; label?: string }
   );
 }
 
-function Danger({ title, text, button }: { title: string; text: string; button: string }) {
+function Danger({ title, text, button, confirmBody, done }: { title: string; text: string; button: string; confirmBody: string; done: string }) {
+  const { confirm } = useFeedback();
   return (
     <section className="app-danger" aria-label={title}>
       <h2>{title}</h2>
       <p>{text}</p>
-      <Button variant="danger" size="md">
+      <Button variant="danger" size="md" onClick={() => confirm({ title: `${title}?`, body: confirmBody, confirmLabel: button, tone: 'danger', done })}>
         {button}
       </Button>
     </section>
@@ -60,6 +62,8 @@ function Workspace() {
         title="Delete this workspace"
         text="Removes your account of this workspace from Wursor, including its history and safe copies. Your WordPress sites are not touched. Sites hosted on Wursor Cloud are deleted after 30 days unless you move them out first."
         button="Delete workspace"
+        confirmBody="This can’t be undone from here. Your WordPress sites are not touched."
+        done="Workspace deletion is scheduled. Check your email to finish."
       />
     </>
   );
@@ -121,18 +125,51 @@ const ROLES = [
 ] as const;
 
 function Team() {
+  const { notify, confirm } = useFeedback();
+  const [people, setPeople] = useState<ReadonlyArray<(typeof PEOPLE)[number]>>(PEOPLE);
+  const [inviting, setInviting] = useState(false);
+  const [email, setEmail] = useState('');
+  const [problem, setProblem] = useState('');
+  const [menuFor, setMenuFor] = useState<string | null>(null);
+  const send = () => {
+    const value = email.trim();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
+      setProblem('Enter a full email address, like name@company.com.');
+      return;
+    }
+    const initials = value.slice(0, 2).toUpperCase();
+    setPeople([...people, { initials, name: value.split('@')[0] ?? value, email: value, role: 'Editor', invited: true }]);
+    setEmail('');
+    setProblem('');
+    setInviting(false);
+    notify(`Invite sent to ${value}`);
+  };
   return (
     <>
       <Section
         title="Teammates"
         action={
-          <Button variant="primary" leadingIcon="plus">
+          <Button variant="primary" leadingIcon="plus" onClick={() => setInviting(!inviting)}>
             Invite
           </Button>
         }
       >
+        {inviting && (
+          <form
+            className="app-invite"
+            onSubmit={(e) => {
+              e.preventDefault();
+              send();
+            }}
+          >
+            <Field label="Email to invite" value={email} onChange={setEmail} helper={problem || 'They’ll join as an Editor. You can change that later.'} />
+            <Button variant="primary" size="md" onClick={send}>
+              Send invite
+            </Button>
+          </form>
+        )}
         <ul aria-label="Teammates" className="app-people">
-          {PEOPLE.map((p) => (
+          {people.map((p) => (
             <li key={p.email}>
               <Avatar kind="initials" initials={p.initials} name={p.name} size="md" />
               <span className="app-people-text">
@@ -141,9 +178,40 @@ function Team() {
               </span>
               {p.invited && <span className="p-tag">Invited</span>}
               <span className="app-people-role">{p.role}</span>
-              <span className="app-siterow-menu" aria-hidden="true">
-                <Icon name="dots" size={16} />
-              </span>
+              {p.role !== 'Owner' ? (
+                <span className="app-people-menu">
+                  {menuFor === p.email && (
+                    <button
+                      type="button"
+                      className="app-people-remove"
+                      onClick={() => {
+                        setMenuFor(null);
+                        confirm({
+                          title: `Remove ${p.name}?`,
+                          body: 'They lose access to this workspace straight away. Their past changes stay in Activity.',
+                          confirmLabel: `Remove ${p.name.split(' ')[0]}`,
+                          tone: 'danger',
+                          done: `${p.name} was removed`,
+                          onConfirm: () => setPeople((all) => all.filter((x) => x.email !== p.email)),
+                        });
+                      }}
+                    >
+                      Remove
+                    </button>
+                  )}
+                  <button
+                    type="button"
+                    className="app-siterow-menu"
+                    aria-label={`More for ${p.name}`}
+                    aria-expanded={menuFor === p.email}
+                    onClick={() => setMenuFor(menuFor === p.email ? null : p.email)}
+                  >
+                    <Icon name="dots" size={16} />
+                  </button>
+                </span>
+              ) : (
+                <span className="app-siterow-menu" aria-hidden="true" />
+              )}
             </li>
           ))}
         </ul>
@@ -176,11 +244,13 @@ const PLANS = [
 ];
 
 function Billing() {
+  const { confirm } = useFeedback();
+  const [current, setCurrent] = useState('Studio');
   return (
     <>
       <div className="app-plans">
         {PLANS.map((p) => (
-          <section key={p.name} aria-label={`${p.name} plan`} className="app-plan" data-current={p.current ? 'true' : undefined}>
+          <section key={p.name} aria-label={`${p.name} plan`} className="app-plan" data-current={p.name === current ? 'true' : undefined}>
             <h2>{p.name}</h2>
             <p className="app-plan-price">
               <span>{p.price}</span>
@@ -195,10 +265,22 @@ function Billing() {
                 </li>
               ))}
             </ul>
-            {p.current ? (
+            {p.name === current ? (
               <span className="app-plan-current">Current plan</span>
             ) : (
-              <button type="button" className="p-btn p-btn-secondary p-btn-md app-plan-choose">
+              <button
+                type="button"
+                className="p-btn p-btn-secondary p-btn-md app-plan-choose"
+                onClick={() =>
+                  confirm({
+                    title: `Switch to ${p.name}?`,
+                    body: `${p.price} per month from your next invoice. You can switch back any time.`,
+                    confirmLabel: `Switch to ${p.name}`,
+                    done: `You’re on ${p.name}`,
+                    onConfirm: () => setCurrent(p.name),
+                  })
+                }
+              >
                 Choose plan
               </button>
             )}
@@ -214,9 +296,9 @@ function Billing() {
       </section>
       <Section title="Payment and invoices">
         <Rows>
-          <SettingRow title="Payment method" detail="Visa ending 4242." control="button" label="Update" />
-          <SettingRow title="Invoice, September" detail="Paid 1 Sep. $49.00." control="button" label="Download" />
-          <SettingRow title="Invoice, August" detail="Paid 1 Aug. $49.00." control="button" label="Download" />
+          <SettingRow title="Payment method" detail="Visa ending 4242." control="button" label="Update" done="Payment details can be updated once billing is connected." />
+          <SettingRow title="Invoice, September" detail="Paid 1 Sep. $49.00." control="button" label="Download" done="Invoice for September saved to your downloads." />
+          <SettingRow title="Invoice, August" detail="Paid 1 Aug. $49.00." control="button" label="Download" done="Invoice for August saved to your downloads." />
         </Rows>
       </Section>
     </>
@@ -273,7 +355,13 @@ function Account() {
           <SettingRow title="Theme" detail="Follows your computer by default." control="select" options={['System', 'Light', 'Dark']} initial="System" />
         </Rows>
       </Section>
-      <Danger title="Delete my account" text="Removes you from every workspace. Workspaces you own must be transferred or deleted first." button="Delete account" />
+      <Danger
+        title="Delete my account"
+        text="Removes you from every workspace. Workspaces you own must be transferred or deleted first."
+        button="Delete account"
+        confirmBody="You’ll be removed from every workspace. This can’t be undone from here."
+        done="Account deletion started. Check your email to finish."
+      />
     </>
   );
 }

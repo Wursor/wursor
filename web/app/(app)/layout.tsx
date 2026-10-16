@@ -9,6 +9,7 @@ import '../../src/styles/product.css';
 import '../../src/styles/workspace.css';
 import '../../src/styles/app.css';
 import '../../src/styles/system.css';
+import { FeedbackProvider } from '../../src/system/Feedback.tsx';
 
 export const metadata: Metadata = {
   title: { default: 'Wursor', template: '%s · Wursor' },
@@ -22,7 +23,9 @@ export default function AppLayout({ children }: { children: ReactNode }) {
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
       </head>
-      <body>{children}</body>
+      <body>
+        <FeedbackProvider>{children}</FeedbackProvider>
+      </body>
     </html>
   );
 }
