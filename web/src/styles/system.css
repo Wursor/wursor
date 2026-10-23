@@ -64,7 +64,7 @@
 .mb-scrim { position: fixed; inset: 0; z-index: 60; display: flex; align-items: flex-end; background: var(--color-scrim); }
 .mb-sheet { display: flex; flex-direction: column; gap: var(--space-3); box-sizing: border-box; width: 100%; max-height: 90vh; padding: var(--space-3) var(--space-4); overflow: hidden; border-radius: 20px 20px 0 0; background: var(--color-bg-surface); box-shadow: 0 -8px 24px #0000002e; font-family: var(--font-sans); }
 .mb-sheet h2 { margin: 0; font: 500 16px/24px var(--font-sans); letter-spacing: -0.005em; color: var(--color-text-primary); }
-.mb-grab { display: block; flex: none; width: 36px; height: 4px; border-radius: 2px; background: #ccc9bf; }
+.mb-grab { display: block; flex: none; align-self: center; width: 36px; height: 4px; border-radius: 2px; background: #ccc9bf; }
 .mb-sites, .mb-notes { margin: 0; padding: 0; list-style: none; }
 .mb-sites { display: flex; flex-direction: column; gap: var(--space-3); }
 .mb-site { display: flex; align-items: center; gap: var(--space-3); box-sizing: border-box; width: 100%; padding: var(--space-2); border: 0; background: transparent; color: var(--color-text-primary); text-align: left; cursor: pointer; }

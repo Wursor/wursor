@@ -137,3 +137,11 @@ describe('New change dialog can start with text', () => {
     expect(screen.getByDisplayValue('Add Sunday hours')).toBeInTheDocument();
   });
 });
+
+describe('Sheet grab bar', () => {
+  it('is centred in its sheet', async () => {
+    const { readFileSync } = await import('node:fs');
+    const css = readFileSync('src/styles/system.css', 'utf8');
+    expect(css).toMatch(/\.mb-grab \{[^}]*align-self: center/);
+  });
+});
