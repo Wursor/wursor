@@ -209,7 +209,7 @@ export function BoardScreen({ state = 'board', scope = 'site', initialView = 'bo
       risk: 'everyday',
       when: 'Just now',
       page: c.page,
-      mine: c.assignee === 'Me',
+      mine: true,
       site: c.site,
       ...(c.stage === 'working' ? { progress: 0.05 } : {}),
       ...(when && when.getFullYear() === 2026 && when.getMonth() === 9 ? { day: when.getDate() } : {}),

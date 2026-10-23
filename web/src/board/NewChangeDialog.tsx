@@ -14,7 +14,6 @@ export type NewChange = {
   /** The lane the card is added to. */
   stage: LaneId;
   page: string;
-  assignee: string;
   /** Optional, as YYYY-MM-DD. Empty when there is none. */
   due: string;
   files: string[];
@@ -38,7 +37,6 @@ const STAGE_HELP: Record<LaneId, string> = {
   done: 'Already live. Kept here so the board tells the whole story.',
 };
 const PAGES = ['Whole site', 'Home page', 'Contact page', 'Menu', 'Footer', 'Gallery', 'Order page'];
-const PEOPLE = ['Me', 'Chidi Eze', 'Tola Bello'];
 const SITES = ['Harbor Bakery', 'Northline Studio', 'Kestrel Coffee', 'Lumen Studio'];
 const stageTitle = (id: LaneId) => LANES.find((l) => l.id === id)!.title;
 
@@ -49,7 +47,6 @@ export function NewChangeDialog({ onStart, onClose, initialText = '', initialSta
   const [mode, setMode] = useState<NewChange['mode']>('Ask first');
   const [stage, setStage] = useState<LaneId>(initialStage);
   const [page, setPage] = useState(PAGES[0]!);
-  const [assignee, setAssignee] = useState(PEOPLE[0]!);
   const [due, setDue] = useState('');
   const [files, setFiles] = useState<string[]>([]);
   const picker = useRef<HTMLInputElement>(null);
@@ -93,10 +90,6 @@ export function NewChangeDialog({ onStart, onClose, initialText = '', initialSta
           <div className="bd-dialog-field">
             <span>Page</span>
             <Select label="Page" options={PAGES} value={page} onChange={setPage} />
-          </div>
-          <div className="bd-dialog-field">
-            <span>Assigned to</span>
-            <Select label="Assigned to" options={PEOPLE} value={assignee} onChange={setAssignee} />
           </div>
         </div>
         <div className="bd-dialog-row">
@@ -146,7 +139,7 @@ export function NewChangeDialog({ onStart, onClose, initialText = '', initialSta
             aria-disabled={!ready}
             onClick={() => {
               if (!ready) return;
-              onStart({ text: text.trim(), site, mode, stage, page, assignee, due, files });
+              onStart({ text: text.trim(), site, mode, stage, page, due, files });
               onClose();
             }}
           >
