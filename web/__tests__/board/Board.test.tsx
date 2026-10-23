@@ -125,7 +125,7 @@ describe('a new change (BD8)', () => {
     await user.click(within(dialog).getByRole('radio', { name: 'Plan only' }));
     expect(within(dialog).getByText('Wursor will only write a plan for Harbor Bakery. Nothing changes.')).toBeInTheDocument();
     await user.click(within(dialog).getByRole('button', { name: 'Start' }));
-    expect(onStart).toHaveBeenCalledWith({ text: 'Add our Sunday hours to the footer', site: 'Harbor Bakery', mode: 'Plan only' });
+    expect(onStart).toHaveBeenCalledWith({ text: 'Add our Sunday hours to the footer', site: 'Harbor Bakery', mode: 'Plan only', stage: 'working', page: 'Whole site', assignee: 'Me', due: '', files: [] });
     expect(screen.queryByRole('dialog', { name: 'New change' })).not.toBeInTheDocument();
   });
 
@@ -165,5 +165,49 @@ describe('the other states (BD2, BD3, BD10)', () => {
     expect(screen.getByRole('button', { name: 'Retry' })).toBeInTheDocument();
     const card = screen.getAllByRole('article')[0]!;
     expect(card).toHaveAttribute('draggable', 'false');
+  });
+});
+
+
+describe('the new change box is complete', () => {
+  it('lets you pick the stage, the page, who it is for, a due date and files', async () => {
+    const onStart = vi.fn();
+    const { user } = show({ initialComposer: true, onStart });
+    const dialog = screen.getByRole('dialog', { name: 'New change' });
+    const stage = within(dialog).getByRole('combobox', { name: 'Stage' });
+    expect(Array.from((stage as HTMLSelectElement).options).map((o) => o.text)).toEqual(['Idea', 'Plan ready', 'Working', 'Needs you', 'Ready for you', 'Done']);
+    await user.type(within(dialog).getByRole('textbox', { name: 'What should change' }), 'Describe the gallery photos');
+    await user.selectOptions(stage, 'Idea');
+    expect(within(dialog).getByRole('button', { name: 'Add idea' })).toBeInTheDocument();
+    await user.selectOptions(within(dialog).getByRole('combobox', { name: 'Page' }), 'Gallery');
+    await user.selectOptions(within(dialog).getByRole('combobox', { name: 'Assigned to' }), 'Chidi Eze');
+    await user.type(within(dialog).getByLabelText('Due date (optional)'), '2026-10-22');
+    await user.upload(within(dialog).getByLabelText('Attach files', { selector: 'input' }), new File(['x'], 'photos.zip'));
+    expect(within(dialog).getByText('photos.zip')).toBeInTheDocument();
+    await user.click(within(dialog).getByRole('button', { name: 'Add idea' }));
+    expect(onStart).toHaveBeenCalledWith({ text: 'Describe the gallery photos', site: 'Harbor Bakery', mode: 'Ask first', stage: 'idea', page: 'Gallery', assignee: 'Chidi Eze', due: '2026-10-22', files: ['photos.zip'] });
+  });
+
+  it('removes an attached file before sending', async () => {
+    const { user } = show({ initialComposer: true });
+    const dialog = screen.getByRole('dialog', { name: 'New change' });
+    await user.upload(within(dialog).getByLabelText('Attach files', { selector: 'input' }), new File(['x'], 'menu.pdf'));
+    await user.click(within(dialog).getByRole('button', { name: 'Remove menu.pdf' }));
+    expect(within(dialog).queryByText('menu.pdf')).not.toBeInTheDocument();
+  });
+
+  it('puts the new card in the stage you chose, on the board', async () => {
+    const { user } = show({ initialComposer: true });
+    const dialog = screen.getByRole('dialog', { name: 'New change' });
+    await user.type(within(dialog).getByRole('textbox', { name: 'What should change' }), 'Add a holiday banner');
+    await user.selectOptions(within(dialog).getByRole('combobox', { name: 'Stage' }), 'Plan ready');
+    await user.click(within(dialog).getByRole('button', { name: 'Add to board' }));
+    const lane = screen.getByRole('group', { name: /Plan ready/ });
+    expect(within(lane).getByText('Add a holiday banner')).toBeInTheDocument();
+  });
+
+  it('can open on a stage already chosen, from that lane', () => {
+    show({ initialComposer: true, initialStage: 'needs-you' });
+    expect(within(screen.getByRole('dialog', { name: 'New change' })).getByRole('combobox', { name: 'Stage' })).toHaveValue('Needs you');
   });
 });

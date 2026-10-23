@@ -11,6 +11,7 @@ import { StatusPill } from '../product/StatusPill.tsx';
 import { Banner } from '../ui/Banner.tsx';
 import { Icon } from '../ui/Icon.tsx';
 import { PageHeader } from '../home/parts.tsx';
+import { useFeedback } from '../system/Feedback.tsx';
 import { sidebarChanges } from '../workspace/scenario.ts';
 import { ChangeDrawer } from './ChangeDrawer.tsx';
 import { CHANGES, LANES, LIST_ORDER, SCHEDULED, SITE_ROWS, type Change, type LaneId } from './data.ts';
@@ -27,6 +28,8 @@ type Props = {
   initialOpen?: string;
   /** Words already in the new-change box, for example a suggestion the owner picked. */
   initialText?: string;
+  /** The lane a new change is added to when the box opens. */
+  initialStage?: LaneId;
   /** Opens the new-change dialog straight away. */
   initialComposer?: boolean;
   /** Shows a card mid-drag, for the fixed design state. */
@@ -187,12 +190,37 @@ function AllSites() {
 }
 
 /** The board: every change as a card that moves from idea to done, as lanes, a list, or a calendar (Figma BD1 to BD11). */
-export function BoardScreen({ state = 'board', scope = 'site', initialView = 'board', initialOpen, initialText, initialComposer = false, dragDemo = false, onStart }: Props) {
+export function BoardScreen({ state = 'board', scope = 'site', initialView = 'board', initialOpen, initialText, initialStage, initialComposer = false, dragDemo = false, onStart }: Props) {
   const [view, setView] = useState<View>(initialView);
   const [filter, setFilter] = useState<Filter>(state === 'nothing-matches' ? 'needs-you' : 'all');
   const [changes, setChanges] = useState<Change[]>(CHANGES);
   const [open, setOpen] = useState<string | null>(initialOpen ?? null);
   const [composer, setComposer] = useState(initialComposer);
+  const [stage, setStage] = useState<LaneId | undefined>(initialStage);
+  const { notify } = useFeedback();
+  const addChange = (c: NewChange) => {
+    const when = c.due ? new Date(`${c.due}T12:00:00`) : null;
+    const title = c.text.length > 70 ? `${c.text.slice(0, 67).trimEnd()}…` : c.text;
+    const added: Change = {
+      id: `new-${Date.now()}`,
+      title,
+      meta: `${c.page} · Just now`,
+      lane: c.stage,
+      risk: 'everyday',
+      when: 'Just now',
+      page: c.page,
+      mine: c.assignee === 'Me',
+      site: c.site,
+      ...(c.stage === 'working' ? { progress: 0.05 } : {}),
+      ...(when && when.getFullYear() === 2026 && when.getMonth() === 9 ? { day: when.getDate() } : {}),
+    };
+    setChanges((cs) => [added, ...cs]);
+    notify(`Added to ${LANES.find((l) => l.id === c.stage)!.title}`);
+  };
+  const openComposer = (lane?: LaneId) => {
+    setStage(lane);
+    setComposer(true);
+  };
   const [dragging, setDragging] = useState<string | null>(null);
   const [over, setOver] = useState<LaneId | null>(null);
   const offline = state === 'offline';
@@ -213,7 +241,7 @@ export function BoardScreen({ state = 'board', scope = 'site', initialView = 'bo
       variant="primary"
       size="md"
       leadingIcon="plus"
-      onClick={() => setComposer(true)}
+      onClick={() => openComposer()}
     >
       New change
     </Button>
@@ -263,7 +291,7 @@ export function BoardScreen({ state = 'board', scope = 'site', initialView = 'bo
             </span>
             <h3>Your board is empty</h3>
             <p>Ask Wursor for a change, or pick one of its suggestions. Each change gets a card that moves from idea to done.</p>
-            <Button variant="secondary" size="md" onClick={() => setComposer(true)}>
+            <Button variant="secondary" size="md" onClick={() => openComposer()}>
               New change
             </Button>
           </div>
@@ -300,7 +328,7 @@ export function BoardScreen({ state = 'board', scope = 'site', initialView = 'bo
                   onDragEnter={() => dragging && setOver(lane.id)}
                   onDrop={() => drop(lane.id)}
                 >
-                  <LaneHeader lane={lane} count={cards.length} onAdd={() => setComposer(true)} disabled={offline} />
+                  <LaneHeader lane={lane} count={cards.length} onAdd={() => openComposer(lane.id)} disabled={offline} />
                   {cards.map((c) => (
                     <Card key={c.id} change={c} offline={offline} onOpen={() => setOpen(c.id)} onDragStart={() => setDragging(c.id)} />
                   ))}
@@ -322,7 +350,17 @@ export function BoardScreen({ state = 'board', scope = 'site', initialView = 'bo
         {(state === 'board' || offline) && view === 'calendar' && <Calendar today={new Date(2026, 9, 14)} />}
       </div>
       {selected && <ChangeDrawer change={selected} onClose={() => setOpen(null)} />}
-      {composer && <NewChangeDialog {...(initialText ? { initialText } : {})} onStart={(c) => onStart?.(c)} onClose={() => setComposer(false)} />}
+      {composer && (
+        <NewChangeDialog
+          {...(initialText ? { initialText } : {})}
+          {...(stage ? { initialStage: stage } : {})}
+          onStart={(c) => {
+            addChange(c);
+            onStart?.(c);
+          }}
+          onClose={() => setComposer(false)}
+        />
+      )}
     </AppShell>
   );
 }
