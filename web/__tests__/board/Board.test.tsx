@@ -112,7 +112,7 @@ describe('a change in detail (BD5)', () => {
 });
 
 describe('a new change (BD8)', () => {
-  it('asks in your own words, for which site, and how to work, and starts it', async () => {
+  it('asks in your own words, for which site, and how to work, and adds it', async () => {
     const onStart = vi.fn();
     const { user } = show({ initialComposer: true, onStart });
     const dialog = screen.getByRole('dialog', { name: 'New change' });
@@ -120,11 +120,11 @@ describe('a new change (BD8)', () => {
     expect(within(dialog).getByRole('combobox', { name: 'Site' })).toHaveValue('Harbor Bakery');
     expect(within(dialog).getByRole('radio', { name: 'Ask first' })).toBeChecked();
     expect(within(dialog).getByText('Wursor will show you a plan before it changes anything on Harbor Bakery.')).toBeInTheDocument();
-    expect(within(dialog).getByRole('button', { name: 'Start' })).toHaveAttribute('aria-disabled', 'true');
+    expect(within(dialog).getByRole('button', { name: 'Add change' })).toHaveAttribute('aria-disabled', 'true');
     await user.type(within(dialog).getByRole('textbox'), 'Add our Sunday hours to the footer');
     await user.click(within(dialog).getByRole('radio', { name: 'Plan only' }));
     expect(within(dialog).getByText('Wursor will only write a plan for Harbor Bakery. Nothing changes.')).toBeInTheDocument();
-    await user.click(within(dialog).getByRole('button', { name: 'Start' }));
+    await user.click(within(dialog).getByRole('button', { name: 'Add change' }));
     expect(onStart).toHaveBeenCalledWith({ text: 'Add our Sunday hours to the footer', site: 'Harbor Bakery', mode: 'Plan only', stage: 'working', page: 'Whole site', due: '', files: [] });
     expect(screen.queryByRole('dialog', { name: 'New change' })).not.toBeInTheDocument();
   });
@@ -178,13 +178,13 @@ describe('the new change box is complete', () => {
     expect(Array.from((stage as HTMLSelectElement).options).map((o) => o.text)).toEqual(['Idea', 'Plan ready', 'Working', 'Needs you', 'Ready for you', 'Done']);
     await user.type(within(dialog).getByRole('textbox', { name: 'What should change' }), 'Describe the gallery photos');
     await user.selectOptions(stage, 'Idea');
-    expect(within(dialog).getByRole('button', { name: 'Add idea' })).toBeInTheDocument();
+    expect(within(dialog).getByRole('button', { name: 'Add change' })).toBeInTheDocument(); // same label at every stage
     await user.selectOptions(within(dialog).getByRole('combobox', { name: 'Page' }), 'Gallery');
     expect(within(dialog).queryByRole('combobox', { name: 'Assigned to' })).not.toBeInTheDocument();
     await user.type(within(dialog).getByLabelText('Due date (optional)'), '2026-10-22');
     await user.upload(within(dialog).getByLabelText('Attach files', { selector: 'input' }), new File(['x'], 'photos.zip'));
     expect(within(dialog).getByText('photos.zip')).toBeInTheDocument();
-    await user.click(within(dialog).getByRole('button', { name: 'Add idea' }));
+    await user.click(within(dialog).getByRole('button', { name: 'Add change' }));
     expect(onStart).toHaveBeenCalledWith({ text: 'Describe the gallery photos', site: 'Harbor Bakery', mode: 'Ask first', stage: 'idea', page: 'Gallery', due: '2026-10-22', files: ['photos.zip'] });
   });
 
@@ -201,7 +201,7 @@ describe('the new change box is complete', () => {
     const dialog = screen.getByRole('dialog', { name: 'New change' });
     await user.type(within(dialog).getByRole('textbox', { name: 'What should change' }), 'Add a holiday banner');
     await user.selectOptions(within(dialog).getByRole('combobox', { name: 'Stage' }), 'Plan ready');
-    await user.click(within(dialog).getByRole('button', { name: 'Add to board' }));
+    await user.click(within(dialog).getByRole('button', { name: 'Add change' }));
     const lane = screen.getByRole('group', { name: /Plan ready/ });
     expect(within(lane).getByText('Add a holiday banner')).toBeInTheDocument();
   });

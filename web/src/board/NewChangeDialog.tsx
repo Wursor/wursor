@@ -50,7 +50,6 @@ export function NewChangeDialog({ onStart, onClose, initialText = '', initialSta
   const [due, setDue] = useState('');
   const [files, setFiles] = useState<string[]>([]);
   const picker = useRef<HTMLInputElement>(null);
-  const action = stage === 'working' ? 'Start' : stage === 'idea' ? 'Add idea' : 'Add to board';
   const id = useId();
   const ready = text.trim() !== '';
 
@@ -141,7 +140,7 @@ export function NewChangeDialog({ onStart, onClose, initialText = '', initialSta
               onClose();
             }}
           >
-            {action}
+            Add change
           </button>
         </div>
       </div>
