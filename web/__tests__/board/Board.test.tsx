@@ -211,3 +211,15 @@ describe('the new change box is complete', () => {
     expect(within(screen.getByRole('dialog', { name: 'New change' })).getByRole('combobox', { name: 'Stage' })).toHaveValue('Needs you');
   });
 });
+
+describe('layout of the new change box', () => {
+  it('puts Page and Due date side by side and gives How to work its own full-width row', () => {
+    show({ initialComposer: true });
+    const dialog = screen.getByRole('dialog', { name: 'New change' });
+    const page = within(dialog).getByRole('combobox', { name: 'Page' }).closest('.bd-dialog-row')!;
+    expect(within(page as HTMLElement).getByLabelText('Due date (optional)')).toBeInTheDocument();
+    const how = within(dialog).getByRole('radiogroup', { name: 'How to work' });
+    expect(how.closest('.bd-dialog-row')).toBeNull();
+    expect(how.closest('.bd-dialog-wide')).not.toBeNull();
+  });
+});

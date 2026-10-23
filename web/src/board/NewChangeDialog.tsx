@@ -91,16 +91,14 @@ export function NewChangeDialog({ onStart, onClose, initialText = '', initialSta
             <span>Page</span>
             <Select label="Page" options={PAGES} value={page} onChange={setPage} />
           </div>
-        </div>
-        <div className="bd-dialog-row">
           <div className="bd-dialog-field">
             <label htmlFor={`${id}-due`}>Due date (optional)</label>
             <input id={`${id}-due`} type="date" className="bd-dialog-date" value={due} onChange={(e) => setDue(e.target.value)} />
           </div>
-          <div className="bd-dialog-field">
-            <span id={`${id}-mode`}>How to work</span>
-            <SegmentedControl label="How to work" options={MODES} value={mode} onChange={setMode} />
-          </div>
+        </div>
+        <div className="bd-dialog-field bd-dialog-wide">
+          <span id={`${id}-mode`}>How to work</span>
+          <SegmentedControl label="How to work" options={MODES} value={mode} onChange={setMode} />
         </div>
         <p className="bd-dialog-help">{HELP[mode](site)}</p>
         <div className="bd-dialog-files">

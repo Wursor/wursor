@@ -524,3 +524,12 @@ a.app-idea:hover span { text-decoration: underline; text-underline-offset: 3px; 
   .bd-dialog { height: auto; max-height: calc(100% - 36px); }
   .bd-dialog::before { left: 50%; margin-left: -18px; }
 }
+/* How to work spans the whole box, its three choices sharing the width. */
+.bd-dialog-wide { flex: none; width: 100%; }
+.bd-dialog-wide .p-segmented { display: flex; width: 100%; box-sizing: border-box; align-self: stretch; }
+.bd-dialog-wide .p-segment { flex: 1 1 0; }
+/* Page and Due date stay side by side on a phone too. */
+@media (max-width: 600px) {
+  .bd-dialog-row:has(.bd-dialog-date) { flex-direction: row; align-items: flex-end; }
+  .bd-dialog-row:has(.bd-dialog-date) > .bd-dialog-field { flex: 1 1 0; }
+}
