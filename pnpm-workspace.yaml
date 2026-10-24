@@ -2,3 +2,9 @@ packages:
   - api
   - web
   - e2e
+
+# Security: floors for indirect dependencies whose parents still ask for a vulnerable version. Remove once the parents catch up.
+overrides:
+  undici: '>=8.10.2'
+  source-map-js: '>=1.2.2'
+  '@grpc/grpc-js': '>=1.14.5'
