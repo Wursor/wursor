@@ -1,6 +1,12 @@
 import { BoardCard } from './BoardCard.tsx';
+import { CHANGES } from '../board/data.ts';
 import { Counter } from './Counter.tsx';
 import type { BoardLaneData } from './harbor-bakery.ts';
+
+const hrefFor = (title: string) => {
+  const found = CHANGES.find((c) => c.title === title);
+  return found ? `/board?open=${found.id}` : '/board';
+};
 
 /** The board as a strip under the preview: four lanes, each with its count. The header count is what is not done yet. */
 export function BoardStrip({ lanes }: { lanes: readonly BoardLaneData[] }) {
@@ -11,7 +17,9 @@ export function BoardStrip({ lanes }: { lanes: readonly BoardLaneData[] }) {
         <h3 className="p-board-title">Board</h3>
         <Counter count={open} />
         <span className="p-spacer" />
-        <span className="p-board-link">Open board</span>
+        <a href="/board" className="p-board-link">
+          Open board
+        </a>
       </div>
       <div className="p-lanes">
         {lanes.map((lane) => (
@@ -21,7 +29,7 @@ export function BoardStrip({ lanes }: { lanes: readonly BoardLaneData[] }) {
               <Counter count={lane.cards.length} />
             </div>
             {lane.cards.map((c) => (
-              <BoardCard key={c.title} {...c} />
+              <BoardCard key={c.title} {...c} href={hrefFor(c.title)} />
             ))}
           </div>
         ))}

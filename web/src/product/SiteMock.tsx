@@ -5,10 +5,10 @@ import { HARBOR } from './harbor-bakery.ts';
  * Harbor Bakery contact page, drawn at its design width of 760 px. Before the change the phone number is
  * plain text; after it, a tap-to-call link with a 44 px touch target.
  */
-export function SiteMock({ state }: { state: 'before' | 'after' }) {
+export function SiteMock({ state, layout = 'desktop' }: { state: 'before' | 'after'; layout?: 'desktop' | 'phone' }) {
   const { phone } = HARBOR;
   return (
-    <div className="p-site" data-state={state}>
+    <div className="p-site" data-state={state} data-layout={layout}>
       <div className="p-site-nav">
         <p className="p-site-brand">Harbor Bakery</p>
         <div className="p-site-links">
@@ -17,6 +17,9 @@ export function SiteMock({ state }: { state: 'before' | 'after' }) {
           <span>About</span>
           <span className="p-site-current">Contact</span>
         </div>
+        <span className="p-site-menu">
+          <Icon name="list" size={20} />
+        </span>
       </div>
       <div className="p-site-rule" />
       <div className="p-site-hero">
@@ -34,18 +37,18 @@ export function SiteMock({ state }: { state: 'before' | 'after' }) {
           <p className="p-site-label">Call or visit</p>
           <p className="p-site-line">12 Quay Street</p>
           {state === 'after' ? (
-            <a href={phone.href} className="p-site-phone">
+            <a href={phone.href} className="p-site-phone" data-point="phone">
               <Icon name="smartphone" size={20} />
               <span>{phone.callLabel}</span>
             </a>
           ) : (
-            <p className="p-site-phone-plain">{phone.display}</p>
+            <p className="p-site-phone-plain" data-point="phone">{phone.display}</p>
           )}
         </div>
       </div>
       <div className="p-site-footer">
         <span>12 Quay Street</span>
-        <span className={state === 'after' ? 'p-site-footer-link' : undefined}>{phone.display}</span>
+        <span className={state === 'after' ? 'p-site-footer-link' : undefined} data-point="footer">{phone.display}</span>
       </div>
     </div>
   );

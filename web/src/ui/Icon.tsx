@@ -1,12 +1,12 @@
 import type { CSSProperties } from 'react';
 
 export type IconName =
-  | 'activity' | 'arrow-right' | 'bell' | 'board' | 'check' | 'camera' | 'check-circle' | 'chevron-down' | 'chevron-right' | 'chevron-up' | 'clock' | 'close' | 'credit-card' | 'dots'
-  | 'eye' | 'globe' | 'help' | 'home' | 'key' | 'list' | 'loader' | 'lock' | 'menu' | 'mic' | 'monitor' | 'paperclip'
+  | 'activity' | 'pause' | 'swap' | 'building' | 'arrow-up' | 'code' | 'play' | 'alert-triangle' | 'arrow-left' | 'arrow-left-20' | 'arrow-right' | 'bell' | 'board' | 'check' | 'camera' | 'check-circle' | 'cloud' | 'chevron-down' | 'chevron-right' | 'chevron-up' | 'clock' | 'close' | 'copy' | 'credit-card' | 'dots' | 'download'
+  | 'external-link' | 'external-link-16' | 'eye' | 'file' | 'globe' | 'help' | 'home' | 'info' | 'key' | 'list' | 'loader' | 'lock' | 'mail' | 'menu' | 'mic' | 'monitor' | 'paperclip'
   | 'pencil' | 'plug' | 'plus' | 'pointer' | 'refresh' | 'rocket' | 'search' | 'shield-check' | 'sidebar' | 'sliders'
-  | 'shield' | 'smartphone' | 'sparkles' | 'split' | 'stop' | 'sun' | 'moon' | 'undo' | 'user' | 'x';
+  | 'shield' | 'smartphone' | 'sparkles' | 'split' | 'stop' | 'sun' | 'moon' | 'undo' | 'x-circle' | 'undo-16' | 'user' | 'x';
 
-type Props = { name: IconName; size?: number; className?: string };
+type Props = { name: IconName; size?: number; className?: string | undefined };
 
 /**
  * Draws a single-colour Figma icon (public/icons) with a CSS mask, so its colour is the

@@ -5,6 +5,7 @@ import type { ReactNode } from 'react';
 import { CommandPaletteProvider } from '../../src/marketing/CommandPalette.tsx';
 import { themeInitScript } from '../../src/marketing/theme.ts';
 import '../../src/styles/tokens.css';
+import '../../src/styles/base.css';
 import '../../src/styles/marketing.css';
 import '../../src/styles/product.css';
 
