@@ -1,13 +1,13 @@
 """Pixel-compare built screens with their Figma frames.
 
-Work dir (renders, Figma PNGs, diffs, urls.tsv) is $FD_WORK, default /private/tmp/claude-501/fd.
+Work dir (renders, Figma PNGs, diffs, urls.tsv) is $FD_WORK, default /tmp/wursor-figma-diff.
 urls.tsv holds `nodeId<TAB>url` for Figma screenshot links (they expire, so refetch when stale).
 An entry is dict(key, node, path, kind, theme, script?) where kind is
   d  desktop 1440x900     m  phone 390x800 shifted under Figma's 44 px status bar     mf  phone 390x844 (full-bleed pages)
 """
 import subprocess, os, sys, json
 BASE = os.environ.get('FD_BASE', 'http://localhost:5173')
-D = os.environ.get('FD_WORK', '/private/tmp/claude-501/fd')
+D = os.environ.get('FD_WORK', '/tmp/wursor-figma-diff')
 for sub in ('fig', 'out', 'diff'):
     os.makedirs(f'{D}/{sub}', exist_ok=True)
 
